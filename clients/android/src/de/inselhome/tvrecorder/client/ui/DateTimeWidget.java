@@ -21,9 +21,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.widget.DatePicker;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -82,6 +80,39 @@ extends      LinearLayout
         date.setTextSize(30);
         time.setTextSize(30);
 
+        date.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                DatePickerDialog picker = new DatePickerDialog(getContext());
+                picker.setOnDateSelectListener(
+                    new DatePickerDialog.OnDateSelectListener() {
+                        public void onDateSelect(int year, int month, int day) {
+                            datetime.set(year, month, day);
+                            updateView();
+                        }
+                    }
+                );
+
+                picker.show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                TimePickerDialog t = new TimePickerDialog(getContext(), true);
+                t.setOnTimeSelectListener(
+                    new TimePickerDialog.OnTimeSelectListener() {
+                        public void onTimeSelect(int hours, int minutes) {
+                            datetime.set(Calendar.HOUR_OF_DAY, hours);
+                            datetime.set(Calendar.MINUTE, minutes);
+                            updateView();
+                        }
+                    }
+                );
+
+                t.show();
+            }
+        });
+
         updateView();
 
         addView(date);
@@ -107,27 +138,6 @@ extends      LinearLayout
      */
     public Calendar getDatetime() {
         return datetime;
-    }
-
-
-    /**
-     * This method is called when this widget receives a MotionEvent. After this
-     * method is called, a dialog to change the selected date and time is
-     * opened.
-     *
-     * @param e the MotionEvent
-     *
-     * @return true, if the event was handled.
-     */
-    public boolean onTouchEvent(MotionEvent e) {
-        int year  = datetime.getTime().getYear();
-        int month = datetime.getTime().getMonth();
-        int day   = datetime.getTime().getDay();
-
-        Log.d("TvR [DateTimeWidget]", "onTouchEvent() - show DateTimePicker.");
-        // TODO Open a dialog that contains a DatePicker to choose the date
-
-        return true;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

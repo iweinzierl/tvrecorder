@@ -1,5 +1,19 @@
 2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/DatePickerDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TimePickerDialog.java:
+	  New. Dialogs to select a date and a time. Both contain a special interface
+	  that describes a method that is fired if a date or a time was selected in
+	  the widget.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java:
+	  Removed the onTouch event and added two OnClickListener to the date and
+	  time fields. A click on the date field will open a DatePickerDialog, a
+	  click on the time field will open a TimePickerDialog.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/rest/ChannelsResource.java,
 	  common/src/main/java/de/inselhome/tvrecorder/common/rest/RecordResource.java:
 	  Added the resource path to the interfaces.
