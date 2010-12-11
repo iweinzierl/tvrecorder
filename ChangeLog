@@ -1,5 +1,33 @@
 2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/AndroidManifest.xml,
+	  clients/android/build.properties,
+	  clients/android/build.xml,
+	  clients/android/default.properties,
+	  clients/android/libs/org.restlet-2.0snapshot.jar,
+	  clients/android/libs/tvrecorder-common-0.1-SNAPSHOT.jar,
+	  clients/android/local.properties,
+	  clients/android/res/drawable-hdpi/icon.png,
+	  clients/android/res/drawable-ldpi/icon.png,
+	  clients/android/res/drawable-mdpi/icon.png,
+	  clients/android/res/layout/main.xml,
+	  clients/android/res/values/strings.xml,
+	  clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/utils/DateUtils.java:
+	  The initial checkin of an Android client. Currently, the gui consists of a
+	  single AddJobForm. This form contains two DateTimeWidgets to adjust the
+	  start and end time, a select box to select the channel, a text field to
+	  specify a name of the job and a button to add the defined job.
+
+	  Note: The creation of a new job is currently not implemented.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/App.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java,
