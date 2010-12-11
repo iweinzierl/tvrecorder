@@ -17,47 +17,45 @@
  */
 package de.inselhome.tvrecorder.client;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
-
-import de.inselhome.tvrecorder.client.ui.AddJobForm;
 
 
 /**
+ * This class contains some static functions to access the configuration.
+ *
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public class TvRecorder
-extends      Activity
-{
-    /**
-     * The {@link AddJobForm} that allows adding new jobs.
-     */
-    protected AddJobForm addJobForm;
-
+public class Config {
 
     /**
-     * Called when the activity is first created.
+     * This function retrieves the server url.
+     *
+     * @param context The context.
+     *
+     * @return the server url as string.
      */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("TvR [TvRecorderActivity]", "onCreate() - create view");
+    public static final String getServer(Context context) {
+        Resources res = context.getResources();
 
-        addJobForm = new AddJobForm(this);
-        setContentView(addJobForm);
+        String url  = res.getString(R.string.server_url);
+        String port = res.getString(R.string.server_port);
 
-        addJobForm.refresh();
+        return url + ":" + port;
     }
 
 
     /**
-     * This method retrieves the {@link AddJobForm}.
+     * This function retrieves the url for a specific ServerResource <i>res</i>.
      *
-     * @return the {@link AddJobForm}.
+     * @param context The context.
+     * @param res The ServerResource path.
+     *
+     * @return the url to a specific ServerResource.
      */
-    public AddJobForm getAddJobForm() {
-        return addJobForm;
+    public static final String getServerResource(Context context, String res) {
+        return getServer(context) + res;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

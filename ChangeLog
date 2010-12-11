@@ -1,5 +1,28 @@
 2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* common/src/main/java/de/inselhome/tvrecorder/common/rest/ChannelsResource.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/rest/RecordResource.java:
+	  Added the resource path to the interfaces.
+
+	* clients/android/res/values/config.xml: A configuration file where
+	  necessary settings shuould be defined. Currently, important things are
+	  remote server url and server port.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: New. This
+	  class defines some functions that retrieve application settings.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
+	  Removed the path definitions for the ChannelsResource and RecordResource.
+	  The definitions are useless now: the relative pathes are defined in the
+	  interfaces and the server url is retrievable by Config.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  The necessary urls are taken from Config now.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/AndroidManifest.xml,
 	  clients/android/build.properties,
 	  clients/android/build.xml,

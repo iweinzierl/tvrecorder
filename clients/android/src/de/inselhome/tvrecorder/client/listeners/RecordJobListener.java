@@ -30,6 +30,7 @@ import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
 
+import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.TvRecorder;
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
 import de.inselhome.tvrecorder.client.utils.DateUtils;
@@ -87,7 +88,8 @@ implements   View.OnClickListener
             msg += "\nName: ";
             msg += name;
 
-            ClientResource c = new ClientResource(TvRecorder.URL_SERVER_RECORD);
+            ClientResource c = new ClientResource(Config.getServerResource(
+                recorder, RecordResource.PATH));
             RecordResource resource = c.wrap(RecordResource.class);
 
             Job job = new Job(start, end, new Channel(chann, chann), name);

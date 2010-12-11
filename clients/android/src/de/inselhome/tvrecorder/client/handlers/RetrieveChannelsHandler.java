@@ -24,6 +24,7 @@ import org.restlet.resource.ClientResource;
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.rest.ChannelsResource;
 
+import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.TvRecorder;
 
 
@@ -61,8 +62,8 @@ implements   Runnable
                 "TvR [RetrieveChannelsHandler]",
                 "run() - retrieve channels");
 
-            ClientResource cr = new ClientResource(
-                TvRecorder.URL_SERVER_CHANNELS);
+            ClientResource cr = new ClientResource(Config.getServerResource(
+                tvrecorder, ChannelsResource.PATH));
 
             ChannelsResource resource = cr.wrap(ChannelsResource.class);
             Channel[] channels = resource.retrieve();

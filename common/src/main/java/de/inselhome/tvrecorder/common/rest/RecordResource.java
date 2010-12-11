@@ -30,6 +30,8 @@ import de.inselhome.tvrecorder.common.objects.Job;
  */
 public interface RecordResource {
 
+    public static final String PATH = "/record";
+
     @Post
     public void add(Job job);
 }

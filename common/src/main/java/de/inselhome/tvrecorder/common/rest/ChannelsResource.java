@@ -31,6 +31,8 @@ import de.inselhome.tvrecorder.common.objects.Channel;
  */
 public interface ChannelsResource {
 
+    public static final String PATH = "/channels";
+
     @Get
     public Channel[] retrieve();
 }
