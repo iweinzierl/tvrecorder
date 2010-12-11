@@ -1,0 +1,14 @@
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/rest/ChannelsResource.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/rest/RecordResource.java:
+	  The initial commit of the common package. This package contains objects
+	  that are used for the communication between clients and server. Both,
+	  client and server, should make use of this package!
+
+	* common/pom.xml: The maven configuration of the common package.
+	  Currently, there are dependencies to JUnit and Restlet.
+
+	* common/LICENSE: This package is distributed under the GPL v3.
