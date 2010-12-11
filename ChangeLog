@@ -1,5 +1,26 @@
 2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/App.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  The initial checkin of the server. The server represents a HTTP server
+	  with some REST interfaces to retrieve supported channels and add new jobs
+	  for recording.
+
+	* server/LICENSE: The server is distributed under the GPL v3.
+
+	* server/conf/log4j.properties: A logging configuration for Log4J.
+
+	* server/contrib/run.sh: A bash script to start the server.
+
+	* server/pom.xml: The maven configuration of the server. Currently, there
+	  are dependencies to JUnit, Restet and the common package.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
 	  common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java,
 	  common/src/main/java/de/inselhome/tvrecorder/common/rest/ChannelsResource.java,
