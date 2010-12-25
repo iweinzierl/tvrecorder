@@ -1,5 +1,12 @@
 2010-12-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Now, we make sure, that the start date is smaller than the end date of the
+	  record job. Otherwise, an warn dialog is shown and no job is sent to the
+	  server.
+
+2010-12-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
 	  Removed a debug line that has been commited by accident.
 

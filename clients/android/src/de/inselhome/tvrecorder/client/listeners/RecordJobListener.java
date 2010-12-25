@@ -18,6 +18,7 @@
 package de.inselhome.tvrecorder.client.listeners;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -76,7 +77,12 @@ implements   View.OnClickListener
             Channel  chann = form.getChannel();
             String   name  = form.getName();
 
-            String msg   = "Neuen Job erstellt: \n";
+            if (!isEndGreaterThanStart(end.getTime(), start.getTime())) {
+                throw new IllegalArgumentException(
+                    "End time needs to be greater than start time.");
+            }
+
+            String msg = "Neuen Job erstellt: \n";
             msg += "Start: ";
             msg += DateUtils.formatDate(start) + "  ";
             msg += DateUtils.formatTime(start);
@@ -108,6 +114,23 @@ implements   View.OnClickListener
             popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             popup.show();
         }
+    }
+
+
+    /**
+     * This method compares two dates with a precision of minutes.
+     *
+     * @param end An end date.
+     * @param start A start date.
+     *
+     * @return true, if <i>end</i> is greater that that <i>start</i>, otherwise
+     * false.
+     */
+    public static boolean isEndGreaterThanStart(Date end, Date start) {
+        long endTime   = end.getTime() / (1000 * 60);
+        long startTime = start.getTime() / (1000 * 60);
+
+        return endTime <= startTime ? false : true;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
