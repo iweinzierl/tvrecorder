@@ -17,7 +17,9 @@
  */
 package de.inselhome.tvrecorder.client.ui;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -47,6 +49,11 @@ import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
 public class AddJobForm
 extends      ScrollView
 {
+    /**
+     * The raw channels supported by the server.
+     */
+    protected List<Channel> rawChannels;
+
     /**
      * The {@link DateTimeWidget} to select the start point.
      */
@@ -82,6 +89,8 @@ extends      ScrollView
      */
     public AddJobForm(Context context) {
         super(context);
+
+        rawChannels = new ArrayList<Channel>();
 
         start    = new DateTimeWidget(context);
         end      = new DateTimeWidget(context);
@@ -147,6 +156,7 @@ extends      ScrollView
             getContext(), android.R.layout.simple_spinner_dropdown_item);
 
         for (Channel channel: c) {
+            rawChannels.add(channel);
             adapter.add(channel.getDescription());
         }
 
@@ -196,8 +206,9 @@ extends      ScrollView
      *
      * @return the selected channel as string.
      */
-    public String getChannel() {
-        return (String) channels.getSelectedItem();
+    public Channel getChannel() {
+        int idx = channels.getSelectedItemPosition();
+        return rawChannels.get(idx);
     }
 
 

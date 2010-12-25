@@ -18,7 +18,7 @@
 package de.inselhome.tvrecorder.common.objects;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -33,12 +33,12 @@ implements   Serializable
     /**
      * The start time.
      */
-    protected Calendar start;
+    protected Date start;
 
     /**
      * The end time.
      */
-    protected Calendar end;
+    protected Date end;
 
     /**
      * The channel.
@@ -63,7 +63,7 @@ implements   Serializable
      * @param channel The channel used for the recording.
      * @param name The name of the job.
      */
-    public Job(Calendar start, Calendar end, Channel channel, String name) {
+    public Job(Date start, Date end, Channel channel, String name) {
         this.start   = start;
         this.end     = end;
         this.channel = channel;
@@ -76,7 +76,7 @@ implements   Serializable
      *
      * @return the start time.
      */
-    public Calendar getStart() {
+    public Date getStart() {
         return start;
     }
 
@@ -86,7 +86,7 @@ implements   Serializable
      *
      * @return the end time.
      */
-    public Calendar getEnd() {
+    public Date getEnd() {
         return end;
     }
 

@@ -1,3 +1,21 @@
+2010-12-25  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java: The
+	  job stores its start and end time as Date objects now, because there have
+	  been problems while serialization or deserialization in client or server.
+	  The result was, that no job could be transfered between client and server.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Added some more debug statements and validate the job objects at the
+	  beginning of add() to make sure, that it is not null.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
+	  This form's getChannel() method returns a real Channel object instead of
+	  a string representation of the Channel.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Some adjustments based on the changes mentioned above.
+
 2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/ui/DatePickerDialog.java,

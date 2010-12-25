@@ -52,6 +52,21 @@ implements   RecordResource
     @Post
     public void add(Job job) {
         logger.info("/record - add()");
+        job = null;
+
+        if (job == null) {
+            logger.warn("Job to record is null!");
+            throw new IllegalArgumentException("Could not create job - missing information.");
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("=================== New record ==================");
+            logger.debug("= Channel: " + job.getChannel().getDescription());
+            logger.debug("= Start: " + job.getStart());
+            logger.debug("= End: " + job.getEnd());
+            logger.debug("= Out name: " + job.getName());
+            logger.debug("=================================================");
+        }
 
         // TODO do something to start recording
     }

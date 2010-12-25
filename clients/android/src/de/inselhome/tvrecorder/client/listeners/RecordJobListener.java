@@ -73,7 +73,7 @@ implements   View.OnClickListener
 
             Calendar start = form.getStart();
             Calendar end   = form.getEnd();
-            String   chann = form.getChannel();
+            Channel  chann = form.getChannel();
             String   name  = form.getName();
 
             String msg   = "Neuen Job erstellt: \n";
@@ -84,7 +84,7 @@ implements   View.OnClickListener
             msg += DateUtils.formatDate(end) + "  ";
             msg += DateUtils.formatTime(end);
             msg += "\nKanal: ";
-            msg += chann;
+            msg += chann.getDescription();
             msg += "\nName: ";
             msg += name;
 
@@ -92,8 +92,7 @@ implements   View.OnClickListener
                 recorder, RecordResource.PATH));
             RecordResource resource = c.wrap(RecordResource.class);
 
-            Job job = new Job(start, end, new Channel(chann, chann), name);
-            Log.d("TvR [RecordJobListener]", "createJob() - " + job.toString());
+            Job job = new Job(start.getTime(), end.getTime(), chann, name);
 
             Log.i("TvR [RecordJobListener]", "createJob() - add new job.");
             resource.add(job);
