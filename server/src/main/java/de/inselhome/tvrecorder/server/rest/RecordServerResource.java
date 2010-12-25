@@ -52,7 +52,6 @@ implements   RecordResource
     @Post
     public void add(Job job) {
         logger.info("/record - add()");
-        job = null;
 
         if (job == null) {
             logger.warn("Job to record is null!");
