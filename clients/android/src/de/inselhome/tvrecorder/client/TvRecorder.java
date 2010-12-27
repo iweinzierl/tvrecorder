@@ -20,6 +20,8 @@ package de.inselhome.tvrecorder.client;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
 
@@ -48,6 +50,32 @@ extends      Activity
         setContentView(addJobForm);
 
         addJobForm.refresh();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d("TvR [TvRecorder]", " - onCreateOptionsMenu()");
+        menu.add("Quit");
+        menu.add("Settings");
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String title = item.getTitle().toString();
+
+        Log.d(
+            "TvR [TvRecorder]",
+            "onOptionsItemSelected(): selected '" + title + "'");
+
+        if (title.equals("Quit")) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

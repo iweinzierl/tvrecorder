@@ -1,3 +1,11 @@
+2010-12-27  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: The
+	  TvRecorder Activity has now an OptionsMenu with two items - the target of
+	  "Quit" is to stop the application, "Settings" should open a window to
+	  change some basic settings (like the server url). "Settings" is not
+	  implemented yet!
+
 2010-12-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
