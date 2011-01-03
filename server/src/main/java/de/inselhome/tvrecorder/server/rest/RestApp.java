@@ -17,12 +17,16 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.util.concurrent.ConcurrentMap;
+
 import org.apache.log4j.Logger;
 
 import org.restlet.Application;
 import org.restlet.Context;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
+
+import de.inselhome.tvrecorder.server.backend.Backend;
 
 
 /**
@@ -39,11 +43,14 @@ extends      Application
      */
     private static final Logger logger = Logger.getLogger(RestApp.class);
 
+    protected Backend backend;
+
 
     /**
      * Creates a new {@link RestApp}.
      */
-    public RestApp() {
+    public RestApp(Backend backend) {
+        this.backend = backend;
     }
 
 
@@ -56,6 +63,9 @@ extends      Application
     public Restlet createRoot() {
 
         Context context = getContext();
+
+        ConcurrentMap map = context.getAttributes();
+        map.put("backend", backend);
 
         Router router = new Router(context);
 

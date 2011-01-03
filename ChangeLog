@@ -1,5 +1,17 @@
 2011-01-03  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java: The
+	  backend is available via the Context's attribute map now ('backend').
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Injected the Backend into the RestApp.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Incoming jobs are saved to database now. But the real recording stuff is
+	  still missing!
+
+2011-01-03  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/pom.xml: Added a dependency to Xerial's SQLiteJDBC
 	  driver (version 3.7.2).
 

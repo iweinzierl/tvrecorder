@@ -17,6 +17,9 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.util.Map;
+
+import org.restlet.Context;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
@@ -24,6 +27,8 @@ import org.apache.log4j.Logger;
 
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
+
+import de.inselhome.tvrecorder.server.backend.Backend;
 
 
 /**
@@ -68,6 +73,12 @@ implements   RecordResource
         }
 
         // TODO do something to start recording
+        Context context = getContext();
+        Map attr = context.getAttributes();
+        Backend backend = (Backend) attr.get("backend");
+
+        backend.insertJob(job);
+
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

@@ -22,6 +22,8 @@ import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
+import de.inselhome.tvrecorder.server.backend.Backend;
+
 
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
@@ -48,7 +50,9 @@ public class TvRecorderServer {
     public void start() {
         logger.debug("Create necessary components for HTTP server.");
 
-        RestApp app = new RestApp();
+        Backend backend = new Backend();
+
+        RestApp app = new RestApp(backend);
 
         Component component = new Component();
 
