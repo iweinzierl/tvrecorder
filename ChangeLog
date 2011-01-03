@@ -1,3 +1,17 @@
+2011-01-03  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/pom.xml: Added a dependency to Xerial's SQLiteJDBC
+	  driver (version 3.7.2).
+
+	* server/docs/schema.sql: A simple schema definition for the job table.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/Backend.java:
+	  The backend. Currently, there are two methods defined to load all jobs
+	  from database and insert new jobs into it.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/DBConnection.java:
+	  This class is used to retrieve a database connection.
+
 2010-12-27  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: The
