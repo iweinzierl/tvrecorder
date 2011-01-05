@@ -1,3 +1,8 @@
+2011-01-05  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  A helper class that should make it easier to work with Date objects.
+
 2011-01-03  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java: The
