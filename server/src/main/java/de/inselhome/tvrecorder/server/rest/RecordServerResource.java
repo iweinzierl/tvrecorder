@@ -29,6 +29,9 @@ import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
+import de.inselhome.tvrecorder.server.utils.MPlayerCmdProducer;
+import de.inselhome.tvrecorder.server.utils.StartAtJobCreator;
+import de.inselhome.tvrecorder.server.utils.StopAtJobCreator;
 
 
 /**
@@ -72,13 +75,19 @@ implements   RecordResource
             logger.debug("=================================================");
         }
 
-        // TODO do something to start recording
+        boolean success = new StartAtJobCreator(job, new MPlayerCmdProducer()).startJob();
+
+        if (!success) {
+            return;
+        }
+
         Context context = getContext();
-        Map attr = context.getAttributes();
+        Map attr        = context.getAttributes();
         Backend backend = (Backend) attr.get("backend");
 
         backend.insertJob(job);
 
+        new StopAtJobCreator(job).startJob();
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

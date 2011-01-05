@@ -56,12 +56,13 @@ implements   ChannelsResource
     @Get
     public Channel[] retrieve() {
         logger.info("/channels - retrieve()");
-        Channel[] channels = new Channel[5];
-        channels[0]        = new Channel("ard", "ARD");
-        channels[1]        = new Channel("zdf", "ZDF");
-        channels[2]        = new Channel("rtl", "RTL");
-        channels[3]        = new Channel("sat1", "SAT.1");
-        channels[4]        = new Channel("pro7", "Pro 7");
+        Channel[] channels = new Channel[6];
+        channels[0]        = new Channel("ARD", "ARD");
+        channels[1]        = new Channel("ZDF", "ZDF");
+        channels[2]        = new Channel("RTL", "RTL");
+        channels[3]        = new Channel("SAT1", "SAT.1");
+        channels[4]        = new Channel("ProSieben", "Pro 7");
+        channels[5]        = new Channel("RTL2", "RTL 2");
 
         return channels;
     }

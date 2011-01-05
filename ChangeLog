@@ -1,3 +1,35 @@
+2011-01-06  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java: 
+	  After a job has arrived here, a new At job is created. This job executes a
+	  command (currently for MPlayer) that starts recording the job.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
+	  Changed the keys of the channels.
+
+	* server/contrib/stop_records.sh: The default shell script that is executed
+	  by At jobs to stop MPlayer recording.
+
+	* server/jobs/do-not-delete-me,
+	  server/records/do-not-delete-me: Directories for storing jobs and records.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/AtJobCreator.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/utils/StartAtJobCreator.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/utils/StopAtJobCreator.java:
+	  An abstract base class and two subclasses. AtJobCreators have the task to
+	  create new At jobs. StartAtJobCreator should be used to create an At job
+	  to start recording, the StopAtJobCreator should be used to stop these
+	  recordings.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/CmdProducer.java.
+	  server/src/main/java/de/inselhome/tvrecorder/server/utils/MPlayerCmdProducer.java:
+	  The CmdProducer interface describes a single method to create command
+	  lines. MPlayerCmdProducer produces a concrete command line that that
+	  starts recording with usage of Mplayer.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:
+	  A helper class for working with files.
+
 2011-01-05  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
