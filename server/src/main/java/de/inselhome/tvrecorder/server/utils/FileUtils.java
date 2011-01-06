@@ -17,11 +17,15 @@
  */
 package de.inselhome.tvrecorder.server.utils;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -89,6 +93,38 @@ public class FileUtils {
         }
 
         return false;
+    }
+
+
+    public static String[] readLines(String filename) {
+        BufferedReader reader = null;
+        List<String>   lines  = new ArrayList<String>();
+
+        try {
+            reader = new BufferedReader(new FileReader(filename));
+
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+
+            return (String[]) lines.toArray(new String[lines.size()]);
+        }
+        catch (IOException ioe) {
+            logger.error(
+                "Error while reader file '" + filename +"':" +
+                ioe.getLocalizedMessage());
+        }
+        finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                }
+                catch (IOException ioe) { /* do nothing */ }
+            }
+        }
+
+        return null;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

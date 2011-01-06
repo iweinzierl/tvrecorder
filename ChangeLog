@@ -1,5 +1,14 @@
 2011-01-06  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:
+	  Added a new function that retrieves the lines of a file as String array.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/DVBSChannelsParser.java:
+	  This class represents a parser that is used to extract the channels of a
+	  MPlayer DVB-S configuration file.
+
+2011-01-06  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java: 
 	  After a job has arrived here, a new At job is created. This job executes a
 	  command (currently for MPlayer) that starts recording the job.
