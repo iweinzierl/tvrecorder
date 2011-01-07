@@ -1,5 +1,11 @@
 2011-01-07  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
+	  This resource returns the real channel list from context now - the dummy
+	  values are removed.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
 	  The channels defined in the channels configuration file are available in

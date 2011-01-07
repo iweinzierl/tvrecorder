@@ -17,6 +17,9 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.util.Map;
+
+import org.restlet.Context;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
@@ -56,15 +59,11 @@ implements   ChannelsResource
     @Get
     public Channel[] retrieve() {
         logger.info("/channels - retrieve()");
-        Channel[] channels = new Channel[6];
-        channels[0]        = new Channel("ARD", "ARD");
-        channels[1]        = new Channel("ZDF", "ZDF");
-        channels[2]        = new Channel("RTL", "RTL");
-        channels[3]        = new Channel("SAT1", "SAT.1");
-        channels[4]        = new Channel("ProSieben", "Pro 7");
-        channels[5]        = new Channel("RTL2", "RTL 2");
 
-        return channels;
+        Context context = getContext();
+        Map     attr    = context.getAttributes();
+
+        return (Channel[]) attr.get(TvRecorderServer.CHANNELS_KEY);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
