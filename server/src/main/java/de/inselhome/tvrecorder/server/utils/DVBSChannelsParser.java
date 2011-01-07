@@ -56,6 +56,10 @@ public class DVBSChannelsParser {
         List<Channel> channels = new ArrayList<Channel>();
         String[]      lines    = FileUtils.readLines(filename);
 
+        if (lines == null) {
+            return null;
+        }
+
         for (String line: lines) {
             Channel channel = extractChannel(line);
 

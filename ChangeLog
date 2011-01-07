@@ -1,5 +1,11 @@
 2011-01-07  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/DVBSChannelsParser.java:
+	  Bugfix: avoided a NullPointerException if no lines are returned from
+	  FileUtils while parsing the channels configuration file.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/XMLUtils.java:
 	  Introduced a helper class to work with XML documents.
 
