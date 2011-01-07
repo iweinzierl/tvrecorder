@@ -1,3 +1,26 @@
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/XMLUtils.java:
+	  Introduced a helper class to work with XML documents.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/config/Config.java:
+	  Introduced this class as a central point for querying configuration
+	  settings.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/DBConnection.java:
+	  The path to the database file is queried from Config now. If no path is
+	  configured, or an error occured while reading that config option, the
+	  default path is used (tvrecorder.db).
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  The port that the server is listening on is read from Config now. If no
+	  port is configured, or an error occured while reading that option, the
+	  default port (8282) is used.
+
+	* server/conf/config.xml: A default config file. It contains the port that
+	  the server should listen on, the path to the sqlite database file and the
+	  path to the channels configuration file.
+
 2011-01-06  Ingo Weinzierl <ingo@intevation.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<tvrecorder>
+
+    <server>
+        <port>8282</port>
+    </server>
+
+    <database>
+        <url>tvrecorder.db</url>
+    </database>
+
+    <channels>
+        <config-file>/your/path/to/channels.conf</config-file>
+    </channels>
+
+</tvrecorder>

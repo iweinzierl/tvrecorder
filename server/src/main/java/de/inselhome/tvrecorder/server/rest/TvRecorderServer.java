@@ -23,6 +23,7 @@ import org.restlet.Component;
 import org.restlet.data.Protocol;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
+import de.inselhome.tvrecorder.server.config.Config;
 
 
 /**
@@ -56,13 +57,27 @@ public class TvRecorderServer {
 
         Component component = new Component();
 
-        component.getServers().add(Protocol.HTTP, DEFAULT_PORT);
+        Config config  = Config.getInstance();
+        String portStr = config.getProperty(Config.XPATH_SERVER_PORT);
+
+        int port = DEFAULT_PORT;
+        if (portStr != null) {
+            try {
+                port = Integer.parseInt(portStr);
+            }
+            catch (NumberFormatException nfe) {
+                logger.warn("Could not determine port configuration. " +
+                            "Use standard port: " + port);
+            }
+        }
+
+        component.getServers().add(Protocol.HTTP, port);
         component.getDefaultHost().attach(app);
 
         try {
             logger.info(
                 "Starting rest HTTP server on " +
-                "localhost:" + DEFAULT_PORT);
+                "localhost:" + port);
 
             component.start();
         }

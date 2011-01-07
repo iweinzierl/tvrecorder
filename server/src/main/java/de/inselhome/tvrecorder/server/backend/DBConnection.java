@@ -21,11 +21,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
+import de.inselhome.tvrecorder.server.config.Config;
+
 
 /**
  * @author <a href="mailto:ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
 public class DBConnection {
+
+    /** The logger that is used in this class. */
+    private static Logger logger = Logger.getLogger(DBConnection.class);
 
     private DBConnection() {
     }
@@ -39,8 +46,17 @@ public class DBConnection {
      */
     public static String getUrl() {
 
-        // TODO the path to the database file should be read from configuration
-        // file.
+        Config config = Config.getInstance();
+        String path   = config.getProperty(Config.XPATH_DATABASE_URL);
+
+        if (path != null) {
+            String connString = "jdbc:sqlite:" + path;
+            logger.info("Open database connection to '" + connString + "'");
+
+            return connString;
+        }
+
+        // if no path could be found, we return the default one.
         return "jdbc:sqlite:tvrecorder.db";
     }
 
