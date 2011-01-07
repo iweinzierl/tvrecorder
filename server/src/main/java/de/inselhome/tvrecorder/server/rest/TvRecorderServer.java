@@ -22,8 +22,11 @@ import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
+import de.inselhome.tvrecorder.common.objects.Channel;
+
 import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.config.Config;
+import de.inselhome.tvrecorder.server.utils.DVBSChannelsParser;
 
 
 /**
@@ -35,6 +38,11 @@ public class TvRecorderServer {
      * The default port of the REST server: 8282
      */
     public static final int DEFAULT_PORT = 8282;
+
+    /**
+     * The key that is used to store the channels in the context.
+     */
+    public static final String CHANNELS_KEY = "tvrecorder.channels";
 
 
     private static final Logger logger =
@@ -51,16 +59,26 @@ public class TvRecorderServer {
     public void start() {
         logger.debug("Create necessary components for HTTP server.");
 
+        Config config = Config.getInstance();
+
         Backend backend = new Backend();
 
-        RestApp app = new RestApp(backend);
+        String    path     = config.getProperty(Config.XPATH_CHANNELS_FILE);
+        Channel[] channels = DVBSChannelsParser.parse(path);
+
+        if (channels == null) {
+            logger.error("Could not find any channels!");
+            System.exit(1);
+        }
+
+        logger.info("There are " + channels.length + " channels available.");
+
+        RestApp app = new RestApp(backend, channels);
 
         Component component = new Component();
 
-        Config config  = Config.getInstance();
         String portStr = config.getProperty(Config.XPATH_SERVER_PORT);
-
-        int port = DEFAULT_PORT;
+        int    port    = DEFAULT_PORT;
         if (portStr != null) {
             try {
                 port = Integer.parseInt(portStr);

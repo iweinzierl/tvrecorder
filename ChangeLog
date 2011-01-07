@@ -1,5 +1,13 @@
 2011-01-07  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  The channels defined in the channels configuration file are available in
+	  the context of the RestApp now. They are retrievable via the constant
+	  TvRecorderServer.CHANNELS_KEY.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/DVBSChannelsParser.java:
 	  Bugfix: avoided a NullPointerException if no lines are returned from
 	  FileUtils while parsing the channels configuration file.

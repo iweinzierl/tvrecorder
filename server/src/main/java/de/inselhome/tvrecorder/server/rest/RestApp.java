@@ -26,6 +26,8 @@ import org.restlet.Context;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
+import de.inselhome.tvrecorder.common.objects.Channel;
+
 import de.inselhome.tvrecorder.server.backend.Backend;
 
 
@@ -45,12 +47,15 @@ extends      Application
 
     protected Backend backend;
 
+    protected Channel[] channels;
+
 
     /**
      * Creates a new {@link RestApp}.
      */
-    public RestApp(Backend backend) {
-        this.backend = backend;
+    public RestApp(Backend backend, Channel[] channels) {
+        this.backend  = backend;
+        this.channels = channels;
     }
 
 
@@ -66,6 +71,7 @@ extends      Application
 
         ConcurrentMap map = context.getAttributes();
         map.put("backend", backend);
+        map.put(TvRecorderServer.CHANNELS_KEY, channels);
 
         Router router = new Router(context);
 
