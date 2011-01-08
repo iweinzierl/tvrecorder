@@ -31,7 +31,22 @@ public class DateUtils {
 
     public static final String OUTPUT_FORMAT = "dd-MM-yyyy_HH-mm";
 
+    public static final String DATETIME_FORMAT = "dd.MM.yyyy HH:mm";
 
+    public static final String DATE_FORMAT = "dd.MM.yyyy";
+
+    public static final String TIME_FORMAT = "HH:mm";
+
+
+    /**
+     * This function formats a given {@link Date} based on a given format.
+     *
+     * @param date the date to format.
+     * @param format the format to use.
+     *
+     * @return the formatted date/time or null, if <i>date</i> or <i>format</i>
+     * are null.
+     */
     public static String format(Date date, String format) {
         if (date == null || format == null) {
             return null;
@@ -40,6 +55,23 @@ public class DateUtils {
         DateFormat df = new SimpleDateFormat(format);
 
         return df.format(date);
+    }
+
+
+    /**
+     * This method compares two dates with a precision of minutes.
+     *
+     * @param end An end date.
+     * @param start A start date.
+     *
+     * @return true, if <i>end</i> is greater that that <i>start</i>, otherwise
+     * false.
+     */
+    public static boolean isEndGreaterThanStart(Date end, Date start) {
+        long endTime   = end.getTime() / (1000 * 60);
+        long startTime = start.getTime() / (1000 * 60);
+
+        return endTime <= startTime ? false : true;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
