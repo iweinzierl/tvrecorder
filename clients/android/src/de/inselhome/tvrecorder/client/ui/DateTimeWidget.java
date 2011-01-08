@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import de.inselhome.tvrecorder.client.utils.DateUtils;
+import de.inselhome.tvrecorder.common.utils.DateUtils;
 
 
 /**
@@ -125,8 +125,11 @@ extends      LinearLayout
      * time.
      */
     public void updateView() {
-        date.setText(DateUtils.formatDate(datetime));
-        time.setText(DateUtils.formatTime(datetime));
+        date.setText(DateUtils.format(
+            datetime.getTime(), DateUtils.DATE_FORMAT));
+
+        time.setText(DateUtils.format(
+            datetime.getTime(), DateUtils.TIME_FORMAT));
     }
 
 

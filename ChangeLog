@@ -1,3 +1,15 @@
+2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/utils/DateUtils.java:
+	  Removed. The client uses the DateUtils class from common package now.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java:
+	  Both classes use the DateUtils from common package now.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Added new date format strings used by the client.
+
 2011-01-07  Ingo Weinzierl <ingo@intevation.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:

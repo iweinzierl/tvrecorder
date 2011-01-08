@@ -30,11 +30,11 @@ import org.restlet.resource.ClientResource;
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
+import de.inselhome.tvrecorder.common.utils.DateUtils;
 
 import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.TvRecorder;
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
-import de.inselhome.tvrecorder.client.utils.DateUtils;
 
 
 /**
@@ -77,18 +77,20 @@ implements   View.OnClickListener
             Channel  chann = form.getChannel();
             String   name  = form.getName();
 
-            if (!isEndGreaterThanStart(end.getTime(), start.getTime())) {
+            if (!DateUtils.isEndGreaterThanStart(
+                end.getTime(), start.getTime()))
+            {
                 throw new IllegalArgumentException(
                     "End time needs to be greater than start time.");
             }
 
             String msg = "Neuen Job erstellt: \n";
             msg += "Start: ";
-            msg += DateUtils.formatDate(start) + "  ";
-            msg += DateUtils.formatTime(start);
+            msg += DateUtils.format(
+                start.getTime(), DateUtils.DATETIME_FORMAT);
             msg += "\nEnde: ";
-            msg += DateUtils.formatDate(end) + "  ";
-            msg += DateUtils.formatTime(end);
+            msg += DateUtils.format(
+                end.getTime(), DateUtils.DATETIME_FORMAT);
             msg += "\nKanal: ";
             msg += chann.getDescription();
             msg += "\nName: ";
@@ -114,23 +116,6 @@ implements   View.OnClickListener
             popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             popup.show();
         }
-    }
-
-
-    /**
-     * This method compares two dates with a precision of minutes.
-     *
-     * @param end An end date.
-     * @param start A start date.
-     *
-     * @return true, if <i>end</i> is greater that that <i>start</i>, otherwise
-     * false.
-     */
-    public static boolean isEndGreaterThanStart(Date end, Date start) {
-        long endTime   = end.getTime() / (1000 * 60);
-        long startTime = start.getTime() / (1000 * 60);
-
-        return endTime <= startTime ? false : true;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
