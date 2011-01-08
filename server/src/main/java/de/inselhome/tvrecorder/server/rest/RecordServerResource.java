@@ -25,8 +25,10 @@ import org.restlet.resource.ServerResource;
 
 import org.apache.log4j.Logger;
 
+import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
+import de.inselhome.tvrecorder.common.utils.DateUtils;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.utils.MPlayerCmdProducer;
@@ -53,9 +55,13 @@ implements   RecordResource
      */
     private static Logger logger = Logger.getLogger(RecordResource.class);
 
+
     /**
-     * This method is meant to add new jobs for recordings.
-     * TODO This method is currently not implemented!
+     * This method is meant to add new jobs for recordings. The incoming job is
+     * validated in {@link isJobValid(Job)}. If the validation passes, a new
+     * <i>at</i> job is created and the <i>job</i> is stored in the database.
+     *
+     * @param job The incoming job to record.
      */
     @Post
     public void add(Job job) {
@@ -75,6 +81,13 @@ implements   RecordResource
             logger.debug("=================================================");
         }
 
+        if (!isJobValid(job)) {
+            String msg = "The job is not valid!";
+            logger.error(msg);
+
+            throw new IllegalArgumentException(msg);
+        }
+
         boolean success = new StartAtJobCreator(job, new MPlayerCmdProducer()).startJob();
 
         if (!success) {
@@ -88,6 +101,53 @@ implements   RecordResource
         backend.insertJob(job);
 
         new StopAtJobCreator(job).startJob();
+    }
+
+
+    /**
+     * This method validates the retrieved {@link Job}. The start date needs to
+     * be smaller than the end date - this is verified by {@link
+     * DateUtils.isEndGreaterThanStart(Date,Date)} - and the channel needs to
+     * be available in the server - verified by {@link isChannelValid(Channel)}.
+     *
+     * @param job The retrieved {@link Job}.
+     *
+     * @return true, if every check was ok, otherwise false.
+     */
+    public boolean isJobValid(Job job) {
+        return (DateUtils.isEndGreaterThanStart(job.getEnd(), job.getStart()) &&
+                isChannelValid(job.getChannel()));
+    }
+
+
+    /**
+     * This method validates the retrieved {@link Channel}. If <i>channel</i>
+     * is not available in the server, we are not able to record the job, which
+     * means that this method returns <i>false</i>. Otherwise - if the channel
+     * is available in the server, this method will return <i>true</i>.
+     *
+     * @param channel The channel retrieved in this resource.
+     *
+     * @return true, if <i>channel</i> is valid, otherwise false.
+     */
+    protected boolean isChannelValid(Channel channel) {
+        Context context = getContext();
+        Map     attr    = context.getAttributes();
+
+        Channel[] ch = (Channel[]) attr.get(TvRecorderServer.CHANNELS_KEY);
+
+        if (ch == null) {
+            return false;
+        }
+
+        String key = channel.getKey();
+        for (Channel c: ch) {
+            if (key.equals(c.getKey())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

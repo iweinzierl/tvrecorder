@@ -1,5 +1,16 @@
 2011-01-08  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  The incoming job request is validated before an at job is created. The job
+	  must at least fulfill the following two conditions:
+	    - the start date is smaller than the end date
+	    - the channel must be available in the server
+
+	  NOTE: we should further check if there are no collisions with other jobs
+	  that are already started/created.
+
+2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/utils/DateUtils.java:
 	  Removed. The client uses the DateUtils class from common package now.
 
