@@ -23,6 +23,7 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 
+import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.TvRecorder;
 import de.inselhome.tvrecorder.client.handlers.RetrieveChannelsHandler;
 import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
@@ -118,16 +120,16 @@ extends      ScrollView
 
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        startTitle.setText("Start");
-        endTitle.setText("Ende");
-        channelTitle.setText("Programm");
-        nameTitle.setText("Name");
+        startTitle.setText(R.string.addjob_start);
+        endTitle.setText(R.string.addjob_end);
+        channelTitle.setText(R.string.addjob_channel);
+        nameTitle.setText(R.string.addjob_name);
 
         name.setPadding(0,0,0,30);
         name.setWidth(0);
 
         add.setOnClickListener(new RecordJobListener((TvRecorder) context));
-        add.setText("aufnehmen");
+        add.setText(R.string.addjob_start_record);
 
         layout.addView(startTitle);
         layout.addView(start);
@@ -170,8 +172,13 @@ extends      ScrollView
      * process. After the channels have been received, this dialog is closed.
      */
     public void refresh() {
-        TvRecorder recorder = (TvRecorder) getContext();
-        ProgressDialog d = ProgressDialog.show(recorder, "Lade", "Lade Kanäle");
+        TvRecorder recorder  = (TvRecorder) getContext();
+        Resources  resources = recorder.getResources();
+
+        ProgressDialog d = ProgressDialog.show(
+            recorder,
+            resources.getString(R.string.addjob_load_progress_title),
+            resources.getString(R.string.addjob_load_progress_text));
 
         RetrieveChannelsHandler handler = new RetrieveChannelsHandler(recorder);
 

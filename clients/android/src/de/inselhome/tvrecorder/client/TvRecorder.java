@@ -56,8 +56,8 @@ extends      Activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("TvR [TvRecorder]", " - onCreateOptionsMenu()");
-        menu.add("Quit");
-        menu.add("Settings");
+        menu.add(R.string.tvrecorder_contextmenu_quit);
+        menu.add(R.string.tvrecorder_contextmenu_settings);
         return true;
     }
 
@@ -70,7 +70,10 @@ extends      Activity
             "TvR [TvRecorder]",
             "onOptionsItemSelected(): selected '" + title + "'");
 
-        if (title.equals("Quit")) {
+        String quit = getResources().getString(
+            R.string.tvrecorder_contextmenu_quit);
+
+        if (title.equals(quit)) {
             finish();
             return true;
         }

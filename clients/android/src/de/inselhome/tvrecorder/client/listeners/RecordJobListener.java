@@ -20,6 +20,7 @@ package de.inselhome.tvrecorder.client.listeners;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -32,6 +33,7 @@ import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
+import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.TvRecorder;
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
@@ -69,6 +71,8 @@ implements   View.OnClickListener
     public void onClick(View v) {
         Log.i("TvR [RecordJobListener]", "onClick() - add new record.");
 
+        Resources res = recorder.getResources();
+
         try {
             AddJobForm form = recorder.getAddJobForm();
 
@@ -81,19 +85,19 @@ implements   View.OnClickListener
                 end.getTime(), start.getTime()))
             {
                 throw new IllegalArgumentException(
-                    "End time needs to be greater than start time.");
+                    res.getString(R.string.error_endtime_before_starttime));
             }
 
-            String msg = "Neuen Job erstellt: \n";
-            msg += "Start: ";
+            String msg =  res.getString(R.string.addjob_recorded_message) + "\n";
+            msg += res.getString(R.string.addjob_recorded_start) + " ";
             msg += DateUtils.format(
                 start.getTime(), DateUtils.DATETIME_FORMAT);
-            msg += "\nEnde: ";
+            msg += "\n" + res.getString(R.string.addjob_recorded_end) + " ";
             msg += DateUtils.format(
                 end.getTime(), DateUtils.DATETIME_FORMAT);
-            msg += "\nKanal: ";
+            msg += "\n" + res.getString(R.string.addjob_recorded_channel) + " ";
             msg += chann.getDescription();
-            msg += "\nName: ";
+            msg += "\n" + res.getString(R.string.addjob_recorded_name) + " ";
             msg += name;
 
             ClientResource c = new ClientResource(Config.getServerResource(
@@ -110,7 +114,9 @@ implements   View.OnClickListener
             popup.show();
         }
         catch (Exception e) {
-            String msg = "Error while adding new Job: " + e.getMessage();
+            String msg =
+                res.getString(R.string.addjob_recorded_error_title)
+                + " " + e.getMessage();
 
             Toast popup = Toast.makeText(recorder, msg, Toast.LENGTH_SHORT);
             popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

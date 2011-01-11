@@ -24,6 +24,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 
+import de.inselhome.tvrecorder.client.R;
+
 
 /**
  * The DatePickerDialog is a special {@link Dialog} that allows users to select
@@ -85,8 +87,8 @@ extends      Dialog
      * @return the content.
      */
     protected View createContentView(Context context) {
-        cancel.setText("Cancel");
-        submit.setText("Ok");
+        cancel.setText(R.string.datepicker_cancel);
+        submit.setText(R.string.datepicker_ok);
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

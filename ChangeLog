@@ -1,4 +1,17 @@
-2011-01-11  Ingo Weinzierl <ingo@intevation.de>
+2011-01-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DatePickerDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TimePickerDialog.java:
+	  Removed hard coded strings. Use the texts from resource files instead.
+	  This allows us to support more languages (I18N).
+
+	* clients/android/res/values/strings.xml: The strings that occur in the user
+	  interface.
+
+2011-01-08  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
 	  Added a new function that checks, if two time ranges collide.
