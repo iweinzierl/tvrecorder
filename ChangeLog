@@ -1,5 +1,10 @@
 2011-01-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
+	  Changed the padding of the name textfield. The text is no longer clipped.
+
+2011-01-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
 	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
 	  clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java,

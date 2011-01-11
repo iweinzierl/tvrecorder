@@ -125,7 +125,7 @@ extends      ScrollView
         channelTitle.setText(R.string.addjob_channel);
         nameTitle.setText(R.string.addjob_name);
 
-        name.setPadding(0,0,0,30);
+        name.setPadding(10,0,0,0);
         name.setWidth(0);
 
         add.setOnClickListener(new RecordJobListener((TvRecorder) context));
