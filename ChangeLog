@@ -1,3 +1,25 @@
+2011-01-11  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Added a new function that checks, if two time ranges collide.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/Backend.java:
+	  Added a new method that retrieves all queued jobs. The job creation is
+	  moved to an own helper class that makes it able to reuse the same code to
+	  create jobs loaded from database.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderResource.java:
+	  New. This ServerResource implements some basic methods to retrieve jobs,
+	  channels or other attributes stored in the context.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
+	  Extends TvRecorderResource that implements the getChannels() method.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Extends TvRecorderResource and added a new constraint before adding new
+	  jobs: the job retrieved by the client may not collide with an existing
+	  job.
+
 2011-01-08  Ingo Weinzierl <ingo@intevation.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:

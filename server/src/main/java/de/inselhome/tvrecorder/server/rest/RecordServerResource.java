@@ -17,11 +17,10 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.util.Date;
 import java.util.Map;
 
-import org.restlet.Context;
 import org.restlet.resource.Post;
-import org.restlet.resource.ServerResource;
 
 import org.apache.log4j.Logger;
 
@@ -42,7 +41,7 @@ import de.inselhome.tvrecorder.server.utils.StopAtJobCreator;
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
 public class RecordServerResource
-extends      ServerResource
+extends      TvRecorderResource
 implements   RecordResource
 {
     /**
@@ -94,10 +93,7 @@ implements   RecordResource
             return;
         }
 
-        Context context = getContext();
-        Map attr        = context.getAttributes();
-        Backend backend = (Backend) attr.get("backend");
-
+        Backend backend = getBackend();
         backend.insertJob(job);
 
         new StopAtJobCreator(job).startJob();
@@ -116,7 +112,8 @@ implements   RecordResource
      */
     public boolean isJobValid(Job job) {
         return (DateUtils.isEndGreaterThanStart(job.getEnd(), job.getStart()) &&
-                isChannelValid(job.getChannel()));
+                isChannelValid(job.getChannel()) &&
+                isDateValid(job.getStart(), job.getEnd()));
     }
 
 
@@ -131,10 +128,7 @@ implements   RecordResource
      * @return true, if <i>channel</i> is valid, otherwise false.
      */
     protected boolean isChannelValid(Channel channel) {
-        Context context = getContext();
-        Map     attr    = context.getAttributes();
-
-        Channel[] ch = (Channel[]) attr.get(TvRecorderServer.CHANNELS_KEY);
+        Channel[] ch = getChannels();
 
         if (ch == null) {
             return false;
@@ -148,6 +142,32 @@ implements   RecordResource
         }
 
         return false;
+    }
+
+
+    /**
+     *
+     */
+    protected boolean isDateValid(Date start, Date end) {
+        Backend backend = getBackend();
+        Job[]   queue   = backend.loadQueuedJobs(new Date());
+
+        if (queue == null || queue.length == 0) {
+            logger.debug("No queued jobs.");
+            return true;
+        }
+
+        logger.debug("Found " + queue.length + "queued jobs.");
+
+        for (Job job: queue) {
+            if (!DateUtils.doesTimerangesCollide(
+                job.getStart(), job.getEnd(), start, end)) {
+                logger.warn("Job collides with queued job.");
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

@@ -20,47 +20,39 @@ package de.inselhome.tvrecorder.server.rest;
 import java.util.Map;
 
 import org.restlet.Context;
-import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
-import org.apache.log4j.Logger;
-
 import de.inselhome.tvrecorder.common.objects.Channel;
-import de.inselhome.tvrecorder.common.rest.ChannelsResource;
+import de.inselhome.tvrecorder.common.objects.Job;
+
+import de.inselhome.tvrecorder.server.backend.Backend;
 
 
 /**
- * The concrete implementation of {@link ChannelsResource}.
+ * The concrete implementation of a {@link RecordResource}.
  *
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public class ChannelsServerResource
-extends      TvRecorderResource
-implements   ChannelsResource
+public class TvRecorderResource
+extends      ServerResource
 {
-    /**
-     * The relative path to this resource.
-     */
-    public static final String PATH = "/channels";
-
-    /**
-     * The logger.
-     */
-    private static Logger logger = Logger.getLogger(ChannelsResource.class);
+    public Map getAttr() {
+        Context context = getContext();
+        return context.getAttributes();
+    }
 
 
-    /**
-     * This method currently just returns a static list of channels. In the
-     * future, this method should retrieve the content of a channels
-     * configuration file.
-     *
-     * @return a list of Channels.
-     */
-    @Get
-    public Channel[] retrieve() {
-        logger.info("/channels - retrieve()");
+    public Backend getBackend() {
+        Map attr = getAttr();
 
-        return getChannels();
+        return (Backend) attr.get("backend");
+    }
+
+
+    public Channel[] getChannels() {
+        Map attr = getAttr();
+
+        return (Channel[]) attr.get(TvRecorderServer.CHANNELS_KEY);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

@@ -39,10 +39,32 @@ public class Backend {
 
     public static final String SQL_SELECT_ALL_JOBS = "SELECT * FROM jobs";
 
+    public static final String SQL_SELECT_QUEUED_JOBS =
+        "SELECT * FROM jobs where start >= ? OR end >= ?";
+
     public static final String SQL_INSERT_NEW_JOB  =
         "INSERT INTO jobs (start, end, channel, name) VALUES (?, ?, ?, ?)";
 
     private static Logger logger = Logger.getLogger(Backend.class);
+
+
+    private class JobCreator {
+        public Job create(ResultSet rs)
+        throws SQLException
+        {
+            String channel = rs.getString("channel");
+            String name    = rs.getString("name");
+            Date   start   = rs.getDate("start");
+            Date   end     = rs.getDate("end");
+
+            // TODO we should not create new Channels on our own, but use a
+            // parser or factory checking if there is a Channel existing
+            // with such key.
+            Channel chan = new Channel(channel, channel);
+
+            return new Job(start, end, chan, name);
+        }
+    } // end of JobCreator
 
 
     public Backend() {
@@ -61,22 +83,50 @@ public class Backend {
             Connection connection = DBConnection.getConnection();
             Statement statement   = connection.createStatement();
 
+            JobCreator creator = new JobCreator();
+
             ResultSet rs = statement.executeQuery(SQL_SELECT_ALL_JOBS);
             while(rs.next()) {
-                String channel = rs.getString("channel");
-                String name    = rs.getString("name");
-                Date   start   = rs.getDate("start");
-                Date   end     = rs.getDate("end");
-
-                // TODO we should not create new Channels on our own, but use a
-                // parser or factory checking if there is a Channel existing
-                // with such key.
-                Channel chan = new Channel(channel, channel);
-
-                jobs.add(new Job(start, end, chan, name));
+                jobs.add(creator.create(rs));
             }
 
             return (Job[]) jobs.toArray(new Job[jobs.size()]);
+        }
+        catch (SQLException sqle) {
+            logger.error(sqle.getLocalizedMessage());
+        }
+        catch (ClassNotFoundException cnfe) {
+            logger.error(cnfe.getLocalizedMessage());
+        }
+
+        return null;
+    }
+
+
+    /**
+     *  This method fetches all jobs from database and returns them as array.
+     *
+     *  @return queued jobs stored in the database.
+     */
+    public Job[] loadQueuedJobs(java.util.Date date) {
+        List<Job> jobs = new ArrayList<Job>();
+
+        try {
+            Connection connection       = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                SQL_SELECT_QUEUED_JOBS);
+
+            statement.setDate(1, new Date(date.getTime()));
+            statement.setDate(2, new Date(date.getTime()));
+
+            JobCreator creator = new JobCreator();
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                jobs.add(creator.create(rs));
+            }
+
+            return jobs.toArray(new Job[jobs.size()]);
         }
         catch (SQLException sqle) {
             logger.error(sqle.getLocalizedMessage());

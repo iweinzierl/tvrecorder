@@ -73,5 +73,29 @@ public class DateUtils {
 
         return endTime <= startTime ? false : true;
     }
+
+
+    /**
+     * This method checks, if timerange specified by <i>secondStart</i> and
+     * <i>secondEnd</i> collides with the timerange specified by
+     * <i>firstStart</i> and <i>firstEnd</i>.
+     *
+     * @param firstStart the start point of the first timerange.
+     * @param firstEnd   the end point of the first timerange.
+     * @param secondStart the start point of the first timerange.
+     * @param secondEnd   the end point of the first timerange.
+     *
+     * @return true, if there is a collision, otherwise false.
+     */
+    public static boolean doesTimerangesCollide(
+        Date firstStart, Date firstEnd, Date secondStart, Date secondEnd)
+    {
+        long firstStartTime  = firstStart.getTime();
+        long firstEndTime    = firstEnd.getTime();
+        long secondStartTime = secondStart.getTime();
+        long secondEndTime   = secondEnd.getTime();
+
+        return !(secondStartTime > firstEndTime || secondEndTime < firstEndTime);
+    }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
