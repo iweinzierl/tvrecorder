@@ -17,8 +17,12 @@
  */
 package de.inselhome.tvrecorder.client;
 
+import java.util.Map;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 
@@ -29,6 +33,55 @@ import android.util.Log;
  */
 public class Config {
 
+    public static final String SETTINGS_SERVER_URL  = "settings_host_url";
+
+    public static final String SETTINGS_SERVER_PORT = "settings_host_port";
+
+    /**
+     * This method retrieves the value of the preference specified by
+     * <i>key</i>.
+     *
+     * @param c the {@link Context}
+     * @param key the key that specifies the preference to return
+     * @param def the default value if the preference specified by <i>key</i> is
+     * not existing
+     *
+     * @return the preference value or <i>def</i>.
+     */
+    protected static String getPreference(Context c, String key, String def) {
+        SharedPreferences prefs =
+            PreferenceManager.getDefaultSharedPreferences(c);
+
+        Map settings = prefs.getAll();
+
+        String pref = (String) settings.get(key);
+
+        return pref != null ? pref : def;
+    }
+
+
+    /**
+     * This function is called to check if all necessary preferences are set.
+     *
+     * @param c the {@link Context}
+     *
+     * @return true, if all necessary preferences are set, otherwise false.
+     */
+    public static boolean checkPreferences(Context c) {
+        Resources res     = c.getResources();
+        String[] settings = res.getStringArray(R.array.tvrecorder_settings);
+
+        for (String setting: settings) {
+            String pref = getPreference(c, setting, null);
+
+            if (pref == null || pref.equals("")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * This function retrieves the server url.
      *
@@ -37,10 +90,8 @@ public class Config {
      * @return the server url as string.
      */
     public static final String getServer(Context context) {
-        Resources res = context.getResources();
-
-        String url  = res.getString(R.string.server_url);
-        String port = res.getString(R.string.server_port);
+        String url  = getPreference(context, SETTINGS_SERVER_URL, "");
+        String port = getPreference(context, SETTINGS_SERVER_PORT, "");
 
         return url + ":" + port;
     }

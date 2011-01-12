@@ -18,12 +18,15 @@
 package de.inselhome.tvrecorder.client;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
+import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 
 
 /**
@@ -45,6 +48,10 @@ extends      Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("TvR [TvRecorderActivity]", "onCreate() - create view");
+
+        if (!Config.checkPreferences(this)) {
+            startActivity(new Intent(this, TvRecorderSettings.class));
+        }
 
         addJobForm = new AddJobForm(this);
         setContentView(addJobForm);
@@ -70,11 +77,19 @@ extends      Activity
             "TvR [TvRecorder]",
             "onOptionsItemSelected(): selected '" + title + "'");
 
-        String quit = getResources().getString(
-            R.string.tvrecorder_contextmenu_quit);
+        Resources res = getResources();
+
+        String quit = res.getString(R.string.tvrecorder_contextmenu_quit);
+        String sett = res.getString(R.string.tvrecorder_contextmenu_settings);
+        Log.d("TvR [TvRecorder]", "onOptionsItemSelected(): settings = " + sett);
 
         if (title.equals(quit)) {
             finish();
+            return true;
+        }
+        else if (title.equals(sett)) {
+            Log.d("TvR [TvRecorder]", "onOptionsItemSelected(): goto settings");
+            startActivity(new Intent(this, TvRecorderSettings.class));
             return true;
         }
 

@@ -6,6 +6,11 @@
     <string name="tvrecorder_contextmenu_quit">Beenden</string>
     <string name="tvrecorder_contextmenu_settings">Einstellungen</string>
 
+    <string name="settings_host_url">URL des Servers</string>
+    <string name="settings_host_port">Port des Servers</string>
+
+    <string name="keyvalueitem_change">ändern</string>
+
     <string name="addjob_start">Start</string>
     <string name="addjob_end">Ende</string>
     <string name="addjob_channel">Programm</string>

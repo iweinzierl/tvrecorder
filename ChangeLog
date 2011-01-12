@@ -1,3 +1,38 @@
+2011-01-13  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java:
+	  New. An activity that allows the user to edit the settings of the
+	  TvRecorder. It will show a list with all settings defined in arrays.xml.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/KeyValueItem.java:
+	  New. This LinearLayout will show a key/value pair with a button on the
+	  right.
+	  TODO: Improve the layout!
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/TextDialog.java:
+	  This dialog will show a textfield and a button to submit the dialog. It
+	  defines an interface OnOkListener that is called after hitting the OK
+	  button. The listener can be set using a setOnOkListener() method.
+
+	* clients/android/AndroidManifest.xml: Added the new activity.
+
+	* clients/android/res/values/strings.xml: Added new strings for the
+	  settings.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: The server
+	  url and port are no longer taken from config.xml. Now, we query the
+	  SharedPreferences for fetching the settings.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: At the
+	  application start, we make sure, that all necessary settings are defined.
+	  If this is not the case, the TvRecorderSettings activity is opened.
+
+	* clients/android/res/values/arrays.xml: New. Defines the necessary settings
+	  of the TvRecorder. Currently, there are just two major settings: the
+	  server url and port number.
+
+	* clients/android/res/values/config.xml: Removed.
+
 2011-01-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
