@@ -1,0 +1,37 @@
+Welcome to TvRecorder!
+
+The TvRecorder is a client/server application that allows users to record tv
+programs via using a DVB-(C|S|T) receiver. Therefore, TvRecorder makes use of
+third party software, currently MPlayer, to store DVB streams to hard disk.
+The server behaves as a REST service and serves different methods. Clients can
+use these services to query status information or start new record jobs.
+
+
+Primary SCM repository:
+=======================
+Mercurial repository: http://hg.intevation.org/tvrecorder
+For more information about mercurial, see http://www.selenic.com/mercurial/.
+
+
+License:
+========
+TvRecorder is distributed unter the GNU General Public License (>= v3). See
+LICENSE files that is served with each package for details.
+
+Copyright (C) 2010-2011 Ingo Weinzierl <ingo_weinzierl@web.de>
+
+
+System Requirements:
+====================
+  * Java 1.5
+  * mplayer
+  * at
+  * sqlite3
+  * further library dependencies are described in the subpackages
+
+
+Installation:
+=============
+For installing the TvRecorder, see the instructions in ``server`` and ``client``
+packages. Both packages make use of ``common``.
+

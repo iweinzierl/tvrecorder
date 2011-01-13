@@ -1,0 +1,58 @@
+The server is the main component of the TvRecorder. It provides different REST
+services that allow interactions with clients. Clients can use these services to
+query status information or start new record jobs.
+
+
+Library Dependencie:
+====================
+  * JUnit 3.8.1
+  * Restlet 2.0 SNAPSHOT
+  * Restlet-xml 2.0 SNAPSHOT
+  * Log4J 1.2.14
+  * tvrecorder-common 0.1 SNAPSHOT
+  * Xerial 3.7.2
+
+Note: the dependencies can be downloaded using the Maven build tool that is the
+prefered way to build this package.
+
+
+Installation:
+=============
+The installation is based on the Maven build tool (see http://maven.apache.org
+for details).
+
+To compile the sources, just type the following:
+  > mvn compile
+
+To build a JAR archive, type:
+  > mvn package
+The resulting JAR is placed in the ``target`` directory.
+
+Prepare the server for running:
+  > mvn package dependency:copy-dependencies
+
+This command line will compile the sources, create a JAR archive and download
+the necessary libraries (defined in ``pom.xml``).
+
+
+RUNNING:
+========
+There is a shell script ``contrib/run.sh`` that might be used to start the
+server from command line. It expects the server and necessary JARs to be located
+in the ``target`` directory.
+
+Before you can do this, you need to adapt the example configuration
+``conf/config.xml``. You need to adapt at least the path to your channels
+configuration file. The default MPlayer channels.conf file is located in
+~/.mplayer/channels.conf.
+NOTE: If the server is not able to read this file or cannot find any valid TV
+channels in that file, the server will not start! A tv recorder software without
+any channels makes no sense anyway ;-)
+
+If you have adapted the configuration, built the server JAR and downloaded the
+dependencies, you should be able to run the following command:
+  > ./contrib/run.sh
+
+For further details about the running server, you may look into the logfile
+``logs/tvrecorder-server.log`` (which is the default). You can adapt the logging
+in ``conf/log4j.properties``.
