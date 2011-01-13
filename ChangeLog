@@ -1,5 +1,12 @@
 2011-01-13  Ingo Weinzierl <ingo@intevation.de>
 
+	* NEWS: A NEWS file that contains the major changes for each release.
+
+	=== RELEASE 0.1 ====
+
+
+2011-01-13  Ingo Weinzierl <ingo@intevation.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java:
 	  New. An activity that allows the user to edit the settings of the
 	  TvRecorder. It will show a list with all settings defined in arrays.xml.
