@@ -1,3 +1,9 @@
+2011-03-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/pom.xml,
+	  server/pom.xml: Fixed broken Restlet dependency - the repository structure
+	  of the Restlet maven repository has changed.
+
 2011-01-13  Ingo Weinzierl <ingo@intevation.de>
 
 	* NEWS: A NEWS file that contains the major changes for each release.
