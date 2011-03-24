@@ -1,4 +1,19 @@
-2011-03-24  Ingo Weinzierl <ingo@intevation.de>
+2011-03-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/conf/config.xml: Added an example block that shows the usage of
+	  HTTP BasicAuth.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/config/Config.java:
+	  Added XPath expressions that points to auth type, name and password.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Added code to provide HTTP BasicAuth. The configuration is queried to
+	  get to know about the auth type, the username and its password.
+
+	  NOTE: The only authentication type that is currently supported is the
+	  HTTP BasicAuth!
+
+2011-03-07  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/res/values/arrays.xml: Added two further config options
 	  for HTTP BasicAuth.
@@ -14,12 +29,7 @@
 	  ClientResource is needed, because that resource is prepared for
 	  authentication (if configured).
 
-	* clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
-	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
-	  Removed the creation of the ClientResource. Use the getClientResource()
-	  of the Config class instead to provide HTTP BasicAuth.
-
-2011-03-07  Ingo Weinzierl <ingo@intevation.de>
+2011-03-24  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/pom.xml,
 	  server/pom.xml: Fixed broken Restlet dependency - the repository structure
