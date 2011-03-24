@@ -13,4 +13,14 @@
         <config-file>/your/path/to/channels.conf</config-file>
     </channels>
 
+    <!-- Uncomment the following block to enable HTTP BasicAuth.
+         It is absolutely recommended to do this!
+         Currently, the only provided authentication type is HTTP BasicAuth. -->
+    <!--
+    <authentication type="BasicAuth">
+        <login>YOURNAME</login>
+        <password>YOURPASS</password>
+    </authentication>
+    -->
+
 </tvrecorder>
