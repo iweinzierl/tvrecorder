@@ -1,0 +1,31 @@
+The common package supports interface, objects and helper classes used by
+clients and server.
+
+
+Library Dependencies:
+====================
+  * JUnit 3.8.1
+  * Restlet 2.0 SNAPSHOT
+  * Restlet-xml 2.0 SNAPSHOT
+
+Note: the dependencies can be downloaded using the Maven build tool that is the
+prefered way to build this package.
+
+
+Installation:
+=============
+The installation is based on the Maven build tool (see http://maven.apache.org
+for details).
+
+To compile the sources, just type the following:
+  > mvn compile
+
+To build a JAR archive, type:
+  > mvn package
+The resulting JAR is placed in the ``target`` directory.
+
+Or make it available for your local maven installation with the following
+command (this is recommended, because the server can load this dependency from
+local filesystem then):
+  > mvn install
+

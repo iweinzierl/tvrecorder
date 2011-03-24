@@ -1,0 +1,23 @@
+Version 0.1
+===========
+
+  * common
+
+    - Basic interfaces used for the communication between client and server
+    - Helper classes for the work with date/time objects
+    - Model classes that represent Channels and Jobs
+
+
+  * server
+
+    - Support for a REST service to retrieve provided channels
+    - Support for a REST service that allows recording new jobs
+    - Validation of new jobs
+    - New jobs are stored in a SQLite3 database
+    - At job creation for valid incoming record jobs
+
+
+  * Android client
+
+    - User interface for adding new jobs
+    - User interface for basic preferences

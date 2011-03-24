@@ -1,0 +1,385 @@
+2011-03-24  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/res/values/arrays.xml: Added two further config options
+	  for HTTP BasicAuth.
+
+	* clients/android/res/values/strings.xml: Added i18n strings for the HTTP
+	  BasicAuth config options.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: Added
+	  method for retrieving the login and password used for authentication.
+
+	  NOTE: The Config class contains a method that retrieves a
+	  ClientResource, now. This method should be used everywhere where a
+	  ClientResource is needed, because that resource is prepared for
+	  authentication (if configured).
+
+	* clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Removed the creation of the ClientResource. Use the getClientResource()
+	  of the Config class instead to provide HTTP BasicAuth.
+
+2011-03-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/pom.xml,
+	  server/pom.xml: Fixed broken Restlet dependency - the repository structure
+	  of the Restlet maven repository has changed.
+
+2011-01-13  Ingo Weinzierl <ingo@intevation.de>
+
+	* NEWS: A NEWS file that contains the major changes for each release.
+
+	=== RELEASE 0.1 ====
+
+
+2011-01-13  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java:
+	  New. An activity that allows the user to edit the settings of the
+	  TvRecorder. It will show a list with all settings defined in arrays.xml.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/KeyValueItem.java:
+	  New. This LinearLayout will show a key/value pair with a button on the
+	  right.
+	  TODO: Improve the layout!
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/TextDialog.java:
+	  This dialog will show a textfield and a button to submit the dialog. It
+	  defines an interface OnOkListener that is called after hitting the OK
+	  button. The listener can be set using a setOnOkListener() method.
+
+	* clients/android/AndroidManifest.xml: Added the new activity.
+
+	* clients/android/res/values/strings.xml: Added new strings for the
+	  settings.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: The server
+	  url and port are no longer taken from config.xml. Now, we query the
+	  SharedPreferences for fetching the settings.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: At the
+	  application start, we make sure, that all necessary settings are defined.
+	  If this is not the case, the TvRecorderSettings activity is opened.
+
+	* clients/android/res/values/arrays.xml: New. Defines the necessary settings
+	  of the TvRecorder. Currently, there are just two major settings: the
+	  server url and port number.
+
+	* clients/android/res/values/config.xml: Removed.
+
+2011-01-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
+	  Changed the padding of the name textfield. The text is no longer clipped.
+
+2011-01-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DatePickerDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TimePickerDialog.java:
+	  Removed hard coded strings. Use the texts from resource files instead.
+	  This allows us to support more languages (I18N).
+
+	* clients/android/res/values/strings.xml: The strings that occur in the user
+	  interface.
+
+2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Added a new function that checks, if two time ranges collide.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/Backend.java:
+	  Added a new method that retrieves all queued jobs. The job creation is
+	  moved to an own helper class that makes it able to reuse the same code to
+	  create jobs loaded from database.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderResource.java:
+	  New. This ServerResource implements some basic methods to retrieve jobs,
+	  channels or other attributes stored in the context.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
+	  Extends TvRecorderResource that implements the getChannels() method.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Extends TvRecorderResource and added a new constraint before adding new
+	  jobs: the job retrieved by the client may not collide with an existing
+	  job.
+
+2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  The incoming job request is validated before an at job is created. The job
+	  must at least fulfill the following two conditions:
+	    - the start date is smaller than the end date
+	    - the channel must be available in the server
+
+	  NOTE: we should further check if there are no collisions with other jobs
+	  that are already started/created.
+
+2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/utils/DateUtils.java:
+	  Removed. The client uses the DateUtils class from common package now.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java:
+	  Both classes use the DateUtils from common package now.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Added new date format strings used by the client.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
+	  This resource returns the real channel list from context now - the dummy
+	  values are removed.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  The channels defined in the channels configuration file are available in
+	  the context of the RestApp now. They are retrievable via the constant
+	  TvRecorderServer.CHANNELS_KEY.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/DVBSChannelsParser.java:
+	  Bugfix: avoided a NullPointerException if no lines are returned from
+	  FileUtils while parsing the channels configuration file.
+
+2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/XMLUtils.java:
+	  Introduced a helper class to work with XML documents.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/config/Config.java:
+	  Introduced this class as a central point for querying configuration
+	  settings.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/DBConnection.java:
+	  The path to the database file is queried from Config now. If no path is
+	  configured, or an error occured while reading that config option, the
+	  default path is used (tvrecorder.db).
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  The port that the server is listening on is read from Config now. If no
+	  port is configured, or an error occured while reading that option, the
+	  default port (8282) is used.
+
+	* server/conf/config.xml: A default config file. It contains the port that
+	  the server should listen on, the path to the sqlite database file and the
+	  path to the channels configuration file.
+
+2011-01-06  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:
+	  Added a new function that retrieves the lines of a file as String array.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/DVBSChannelsParser.java:
+	  This class represents a parser that is used to extract the channels of a
+	  MPlayer DVB-S configuration file.
+
+2011-01-06  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java: 
+	  After a job has arrived here, a new At job is created. This job executes a
+	  command (currently for MPlayer) that starts recording the job.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
+	  Changed the keys of the channels.
+
+	* server/contrib/stop_records.sh: The default shell script that is executed
+	  by At jobs to stop MPlayer recording.
+
+	* server/jobs/do-not-delete-me,
+	  server/records/do-not-delete-me: Directories for storing jobs and records.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/AtJobCreator.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/utils/StartAtJobCreator.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/utils/StopAtJobCreator.java:
+	  An abstract base class and two subclasses. AtJobCreators have the task to
+	  create new At jobs. StartAtJobCreator should be used to create an At job
+	  to start recording, the StopAtJobCreator should be used to stop these
+	  recordings.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/CmdProducer.java.
+	  server/src/main/java/de/inselhome/tvrecorder/server/utils/MPlayerCmdProducer.java:
+	  The CmdProducer interface describes a single method to create command
+	  lines. MPlayerCmdProducer produces a concrete command line that that
+	  starts recording with usage of Mplayer.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:
+	  A helper class for working with files.
+
+2011-01-05  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  A helper class that should make it easier to work with Date objects.
+
+2011-01-03  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java: The
+	  backend is available via the Context's attribute map now ('backend').
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Injected the Backend into the RestApp.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Incoming jobs are saved to database now. But the real recording stuff is
+	  still missing!
+
+2011-01-03  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/pom.xml: Added a dependency to Xerial's SQLiteJDBC
+	  driver (version 3.7.2).
+
+	* server/docs/schema.sql: A simple schema definition for the job table.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/Backend.java:
+	  The backend. Currently, there are two methods defined to load all jobs
+	  from database and insert new jobs into it.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/DBConnection.java:
+	  This class is used to retrieve a database connection.
+
+2010-12-27  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: The
+	  TvRecorder Activity has now an OptionsMenu with two items - the target of
+	  "Quit" is to stop the application, "Settings" should open a window to
+	  change some basic settings (like the server url). "Settings" is not
+	  implemented yet!
+
+2010-12-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Now, we make sure, that the start date is smaller than the end date of the
+	  record job. Otherwise, an warn dialog is shown and no job is sent to the
+	  server.
+
+2010-12-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Removed a debug line that has been commited by accident.
+
+2010-12-25  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java: The
+	  job stores its start and end time as Date objects now, because there have
+	  been problems while serialization or deserialization in client or server.
+	  The result was, that no job could be transfered between client and server.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Added some more debug statements and validate the job objects at the
+	  beginning of add() to make sure, that it is not null.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
+	  This form's getChannel() method returns a real Channel object instead of
+	  a string representation of the Channel.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Some adjustments based on the changes mentioned above.
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/DatePickerDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TimePickerDialog.java:
+	  New. Dialogs to select a date and a time. Both contain a special interface
+	  that describes a method that is fired if a date or a time was selected in
+	  the widget.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java:
+	  Removed the onTouch event and added two OnClickListener to the date and
+	  time fields. A click on the date field will open a DatePickerDialog, a
+	  click on the time field will open a TimePickerDialog.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/rest/ChannelsResource.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/rest/RecordResource.java:
+	  Added the resource path to the interfaces.
+
+	* clients/android/res/values/config.xml: A configuration file where
+	  necessary settings shuould be defined. Currently, important things are
+	  remote server url and server port.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: New. This
+	  class defines some functions that retrieve application settings.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
+	  Removed the path definitions for the ChannelsResource and RecordResource.
+	  The definitions are useless now: the relative pathes are defined in the
+	  interfaces and the server url is retrievable by Config.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  The necessary urls are taken from Config now.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/AndroidManifest.xml,
+	  clients/android/build.properties,
+	  clients/android/build.xml,
+	  clients/android/default.properties,
+	  clients/android/libs/org.restlet-2.0snapshot.jar,
+	  clients/android/libs/tvrecorder-common-0.1-SNAPSHOT.jar,
+	  clients/android/local.properties,
+	  clients/android/res/drawable-hdpi/icon.png,
+	  clients/android/res/drawable-ldpi/icon.png,
+	  clients/android/res/drawable-mdpi/icon.png,
+	  clients/android/res/layout/main.xml,
+	  clients/android/res/values/strings.xml,
+	  clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/utils/DateUtils.java:
+	  The initial checkin of an Android client. Currently, the gui consists of a
+	  single AddJobForm. This form contains two DateTimeWidgets to adjust the
+	  start and end time, a select box to select the channel, a text field to
+	  specify a name of the job and a button to add the defined job.
+
+	  Note: The creation of a new job is currently not implemented.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/App.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  The initial checkin of the server. The server represents a HTTP server
+	  with some REST interfaces to retrieve supported channels and add new jobs
+	  for recording.
+
+	* server/LICENSE: The server is distributed under the GPL v3.
+
+	* server/conf/log4j.properties: A logging configuration for Log4J.
+
+	* server/contrib/run.sh: A bash script to start the server.
+
+	* server/pom.xml: The maven configuration of the server. Currently, there
+	  are dependencies to JUnit, Restet and the common package.
+
+
+2010-12-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/rest/ChannelsResource.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/rest/RecordResource.java:
+	  The initial commit of the common package. This package contains objects
+	  that are used for the communication between clients and server. Both,
+	  client and server, should make use of this package!
+
+	* common/pom.xml: The maven configuration of the common package.
+	  Currently, there are dependencies to JUnit and Restlet.
+
+	* common/LICENSE: This package is distributed under the GPL v3.
