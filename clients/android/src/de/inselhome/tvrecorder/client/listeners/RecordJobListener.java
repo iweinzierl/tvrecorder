@@ -100,8 +100,8 @@ implements   View.OnClickListener
             msg += "\n" + res.getString(R.string.addjob_recorded_name) + " ";
             msg += name;
 
-            ClientResource c = new ClientResource(Config.getServerResource(
-                recorder, RecordResource.PATH));
+            ClientResource c = Config.getClientResource(
+                recorder, RecordResource.PATH);
             RecordResource resource = c.wrap(RecordResource.class);
 
             Job job = new Job(start.getTime(), end.getTime(), chann, name);

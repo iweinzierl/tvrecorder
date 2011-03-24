@@ -62,8 +62,8 @@ implements   Runnable
                 "TvR [RetrieveChannelsHandler]",
                 "run() - retrieve channels");
 
-            ClientResource cr = new ClientResource(Config.getServerResource(
-                tvrecorder, ChannelsResource.PATH));
+            ClientResource cr = Config.getClientResource(
+                tvrecorder, ChannelsResource.PATH);
 
             ChannelsResource resource = cr.wrap(ChannelsResource.class);
             Channel[] channels = resource.retrieve();

@@ -8,6 +8,8 @@
 
     <string name="settings_host_url">URL des Servers</string>
     <string name="settings_host_port">Port des Servers</string>
+    <string name="settings_auth_user">Benutzer</string>
+    <string name="settings_auth_pass">Passwort</string>
 
     <string name="keyvalueitem_change">ändern</string>
 

@@ -1,3 +1,24 @@
+2011-03-24  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/res/values/arrays.xml: Added two further config options
+	  for HTTP BasicAuth.
+
+	* clients/android/res/values/strings.xml: Added i18n strings for the HTTP
+	  BasicAuth config options.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: Added
+	  method for retrieving the login and password used for authentication.
+
+	  NOTE: The Config class contains a method that retrieves a
+	  ClientResource, now. This method should be used everywhere where a
+	  ClientResource is needed, because that resource is prepared for
+	  authentication (if configured).
+
+	* clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Removed the creation of the ClientResource. Use the getClientResource()
+	  of the Config class instead to provide HTTP BasicAuth.
+
 2011-03-07  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/pom.xml,
