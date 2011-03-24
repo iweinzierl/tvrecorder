@@ -1,3 +1,18 @@
+2011-03-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/conf/config.xml: Added an example block that shows the usage of
+	  HTTP BasicAuth.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/config/Config.java:
+	  Added XPath expressions that points to auth type, name and password.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Added code to provide HTTP BasicAuth. The configuration is queried to
+	  get to know about the auth type, the username and its password.
+
+	  NOTE: The only authentication type that is currently supported is the
+	  HTTP BasicAuth!
+
 2011-03-07  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/pom.xml,

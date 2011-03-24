@@ -44,6 +44,15 @@ public class Config {
     public static final String XPATH_CHANNELS_FILE =
         "/tvrecorder/channels/config-file/text()";
 
+    public static final String XPATH_AUTH_TYPE =
+        "/tvrecorder/authentication/@type";
+
+    public static final String XPATH_AUTH_LOGIN =
+        "/tvrecorder/authentication/login/text()";
+
+    public static final String XPATH_AUTH_PASSWORD =
+        "/tvrecorder/authentication/password/text()";
+
 
     private static Logger logger = Logger.getLogger(Config.class);
 

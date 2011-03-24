@@ -20,7 +20,10 @@ package de.inselhome.tvrecorder.server.rest;
 import org.apache.log4j.Logger;
 
 import org.restlet.Component;
+import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
+import org.restlet.security.ChallengeAuthenticator;
+import org.restlet.security.MapVerifier;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 
@@ -90,7 +93,32 @@ public class TvRecorderServer {
         }
 
         component.getServers().add(Protocol.HTTP, port);
-        component.getDefaultHost().attach(app);
+
+        String authType = config.getProperty(Config.XPATH_AUTH_TYPE);
+
+        if (authType != null && authType.toLowerCase().equals("basicauth")) {
+            logger.info("Prepare server for HTTP BasicAuth.");
+
+            String login = config.getProperty(Config.XPATH_AUTH_LOGIN);
+            String pass  = config.getProperty(Config.XPATH_AUTH_PASSWORD);
+
+            ChallengeAuthenticator guard = new ChallengeAuthenticator(
+                null, ChallengeScheme.HTTP_BASIC, "testRealm");
+
+            MapVerifier mapVerifier = new MapVerifier();
+            mapVerifier.getLocalSecrets().put(login, pass.toCharArray());
+            guard.setVerifier(mapVerifier);
+
+            component.getDefaultHost().attach(guard);
+            guard.setNext(app);
+        }
+        else {
+            logger.warn(
+                "No authentication method set. The server is not secure! " +
+                "It is absolutely recommended to use authentication!");
+
+            component.getDefaultHost().attach(app);
+        }
 
         try {
             logger.info(
