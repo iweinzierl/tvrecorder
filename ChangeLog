@@ -1,3 +1,15 @@
+2011-05-20  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/model/ChannelUpdateJob.java:
+	  New. This class contains a channel and an URL that is used to update the
+	  channel with tv listing information.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/model/ChannelWithListing.java:
+	  New. A special channel that knows about its tv shows.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/model/TvShow.java:
+	  New. A tv show with title, description, start and end date.
+
 2011-05-19  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/rss/RssReader.java,
