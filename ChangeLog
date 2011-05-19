@@ -1,5 +1,13 @@
 2011-05-19  Ingo Weinzierl <ingo@intevation.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/rss/RssReader.java,
+	  clients/android/src/de/inselhome/tvrecorder/rss/RssFeed.java,
+	  clients/android/src/de/inselhome/tvrecorder/rss/RssItem.java,
+	  clients/android/src/de/inselhome/tvrecorder/rss/RssXMLUtils.java: New. A
+	  rss reader and required model classes.
+
+2011-05-19  Ingo Weinzierl <ingo@intevation.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/XMLUtils.java:
 	  New. A helper class that support some basic functions to work with XML
 	  files.
