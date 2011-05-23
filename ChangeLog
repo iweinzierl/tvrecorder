@@ -1,5 +1,15 @@
 2011-05-23  Ingo Weinzierl <ingo@intevation.de>
 
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java:
+	  New. This special channel class provides information about the tv shows
+	  of this channel.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
+	  New. This model class represents a tv show with title, description and a
+	  start date at minimum.
+
+2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/rss/RssFeed.java,
 	  clients/android/src/de/inselhome/tvrecorder/rss/RssItem.java,
 	  clients/android/src/de/inselhome/tvrecorder/rss/RssReader.java,
