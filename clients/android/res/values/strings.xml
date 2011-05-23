@@ -5,6 +5,10 @@
     <!-- THE RECORD ACTIVITY -->
     <string name="tvrecorder_contextmenu_quit">Beenden</string>
     <string name="tvrecorder_contextmenu_settings">Einstellungen</string>
+    <string name="tvrecorder_contextmenu_tvguide">TvGuide</string>
+
+    <string name="tvguide_title">TvGuide</string>
+    <string name="tvguide_update_list">Aktualisieren</string>
 
     <string name="settings_host_url">URL des Servers</string>
     <string name="settings_host_port">Port des Servers</string>

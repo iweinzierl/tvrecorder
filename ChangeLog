@@ -1,5 +1,30 @@
 2011-05-24  Ingo Weinzierl <ingo@intevation.de>
 
+	* clients/android/AndroidManifest.xml: Registered the TvGuide as new
+	  activity for the TvRecorder android client.
+
+	* clients/android/res/values/strings.xml: Added i18n strings for the
+	  TvGuide activity.
+
+	* clients/android/res/layout/list_item.xml: Added a better representation
+	  for list views than the default one is.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: The
+	  TvGuide activity is reachable from the context menu now.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideUpdateEvent.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideUpdateListener.java:
+	  Interfaces and classes for a listener mechanism which is necessary to
+	  fetch the TvGuide from tvrecorder server and update the UI after
+	  finishing this work.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  New. This activity has the goal to show all supported channels and a tv
+	  show listing for each of those channels.
+
+2011-05-24  Ingo Weinzierl <ingo@intevation.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
 	  common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
 	  Improved the string representation of toString() which is necessary to
