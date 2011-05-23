@@ -1,5 +1,11 @@
 2011-05-23  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/contrib/update.sh: New. A shell script to start the
+	  RssTvShowManager as standalone application. Currently used for
+	  development reason.
+
+2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdateEvent.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdateListener.java:
 	  New. Interfaces necessary for a listener mechanism which is used to listen to
