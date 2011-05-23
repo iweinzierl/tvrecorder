@@ -15,8 +15,10 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.rss;
+package de.inselhome.tvrecorder.server.rss;
 
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.IOException;
 
@@ -26,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
 import java.net.URL;
 
 import javax.xml.xpath.XPathConstants;
@@ -34,7 +38,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.util.Log;
+import org.apache.log4j.Logger;
 
 import de.inselhome.tvrecorder.common.utils.XMLUtils;
 
@@ -43,6 +47,8 @@ import de.inselhome.tvrecorder.common.utils.XMLUtils;
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
 public class RssReader {
+
+    private static Logger logger = Logger.getLogger(RssReader.class);
 
     public static final String DEFAULT_DATE_FORMAT =
         "EEE, d MMM yyyy HH:mm:ss Z";
@@ -64,28 +70,54 @@ public class RssReader {
     };
 
 
-    public static RssFeed getFeed(URL url) {
+    protected URL url;
+
+
+    public RssReader(URL url) {
+        this.url = url;
+    }
+
+
+    public RssFeed getFeed() {
         Document raw = getDocumentFromURL(url);
         return parseFeedDocument(raw);
     }
 
 
-    public static Document getDocumentFromURL(URL url) {
+    public Document getDocumentFromURL(URL url) {
+        InputStream is = null;
         try {
-            InputStream is  = url.openStream();
-            Document    doc = XMLUtils.parseDocument(is);
+            URLConnection     connection = url.openConnection();
+            HttpURLConnection urlconnect = (HttpURLConnection) connection;
+            urlconnect.setUseCaches(false);
+            urlconnect.connect();
+
+            is           = urlconnect.getInputStream();
+
+            Document doc = XMLUtils.parseDocument(is);
+
+            is.close();
+            urlconnect.disconnect();
 
             return doc;
         }
         catch (IOException ioe) {
-            Log.e("TvR [RssReader]", ioe.getMessage());
+            logger.warn(ioe, ioe);
+        }
+        finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+            }
+            catch (IOException ioe) {}
         }
 
         return null;
     }
 
 
-    public static RssFeed parseFeedDocument(Document doc) {
+    public RssFeed parseFeedDocument(Document doc) {
         Node     channel = RssXMLUtils.getChannel(doc);
         NodeList items   = RssXMLUtils.getItems(channel);
 
@@ -102,18 +134,16 @@ public class RssReader {
             }
         }
 
-        Log.d(
-            "TvR [RssReader]",
-            "Feed contains " + feed.getItemSize() + " items.");
+        logger.debug("Feed contains " + feed.getItemSize() + " items.");
 
         return feed;
     }
 
 
-    public static RssItem parseItem(Node item) {
+    public RssItem parseItem(Node item) {
         String title = (String) XMLUtils.xpath(
             item,
-            "link/text()",
+            "title/text()",
             XPathConstants.STRING);
 
         String description = (String) XMLUtils.xpath(
@@ -139,7 +169,7 @@ public class RssReader {
                 return new RssItem(title, description, date);
             }
             catch (ParseException pe) {
-                Log.e("TvR [RssReader]", pe.getMessage());
+                logger.warn(pe, pe);
             }
         }
 

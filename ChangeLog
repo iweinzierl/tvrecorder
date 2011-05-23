@@ -1,3 +1,19 @@
+2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/rss/RssFeed.java,
+	  clients/android/src/de/inselhome/tvrecorder/rss/RssItem.java,
+	  clients/android/src/de/inselhome/tvrecorder/rss/RssReader.java,
+	  clients/android/src/de/inselhome/tvrecorder/rss/RssXMLUtils.java:
+	  Removed. I decided to fetch the rss feeds on the server - this is pretty
+	  slow on the client :-/ In addition to that, other clients would need
+	  that code as well...
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rss/RssFeed.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rss/RssItem.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rss/RssReader.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rss/RssXMLUtils.java:
+	  New. Moved from android client.
+
 2011-05-20  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/model/ChannelUpdateJob.java:
