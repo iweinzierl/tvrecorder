@@ -15,51 +15,48 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.rss;
+package de.inselhome.tvrecorder.server.rss;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public class RssFeed implements Serializable {
+public class RssItem implements Serializable {
 
-    protected List<RssItem> items;
+    protected String title;
 
-    protected Date lastCreated;
+    protected String link;
+
+    protected String description;
+
+    protected String category;
+
+    protected Date start;
 
 
-    public RssFeed() {
-        items = new ArrayList<RssItem>();
+    public RssItem(String title, String description, Date start) {
+        this.title       = title;
+        this.description = description;
+        this.start       = start;
     }
 
 
-    public RssFeed(int capacity) {
-        items = new ArrayList<RssItem>(capacity);
+    public String getTitle() {
+        return title;
     }
 
 
-    public void addItem(RssItem item) {
-        items.add(item);
+    public String getDescription() {
+        return description;
     }
 
 
-    public RssItem getItem(int idx) {
-        if (idx < getItemSize()) {
-            return items.get(idx);
-        }
-
-        return null;
-    }
-
-
-    public int getItemSize() {
-        return items.size();
+    public Date getStart() {
+        return start;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

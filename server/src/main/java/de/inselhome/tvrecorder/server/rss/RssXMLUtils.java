@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.rss;
+package de.inselhome.tvrecorder.server.rss;
 
 import javax.xml.xpath.XPathConstants;
 
@@ -29,7 +29,7 @@ import de.inselhome.tvrecorder.common.utils.XMLUtils;
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public final class RssXMLUtils {
+public class RssXMLUtils {
 
     public static final String XPATH_CHANNEL = "/rss/channel";
     public static final String XPATH_ITEMS   = "/rss/channel/item";
@@ -40,12 +40,12 @@ public final class RssXMLUtils {
     }
 
 
-    public static Node getChannel(Document feed) {
+    public static synchronized Node getChannel(Document feed) {
         return (Node) XMLUtils.xpath(feed, XPATH_CHANNEL, XPathConstants.NODE);
     }
 
 
-    public static NodeList getItems(Node channel) {
+    public static synchronized NodeList getItems(Node channel) {
         return (NodeList) XMLUtils.xpath(
             channel,
             XPATH_ITEMS,
