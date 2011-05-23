@@ -1,5 +1,11 @@
 2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* common/src/main/java/de/inselhome/tvrecorder/common/rest/TvGuideResource.java:
+	  New. The interface of a REST resource that should provide channels with
+	  tv shows.
+
+2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* .hgignore: New. A ignore file for mercurial.
 
 2011-05-23  Ingo Weinzierl <ingo@intevation.de>
