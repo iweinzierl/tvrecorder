@@ -21,6 +21,8 @@ import java.io.Serializable;
 
 import java.util.Date;
 
+import de.inselhome.tvrecorder.common.utils.DateUtils;
+
 
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
@@ -74,7 +76,7 @@ public class TvShow implements Serializable, Comparable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(start);
+        sb.append(DateUtils.format(start, DateUtils.DATETIME_FORMAT));
         sb.append("  -  ");
         sb.append(title);
 

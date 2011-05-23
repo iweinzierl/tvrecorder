@@ -77,5 +77,10 @@ implements   Serializable
     public String getDescription() {
         return description;
     }
+
+
+    public String toString() {
+        return description;
+    }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

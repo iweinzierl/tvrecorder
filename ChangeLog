@@ -1,3 +1,10 @@
+2011-05-24  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
+	  Improved the string representation of toString() which is necessary to
+	  put these objects into spinner and list views.
+
 2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/rest/TvGuideResource.java:
