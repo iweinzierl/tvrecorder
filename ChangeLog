@@ -1,5 +1,30 @@
 2011-05-23  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdateEvent.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdateListener.java:
+	  New. Interfaces necessary for a listener mechanism which is used to listen to
+	  changes after TV channels have been updated (~> Tv shows).
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdater.java:
+	  New. This interfaces describes the update master to update tv channel
+	  guides.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/rss/RssTvShowManager.java:
+	  New. This update manager is specialized to handle tv guides from RSS
+	  feeds.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/rss/RssTvShowUpdater.java:
+	  New. This updater fetches tv guide information from RSS feeds and
+	  returns ChannelWithTvGuide objects.
+
+	  NOTE: This updater should be threaded, but there are problems existing
+	  that avoid using more than a single thread. And this single threads
+	  needs to sleep a while between fetching the data of two channels from rss
+	  feeds :-/ Otherwise - without sleeping - all channels will have the same
+	  tv shows...
+
+2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java:
 	  New. This special channel class provides information about the tv shows
 	  of this channel.
