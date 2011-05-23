@@ -1,3 +1,7 @@
+2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* .hgignore: New. A ignore file for mercurial.
+
 2011-05-23  Ingo Weinzierl <ingo@intevation.de>
 
 	* server/contrib/update.sh: New. A shell script to start the
