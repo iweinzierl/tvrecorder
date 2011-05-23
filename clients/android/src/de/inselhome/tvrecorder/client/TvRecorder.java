@@ -27,6 +27,7 @@ import android.view.MenuItem;
 
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
+import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
 
 
 /**
@@ -65,6 +66,7 @@ extends      Activity
         Log.d("TvR [TvRecorder]", " - onCreateOptionsMenu()");
         menu.add(R.string.tvrecorder_contextmenu_quit);
         menu.add(R.string.tvrecorder_contextmenu_settings);
+        menu.add(R.string.tvrecorder_contextmenu_tvguide);
         return true;
     }
 
@@ -79,8 +81,9 @@ extends      Activity
 
         Resources res = getResources();
 
-        String quit = res.getString(R.string.tvrecorder_contextmenu_quit);
-        String sett = res.getString(R.string.tvrecorder_contextmenu_settings);
+        String quit  = res.getString(R.string.tvrecorder_contextmenu_quit);
+        String sett  = res.getString(R.string.tvrecorder_contextmenu_settings);
+        String guide = res.getString(R.string.tvrecorder_contextmenu_tvguide);
         Log.d("TvR [TvRecorder]", "onOptionsItemSelected(): settings = " + sett);
 
         if (title.equals(quit)) {
@@ -90,6 +93,11 @@ extends      Activity
         else if (title.equals(sett)) {
             Log.d("TvR [TvRecorder]", "onOptionsItemSelected(): goto settings");
             startActivity(new Intent(this, TvRecorderSettings.class));
+            return true;
+        }
+        else if (title.equals(guide)) {
+            Log.d("TvR [TvRecorder]", "onOptionsItemSelected(): goto tv guide");
+            startActivity(new Intent(this, TvGuide.class));
             return true;
         }
 
