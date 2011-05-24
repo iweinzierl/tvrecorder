@@ -1,5 +1,21 @@
 2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Replaced the ArrayAdapter of the TvShow ListView with a TvShowsAdapter.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java:
+	  New. An adapter for a ListView of TvShows. This adapter makes use of the
+	  tvguide_list layout.
+
+	* clients/android/res/layout/tvguide_list.xml: New. A layout for a row in
+	  the tv show list.
+
+	* clients/android/res/layout/list_item.xml: Removed.
+
+	* clients/android/res/drawable-ldpi/info_button.png: An info button.
+
+2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* .hgignore: Ignore all stuff in clients/android/bin/ and the files from
 	  type *.swp and *.orig.
 

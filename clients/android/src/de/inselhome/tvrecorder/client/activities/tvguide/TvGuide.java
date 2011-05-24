@@ -46,6 +46,9 @@ import de.inselhome.tvrecorder.common.rest.TvGuideResource;
 import de.inselhome.tvrecorder.client.Config;
 
 
+/**
+ * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
+ */
 public class TvGuide extends Activity implements TvGuideUpdateListener {
 
     protected List<TvGuideUpdateListener> listeners;
@@ -207,9 +210,9 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
 
         rootLayout.post(new Runnable() {
             public void run() {
-                ArrayAdapter adapter = new ArrayAdapter(
+                ArrayAdapter adapter = new TvShowsAdapter(
                     activity,
-                    R.layout.list_item,
+                    R.layout.tvguide_list,
                     shows);
 
                 tvShows.setAdapter(adapter);
@@ -222,3 +225,4 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
         // TODO DO SOMETHING
     }
 }
+// vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
