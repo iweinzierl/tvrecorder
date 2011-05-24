@@ -1,3 +1,26 @@
+2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/res/values/strings.xml: Changed the title and text
+	  message of loading dialogs.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: A
+	  progress dialog is displayed in the time when we are loading the
+	  channels from TvRecorder server. NOTE: the loading stuff is done here!
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/addjob/OnChannelsUpdatedListener.java:
+	  New. An interface that describes the basic stuff for classes who wants
+	  to listen on channel updates.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
+	  Implements the OnChannelsUpdatedListener interface.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Display a progress dialog while loading the channels with tv shows.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/RetrieveChannelsHandler.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java:
+	  Removed.
+
 2011-05-24  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/AndroidManifest.xml: Registered the TvGuide as new

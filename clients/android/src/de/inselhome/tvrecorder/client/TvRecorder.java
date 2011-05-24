@@ -17,15 +17,26 @@
  */
 package de.inselhome.tvrecorder.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.restlet.resource.ClientResource;
+
+import de.inselhome.tvrecorder.common.objects.Channel;
+import de.inselhome.tvrecorder.common.rest.ChannelsResource;
+
 import de.inselhome.tvrecorder.client.ui.AddJobForm;
+import de.inselhome.tvrecorder.client.activities.addjob.OnChannelsUpdatedListener;
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
 
@@ -33,13 +44,16 @@ import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public class TvRecorder
-extends      Activity
-{
+public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
+
     /**
      * The {@link AddJobForm} that allows adding new jobs.
      */
     protected AddJobForm addJobForm;
+
+    protected List<OnChannelsUpdatedListener> listeners;
+
+    protected ProgressDialog dialog;
 
 
     /**
@@ -50,6 +64,8 @@ extends      Activity
         super.onCreate(savedInstanceState);
         Log.d("TvR [TvRecorderActivity]", "onCreate() - create view");
 
+        listeners = new ArrayList<OnChannelsUpdatedListener>();
+
         if (!Config.checkPreferences(this)) {
             startActivity(new Intent(this, TvRecorderSettings.class));
         }
@@ -57,7 +73,61 @@ extends      Activity
         addJobForm = new AddJobForm(this);
         setContentView(addJobForm);
 
-        addJobForm.refresh();
+        addOnChannelsUpdatedListener(this);
+        addOnChannelsUpdatedListener(addJobForm);
+
+        updateChannels();
+    }
+
+
+    public void addOnChannelsUpdatedListener(OnChannelsUpdatedListener l) {
+        if (l != null) {
+            listeners.add(l);
+        }
+    }
+
+
+    protected void fireOnChannelsUpdated(Channel[] channels) {
+        for (OnChannelsUpdatedListener l : listeners) {
+            Log.d("TvR [TvRecorder]", "Listener: " + l);
+            l.onChannelsUpdated(channels);
+        }
+    }
+
+
+    protected void updateChannels() {
+        Resources resources = getResources();
+
+        dialog = ProgressDialog.show(
+            this,
+            resources.getString(R.string.addjob_load_progress_title),
+            resources.getString(R.string.addjob_load_progress_text),
+            true);
+
+        Log.d("TvR [TvRecorder]", "updateChannels()");
+
+        final TvRecorder tvrecorder = this;
+
+        new AsyncTask<Void, Void, Channel[]>() {
+            protected Channel[] doInBackground(Void... v1) {
+                ClientResource cr = Config.getClientResource(
+                    tvrecorder, ChannelsResource.PATH);
+
+                ChannelsResource resource = cr.wrap(ChannelsResource.class);
+                return resource.retrieve();
+            }
+
+            protected void onPostExecute(Channel[] channels) {
+                Log.d("TvR [TvRecorder]", "HTTP request finished.");
+                fireOnChannelsUpdated(channels);
+            }
+        }.execute();
+    }
+
+
+    public void onChannelsUpdated(Channel[] channels) {
+        dialog.dismiss();
+        Log.i("TvR [TvRecorder]", "Found " + channels.length + " channels");
     }
 
 

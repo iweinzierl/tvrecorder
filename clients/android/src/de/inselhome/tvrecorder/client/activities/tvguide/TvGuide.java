@@ -17,10 +17,14 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvguide;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -30,22 +34,27 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TextView;
+
+import org.restlet.resource.ClientResource;
 
 import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
+import de.inselhome.tvrecorder.common.rest.TvGuideResource;
+
+import de.inselhome.tvrecorder.client.Config;
 
 
 public class TvGuide extends Activity implements TvGuideUpdateListener {
 
-    protected RetrieveChannelsHandler handler;
+    protected List<TvGuideUpdateListener> listeners;
 
     protected LinearLayout rootLayout;
     protected Spinner      channelList;
     protected ListView     tvShows;
+
+    protected ProgressDialog progress;
 
 
     @Override
@@ -54,10 +63,10 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
 
         Log.d("TvR [TvGuide]", "onCreate()");
 
+        listeners = new ArrayList<TvGuideUpdateListener>();
+
         channelList = new Spinner(this);
         tvShows     = new ListView(this);
-        handler     = new RetrieveChannelsHandler(this);
-        handler.addTvGuideUpdateListener(this);
 
         rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
@@ -65,6 +74,8 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
         rootLayout.addView(tvShows);
 
         setContentView(rootLayout);
+
+        addTvGuideUpdateListener(this);
 
         updateTvGuide();
     }
@@ -97,12 +108,50 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
     }
 
 
+    public void addTvGuideUpdateListener(TvGuideUpdateListener listener) {
+        if (listener != null) {
+            listeners.add(listener);
+        }
+    }
+
+
     /**
      * This method triggers the update process of the TvShows.
      */
     protected void updateTvGuide() {
-        Thread t = new Thread(handler);
-        t.start();
+        Resources resources = getResources();
+
+        progress = ProgressDialog.show(
+            this,
+            resources.getString(R.string.tvguide_load_progress_title),
+            resources.getString(R.string.tvguide_load_progress_text),
+            true);
+
+        new AsyncTask<Void, Void, ChannelWithTvGuide[]>() {
+            protected ChannelWithTvGuide[] doInBackground(Void... v) {
+                ClientResource cr = Config.getClientResource(
+                    TvGuide.this, TvGuideResource.PATH);
+
+                TvGuideResource      resource = cr.wrap(TvGuideResource.class);
+                ChannelWithTvGuide[] channels = resource.retrieve();
+
+                return channels;
+            }
+
+            protected void onPostExecute(ChannelWithTvGuide[] channels) {
+                Log.d("TvR [TvGuide]", "HTTP request finished.");
+                fireTvGuideUpdateEvent(channels);
+            }
+        }.execute();
+    }
+
+
+    protected void fireTvGuideUpdateEvent(ChannelWithTvGuide[] channels) {
+        TvGuideUpdateEvent event = new TvGuideUpdateEvent(channels);
+
+        for (TvGuideUpdateListener listener: listeners) {
+            listener.onTvGuideUpdate(event);
+        }
     }
 
 
@@ -117,16 +166,12 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
         final ChannelWithTvGuide[] channels = event.getChannels();
         final Activity             activity = this;
 
-        rootLayout.post(new Runnable() {
-            public void run() {
-                ArrayAdapter adapter = new ArrayAdapter(
-                    activity,
-                    android.R.layout.simple_spinner_dropdown_item,
-                    channels);
+        ArrayAdapter adapter = new ArrayAdapter(
+            activity,
+            android.R.layout.simple_spinner_dropdown_item,
+            channels);
 
-                channelList.setAdapter(adapter);
-            }
-        });
+        channelList.setAdapter(adapter);
 
         channelList.setOnItemSelectedListener(
             new AdapterView.OnItemSelectedListener() {
@@ -147,6 +192,8 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
                     // do nothing
                 }
             });
+
+        progress.dismiss();
     }
 
 

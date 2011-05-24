@@ -9,6 +9,8 @@
 
     <string name="tvguide_title">TvGuide</string>
     <string name="tvguide_update_list">Aktualisieren</string>
+    <string name="tvguide_load_progress_title">Aktualisierung</string>
+    <string name="tvguide_load_progress_text">Lade Sendungen</string>
 
     <string name="settings_host_url">URL des Servers</string>
     <string name="settings_host_port">Port des Servers</string>
@@ -22,7 +24,7 @@
     <string name="addjob_channel">Programm</string>
     <string name="addjob_name">Name</string>
     <string name="addjob_start_record">aufnehmen</string>
-    <string name="addjob_load_progress_title">Lade</string>
+    <string name="addjob_load_progress_title">Aktualisierung</string>
     <string name="addjob_load_progress_text">Lade Programme</string>
     <string name="addjob_recorded_message">Neuen Job erstellt:</string>
     <string name="addjob_recorded_start">Start: </string>

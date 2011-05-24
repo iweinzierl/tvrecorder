@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -38,7 +36,7 @@ import de.inselhome.tvrecorder.common.objects.Channel;
 
 import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.TvRecorder;
-import de.inselhome.tvrecorder.client.handlers.RetrieveChannelsHandler;
+import de.inselhome.tvrecorder.client.activities.addjob.OnChannelsUpdatedListener;
 import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
 
 
@@ -50,7 +48,7 @@ import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
  */
 public class AddJobForm
 extends      ScrollView
-{
+implements   OnChannelsUpdatedListener {
     /**
      * The raw channels supported by the server.
      */
@@ -104,6 +102,23 @@ extends      ScrollView
     }
 
 
+    public void onChannelsUpdated(Channel[] channels) {
+        Log.i(
+            "TvR [AddJobForm]",
+            "updateChannels() - " + channels.length + " channels.");
+
+        ArrayAdapter adapter = new ArrayAdapter(
+            getContext(), android.R.layout.simple_spinner_dropdown_item);
+
+        for (Channel channel: channels) {
+            rawChannels.add(channel);
+            adapter.add(channel.getDescription());
+        }
+
+        this.channels.setAdapter(adapter);
+    }
+
+
     /**
      * This method creates the ui.
      *
@@ -142,49 +157,6 @@ extends      ScrollView
         layout.addView(add);
 
         return layout;
-    }
-
-    /**
-     * This method is used to update the channel list with new channels.
-     *
-     * @param c new Channels.
-     */
-    public void updateChannels(Channel[] c) {
-        Log.i(
-            "TvR [TvRecorderActivity]",
-            "updateChannels() - " + c.length + " channels.");
-
-        ArrayAdapter adapter = new ArrayAdapter(
-            getContext(), android.R.layout.simple_spinner_dropdown_item);
-
-        for (Channel channel: c) {
-            rawChannels.add(channel);
-            adapter.add(channel.getDescription());
-        }
-
-        channels.setAdapter(adapter);
-    }
-
-
-    /**
-     * This method makes use of {@link RetrieveChannelsHandler}. A {@link
-     * ProgressDialog} is displayed to inform the user about the loading
-     * process. After the channels have been received, this dialog is closed.
-     */
-    public void refresh() {
-        TvRecorder recorder  = (TvRecorder) getContext();
-        Resources  resources = recorder.getResources();
-
-        ProgressDialog d = ProgressDialog.show(
-            recorder,
-            resources.getString(R.string.addjob_load_progress_title),
-            resources.getString(R.string.addjob_load_progress_text));
-
-        RetrieveChannelsHandler handler = new RetrieveChannelsHandler(recorder);
-
-        handler.run();
-
-        d.hide();
     }
 
 
