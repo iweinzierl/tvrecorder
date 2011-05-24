@@ -1,0 +1,6 @@
+syntax: glob
+server/target/*
+server/jobs/*
+server/records/*
+server/logs/*
+common/target/*

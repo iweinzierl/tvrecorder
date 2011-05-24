@@ -1,0 +1,48 @@
+This is the Android client for the TvRecorder. Currently, it supports a user
+interface that allows recording new jobs at a specific time and channel. Later
+releases will add support for listing queued jobs and a EPG that allows easier
+job creation.
+The necessary settings can be defined via user interface (push the menu button
+and choose `settings`). Necessary settings in this release are the url to the
+TvRecorder server and its port.
+
+NOTE: This application needs access to the internet.
+
+The TvRecorder has been developed using Android 2.2 API Version 8. The
+TvRecorder has not been tested in former Android releases.
+
+
+Library Dependencies:
+=====================
+  * Android 2.2 API Version 8
+  * tvrecorder-common 0.1-SNAPSHOT
+
+
+Installation:
+=============
+The installation is based on the tools shipped with the Android SDK and the Ant
+build tool (see http://ant.apache.org for more details about the Ant build tool).
+
+  * Compile the sources with:
+    > ant compile
+
+  * Create a test package for your Android plattform:
+    > ant debug
+    This will create a file ``bin/tvrecorder-debug.apk`` that is ready to
+    install it on your Android plattform.
+
+  * Install the binary on your Android plattform connected via USB:
+    > $ANDROID_SDK_DIR/platform-tools/adb install
+
+    Replace $ANDROID_SDK_DIR with your local Android installation.
+
+
+Running:
+========
+Choose the application in your menu. The initial start will lead you to the
+preference user interface, because the TvRecorder needs to know the URL of your
+TvRecorder server and its port. After you have finished the configuration you
+can step back to the TvRecorder UI with the back button. You should retrieve a
+list of supported channels by your server. If not, restart the application and
+try it again - make sure that your device is connected to the internet.
+

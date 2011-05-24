@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TvRecorder</string>
+
+    <!-- THE RECORD ACTIVITY -->
+    <string name="tvrecorder_contextmenu_quit">Beenden</string>
+    <string name="tvrecorder_contextmenu_settings">Einstellungen</string>
+    <string name="tvrecorder_contextmenu_tvguide">TvGuide</string>
+
+    <string name="tvguide_title">TvGuide</string>
+    <string name="tvguide_update_list">Aktualisieren</string>
+    <string name="tvguide_load_progress_title">Aktualisierung</string>
+    <string name="tvguide_load_progress_text">Lade Sendungen</string>
+
+    <string name="settings_host_url">URL des Servers</string>
+    <string name="settings_host_port">Port des Servers</string>
+    <string name="settings_auth_user">Benutzer</string>
+    <string name="settings_auth_pass">Passwort</string>
+
+    <string name="keyvalueitem_change">ändern</string>
+
+    <string name="addjob_start">Start</string>
+    <string name="addjob_end">Ende</string>
+    <string name="addjob_channel">Programm</string>
+    <string name="addjob_name">Name</string>
+    <string name="addjob_start_record">aufnehmen</string>
+    <string name="addjob_load_progress_title">Aktualisierung</string>
+    <string name="addjob_load_progress_text">Lade Programme</string>
+    <string name="addjob_recorded_message">Neuen Job erstellt:</string>
+    <string name="addjob_recorded_start">Start: </string>
+    <string name="addjob_recorded_end">Ende: </string>
+    <string name="addjob_recorded_channel">Programm: </string>
+    <string name="addjob_recorded_name">Name: </string>
+    <string name="addjob_recorded_error_title">Fehler beim Erstellen des Jobs: </string>
+
+    <string name="datepicker_cancel">abbrechen</string>
+    <string name="datepicker_ok">ok</string>
+
+    <string name="timepicker_cancel">abbrechen</string>
+    <string name="timepicker_ok">ok</string>
+
+    <!-- ERRORS -->
+    <string name="error_endtime_before_starttime">Die Startzeit muss vor der Endzeit liegen</string>
+</resources>
