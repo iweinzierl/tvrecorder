@@ -1,5 +1,10 @@
 2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* .hgignore: Ignore all stuff in clients/android/bin/ and the files from
+	  type *.swp and *.orig.
+
+2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/values/strings.xml: Changed the title and text
 	  message of loading dialogs.
 
