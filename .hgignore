@@ -4,3 +4,6 @@ server/jobs/*
 server/records/*
 server/logs/*
 common/target/*
+clients/android/bin/*
+*.swp
+*.orig
