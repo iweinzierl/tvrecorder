@@ -38,6 +38,11 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
     protected TvShow[] shows;
 
 
+    public TvShowsAdapter(Context context, int resourceId) {
+        super(context, resourceId);
+    }
+
+
     public TvShowsAdapter(Context context, int resourceId, TvShow[] shows) {
         super(context, resourceId, shows);
         this.shows = shows;
@@ -58,8 +63,8 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
         TvShow o = shows[pos];
 
         if (o != null) {
-            TextView tt = (TextView) v.findViewById(R.id.toptext);
-            TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+            TextView tt = (TextView) v.findViewById(R.id.timetext);
+            TextView bt = (TextView) v.findViewById(R.id.titletext);
 
             if (tt != null) {
                 tt.setText(
