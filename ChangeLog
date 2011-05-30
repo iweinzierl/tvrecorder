@@ -1,3 +1,22 @@
+2011-05-31  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/res/layout/tvrecorder.xml: New. A layout for the simple
+	  form to add jobs. The layout has been defined in Java code before. This
+	  is done in this xml layout now which is the reommended way to define
+	  layouts in android.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
+	  Removed the layout stuff from java code. Added UI listener to change
+	  component values and start recording a tv show.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  This listener will now fetch its necessary values from TvRecorder
+	  activity.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java:
+	  Removed, because the layout stuff is done in XML files.
+
 2011-05-30  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/res/values/strings.xml: Added strings for the tvguide

@@ -18,7 +18,6 @@
 package de.inselhome.tvrecorder.client.listeners;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import android.content.res.Resources;
 import android.util.Log;
@@ -36,7 +35,6 @@ import de.inselhome.tvrecorder.common.utils.DateUtils;
 import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.TvRecorder;
-import de.inselhome.tvrecorder.client.ui.AddJobForm;
 
 
 /**
@@ -74,12 +72,10 @@ implements   View.OnClickListener
         Resources res = recorder.getResources();
 
         try {
-            AddJobForm form = recorder.getAddJobForm();
-
-            Calendar start = form.getStart();
-            Calendar end   = form.getEnd();
-            Channel  chann = form.getChannel();
-            String   name  = form.getName();
+            Calendar start = recorder.getStart();
+            Calendar end   = recorder.getEnd();
+            Channel  chann = recorder.getChannel();
+            String   name  = recorder.getName();
 
             if (!DateUtils.isEndGreaterThanStart(
                 end.getTime(), start.getTime()))
