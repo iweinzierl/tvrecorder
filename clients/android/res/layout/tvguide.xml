@@ -1,0 +1,20 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Spinner 
+        android:id="@+id/channel_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/tvguide_channel_prompt"/>
+
+    <ListView
+        android:id="@+id/tvguide"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="?android:attr/colorBackground"
+        android:layout_weight="5"/>
+
+</LinearLayout>

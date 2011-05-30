@@ -11,6 +11,9 @@
     <string name="tvguide_update_list">Aktualisieren</string>
     <string name="tvguide_load_progress_title">Aktualisierung</string>
     <string name="tvguide_load_progress_text">Lade Sendungen</string>
+    <string name="tvguide_channel_prompt">Kanal wählen</string>
+    <string name="tvguide_context_open">Details</string>
+    <string name="tvguide_context_record">Aufnehmen</string>
 
     <string name="settings_host_url">URL des Servers</string>
     <string name="settings_host_port">Port des Servers</string>

@@ -27,10 +27,12 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -49,7 +51,9 @@ import de.inselhome.tvrecorder.client.Config;
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public class TvGuide extends Activity implements TvGuideUpdateListener {
+public class TvGuide
+extends      Activity
+implements   TvGuideUpdateListener {
 
     protected List<TvGuideUpdateListener> listeners;
 
@@ -66,21 +70,24 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
 
         Log.d("TvR [TvGuide]", "onCreate()");
 
-        listeners = new ArrayList<TvGuideUpdateListener>();
-
-        channelList = new Spinner(this);
-        tvShows     = new ListView(this);
-
-        rootLayout = new LinearLayout(this);
-        rootLayout.setOrientation(LinearLayout.VERTICAL);
-        rootLayout.addView(channelList);
-        rootLayout.addView(tvShows);
-
-        setContentView(rootLayout);
+        listeners   = new ArrayList<TvGuideUpdateListener>();
 
         addTvGuideUpdateListener(this);
 
         updateTvGuide();
+
+        initLayout();
+    }
+
+
+    protected void initLayout() {
+        setContentView(R.layout.tvguide);
+
+        tvShows     = (ListView) findViewById(R.id.tvguide);
+        channelList = (Spinner)  findViewById(R.id.channel_spinner);
+
+        Log.d("TvR [TvGuide]", "register tv show list for context menu");
+        registerForContextMenu(tvShows);
     }
 
 
@@ -115,6 +122,48 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
         if (listener != null) {
             listeners.add(listener);
         }
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        Log.d("TvR [TvGuide]", "onCreateContextMenu");
+
+        AdapterContextMenuInfo info  = (AdapterContextMenuInfo) menuInfo;
+        TvShowsAdapter         shows = (TvShowsAdapter) tvShows.getAdapter();
+        TvShow                 show  = (TvShow) shows.getItem(info.position);
+
+        getMenuInflater().inflate(R.menu.tvguide_list_context, menu);
+
+        menu.setHeaderTitle(show.getTitle());
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+
+        TvShow show = (TvShow) tvShows.getAdapter().getItem(info.position);
+
+        if (show == null) {
+            Log.d("TvR [TvGuide]", "Context menu selected no item.");
+            return super.onContextItemSelected(item);
+        }
+
+        switch (item.getItemId()) {
+            case R.id.details: {
+                showDetails(show);
+                break;
+            }
+            case R.id.record: {
+                recordShow(show);
+                break;
+            }
+        }
+
+        return super.onContextItemSelected(item);
     }
 
 
@@ -208,7 +257,7 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
         final Activity activity = this;
         final TvShow[] shows    = (TvShow[]) tmp.toArray(new TvShow[tmp.size()]);
 
-        rootLayout.post(new Runnable() {
+        tvShows.post(new Runnable() {
             public void run() {
                 ArrayAdapter adapter = new TvShowsAdapter(
                     activity,
@@ -222,7 +271,21 @@ public class TvGuide extends Activity implements TvGuideUpdateListener {
 
 
     public void onTvGuideUpdateFailed(Exception e) {
-        // TODO DO SOMETHING
+        Log.e("TvR [TvGuide]", e.getMessage());
+
+        // TODO IMPLEMENT ME
+    }
+
+
+    protected void showDetails(TvShow show) {
+        // TODO IMPLEMENT ME
+        Log.e("TvR [TvGuide]", "showDetails() currently not implemented.");
+    }
+
+
+    protected void recordShow(TvShow show) {
+        // TODO IMPLEMENT ME
+        Log.e("TvR [TvGuide]", "recordShow() currently not implemented.");
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

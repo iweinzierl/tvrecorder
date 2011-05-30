@@ -1,3 +1,25 @@
+2011-05-30  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/res/values/strings.xml: Added strings for the tvguide
+	  context menu.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Removed the UI layout creation. This work is done using XML files that
+	  describe the layout of this activity.
+
+	* clients/android/res/layout/tvguide.xml: New. A layout description for
+	  the tvguide. Currently, the tvguide consists of a combo box to select
+	  the displayed tv channel and a list view that displays the tv shows of
+	  the selected channel.
+
+	* clients/android/res/menu/tvguide_list_context.xml: New. A layout
+	  description for the context menu of the tv guide. Currently, there are
+	  options to record a tv show or to display a details of a tv show.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java,
+	  clients/android/res/layout/tvguide_list.xml: Changed the IDs of the text
+	  fields in tv guide list.
+
 2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
