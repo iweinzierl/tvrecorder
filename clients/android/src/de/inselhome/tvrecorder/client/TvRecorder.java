@@ -18,6 +18,8 @@
 package de.inselhome.tvrecorder.client;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.app.Activity;
@@ -29,13 +31,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.restlet.resource.ClientResource;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.rest.ChannelsResource;
+import de.inselhome.tvrecorder.common.utils.DateUtils;
 
-import de.inselhome.tvrecorder.client.ui.AddJobForm;
+import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
+import de.inselhome.tvrecorder.client.ui.DatePickerDialog;
+import de.inselhome.tvrecorder.client.ui.TimePickerDialog;
 import de.inselhome.tvrecorder.client.activities.addjob.OnChannelsUpdatedListener;
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
@@ -46,14 +57,22 @@ import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
  */
 public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
 
-    /**
-     * The {@link AddJobForm} that allows adding new jobs.
-     */
-    protected AddJobForm addJobForm;
-
     protected List<OnChannelsUpdatedListener> listeners;
 
+    protected List<Channel> rawChannels;
+
     protected ProgressDialog dialog;
+
+    protected TextView start_date;
+    protected TextView start_time;
+    protected TextView end_date;
+    protected TextView end_time;
+    protected EditText name;
+    protected Spinner  channels;
+    protected Button   record;
+
+    protected GregorianCalendar start_datetime;
+    protected GregorianCalendar end_datetime;
 
 
     /**
@@ -64,19 +83,144 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
         super.onCreate(savedInstanceState);
         Log.d("TvR [TvRecorderActivity]", "onCreate() - create view");
 
-        listeners = new ArrayList<OnChannelsUpdatedListener>();
+        listeners      = new ArrayList<OnChannelsUpdatedListener>();
+        rawChannels    = new ArrayList<Channel>();
+        start_datetime = new GregorianCalendar();
+        end_datetime   = new GregorianCalendar();
 
         if (!Config.checkPreferences(this)) {
             startActivity(new Intent(this, TvRecorderSettings.class));
         }
 
-        addJobForm = new AddJobForm(this);
-        setContentView(addJobForm);
-
         addOnChannelsUpdatedListener(this);
-        addOnChannelsUpdatedListener(addJobForm);
 
+        setContentView(R.layout.tvrecorder);
+        initLayout();
+        updateDateTime();
         updateChannels();
+    }
+
+
+    /**
+     * Initializes the UI components of this activity and its listeners.
+     */
+    protected void initLayout() {
+        start_date = (TextView) findViewById(R.id.start_date);
+        start_time = (TextView) findViewById(R.id.start_time);
+        end_date   = (TextView) findViewById(R.id.end_date);
+        end_time   = (TextView) findViewById(R.id.end_time);
+        name       = (EditText) findViewById(R.id.addjob_name);
+        channels   = (Spinner)  findViewById(R.id.addjob_channel_spinner);
+        record     = (Button)   findViewById(R.id.record);
+
+        start_date.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                DatePickerDialog picker = new DatePickerDialog(TvRecorder.this);
+                picker.setOnDateSelectListener(
+                    new DatePickerDialog.OnDateSelectListener() {
+                        public void onDateSelect(int year, int month, int day) {
+                            start_datetime.set(year, month, day);
+                            updateDateTime();
+                        }
+                    }
+                );
+
+                picker.show();
+            }
+        });
+
+        start_time.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                TimePickerDialog t = new TimePickerDialog(TvRecorder.this, true);
+                t.setOnTimeSelectListener(
+                    new TimePickerDialog.OnTimeSelectListener() {
+                        public void onTimeSelect(int hours, int minutes) {
+                            start_datetime.set(Calendar.HOUR_OF_DAY, hours);
+                            start_datetime.set(Calendar.MINUTE, minutes);
+                            updateDateTime();
+                        }
+                    }
+                );
+
+                t.show();
+            }
+        });
+
+        end_date.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                DatePickerDialog picker = new DatePickerDialog(TvRecorder.this);
+                picker.setOnDateSelectListener(
+                    new DatePickerDialog.OnDateSelectListener() {
+                        public void onDateSelect(int year, int month, int day) {
+                            end_datetime.set(year, month, day);
+                            updateDateTime();
+                        }
+                    }
+                );
+
+                picker.show();
+            }
+        });
+
+        end_time.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                TimePickerDialog t = new TimePickerDialog(TvRecorder.this, true);
+                t.setOnTimeSelectListener(
+                    new TimePickerDialog.OnTimeSelectListener() {
+                        public void onTimeSelect(int hours, int minutes) {
+                            end_datetime.set(Calendar.HOUR_OF_DAY, hours);
+                            end_datetime.set(Calendar.MINUTE, minutes);
+                            updateDateTime();
+                        }
+                    }
+                );
+
+                t.show();
+            }
+        });
+
+        record.setOnClickListener(new RecordJobListener(this));
+    }
+
+
+    /**
+     * Update the date/time views with the data stored in start_datetime and
+     * end_datetime.
+     */
+    protected void updateDateTime() {
+        start_date.setText(DateUtils.format(
+            start_datetime.getTime(), DateUtils.DATE_FORMAT));
+
+        start_time.setText(DateUtils.format(
+            start_datetime.getTime(), DateUtils.TIME_FORMAT));
+
+        end_date.setText(DateUtils.format(
+            end_datetime.getTime(), DateUtils.DATE_FORMAT));
+
+        end_time.setText(DateUtils.format(
+            end_datetime.getTime(), DateUtils.TIME_FORMAT));
+    }
+
+
+    public Calendar getStart() {
+        return start_datetime;
+    }
+
+
+    public Calendar getEnd() {
+        return end_datetime;
+    }
+
+
+    public Channel getChannel() {
+        int idx = channels.getSelectedItemPosition();
+        return rawChannels.get(idx);
+    }
+
+
+    public String getName() {
+        CharSequence n = name.getText();
+        return n != null ? n.toString() : "unknown";
     }
 
 
@@ -95,6 +239,9 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
     }
 
 
+    /**
+     * Triggers the download of supported channels from server.
+     */
     protected void updateChannels() {
         Resources resources = getResources();
 
@@ -125,9 +272,24 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
     }
 
 
+    /**
+     * Replaces the - if existing - old channels of spinner with new channels.
+     *
+     * @param channels A list of channels.
+     */
     public void onChannelsUpdated(Channel[] channels) {
         dialog.dismiss();
         Log.i("TvR [TvRecorder]", "Found " + channels.length + " channels");
+
+        ArrayAdapter adapter = new ArrayAdapter(
+            this, android.R.layout.simple_spinner_dropdown_item);
+
+        for (Channel channel: channels) {
+            rawChannels.add(channel);
+            adapter.add(channel.getDescription());
+        }
+
+        this.channels.setAdapter(adapter);
     }
 
 
@@ -172,16 +334,6 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    /**
-     * This method retrieves the {@link AddJobForm}.
-     *
-     * @return the {@link AddJobForm}.
-     */
-    public AddJobForm getAddJobForm() {
-        return addJobForm;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
