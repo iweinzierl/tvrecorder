@@ -23,6 +23,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.rest.TvGuideResource;
 
 import de.inselhome.tvrecorder.client.Config;
+import de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail;
 
 
 /**
@@ -278,8 +280,11 @@ implements   TvGuideUpdateListener {
 
 
     protected void showDetails(TvShow show) {
-        // TODO IMPLEMENT ME
-        Log.e("TvR [TvGuide]", "showDetails() currently not implemented.");
+        Intent intent = new Intent(this, TvShowDetail.class);
+        intent.putExtra(TvShowDetail.SHOW_TITLE, show.getTitle());
+        intent.putExtra(TvShowDetail.SHOW_DESCRIPTION, show.getDescription());
+        intent.putExtra(TvShowDetail.SHOW_STARTDATE, show.getStart());
+        startActivity(intent);
     }
 
 

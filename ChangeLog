@@ -1,5 +1,21 @@
 2011-06-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvshow/TvShowDetail.java,
+	  clients/android/res/layout/tvshowdetail.xml: New. An activity that
+	  displays information of a specific tv show. The data that should be
+	  displayed is put as extra data into the intent.
+
+	* clients/android/res/values/strings.xml: Added a label for the
+	  TvShowDetail activity.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Put information about a tv show to the intent and start the TvShowDetail
+	  activity if the "detail" item of the context menu is selected.
+
+	* clients/android/AndroidManifest.xml: Registered the new activity.
+
+2011-06-06  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowManager.java:
 	  New. The interface that describe a TvShowManager. Currently, we have a
 	  RssTvShowManager, but maybe there will be another manager some time ago.
