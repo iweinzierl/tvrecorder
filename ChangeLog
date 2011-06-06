@@ -1,4 +1,32 @@
-2011-05-31  Ingo Weinzierl <ingo@intevation.de>
+2011-06-06  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowManager.java:
+	  New. The interface that describe a TvShowManager. Currently, we have a
+	  RssTvShowManager, but maybe there will be another manager some time ago.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/rss/RssTvShowManager.java:
+	  Implements the TvShowManager interface now.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java:
+	  Registered the TvShowManager in the context.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderResource.java:
+	  New method that returns the current TvShowManager.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/rss/RssTvShowUpdater.java:
+	  Adapted the default update interval - set to 1 hour.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Start the RssTvShowManager as thread.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvGuideServerResource.java:
+	  New. A REST resource that returns the tv shows of the channels supported
+	  by the TvShowManager.
+
+	  NOTE: We need to sync the RSS channels with the supported channels by
+	  the server (dvb-*).
+
+2011-05-31  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/layout/tvrecorder.xml: New. A layout for the simple
 	  form to add jobs. The layout has been defined in Java code before. This
@@ -17,7 +45,7 @@
 	  clients/android/src/de/inselhome/tvrecorder/client/ui/DateTimeWidget.java:
 	  Removed, because the layout stuff is done in XML files.
 
-2011-05-30  Ingo Weinzierl <ingo@intevation.de>
+2011-05-30  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/values/strings.xml: Added strings for the tvguide
 	  context menu.
@@ -40,50 +68,6 @@
 	  fields in tv guide list.
 
 2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
-
-	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
-	  Replaced the ArrayAdapter of the TvShow ListView with a TvShowsAdapter.
-
-	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java:
-	  New. An adapter for a ListView of TvShows. This adapter makes use of the
-	  tvguide_list layout.
-
-	* clients/android/res/layout/tvguide_list.xml: New. A layout for a row in
-	  the tv show list.
-
-	* clients/android/res/layout/list_item.xml: Removed.
-
-	* clients/android/res/drawable-ldpi/info_button.png: An info button.
-
-2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
-
-	* .hgignore: Ignore all stuff in clients/android/bin/ and the files from
-	  type *.swp and *.orig.
-
-2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
-
-	* clients/android/res/values/strings.xml: Changed the title and text
-	  message of loading dialogs.
-
-	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: A
-	  progress dialog is displayed in the time when we are loading the
-	  channels from TvRecorder server. NOTE: the loading stuff is done here!
-
-	* clients/android/src/de/inselhome/tvrecorder/client/activities/addjob/OnChannelsUpdatedListener.java:
-	  New. An interface that describes the basic stuff for classes who wants
-	  to listen on channel updates.
-
-	* clients/android/src/de/inselhome/tvrecorder/client/ui/AddJobForm.java:
-	  Implements the OnChannelsUpdatedListener interface.
-
-	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
-	  Display a progress dialog while loading the channels with tv shows.
-
-	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/RetrieveChannelsHandler.java,
-	  clients/android/src/de/inselhome/tvrecorder/client/handlers/RetrieveChannelsHandler.java:
-	  Removed.
-
-2011-05-24  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/AndroidManifest.xml: Registered the TvGuide as new
 	  activity for the TvRecorder android client.
@@ -108,7 +92,7 @@
 	  New. This activity has the goal to show all supported channels and a tv
 	  show listing for each of those channels.
 
-2011-05-24  Ingo Weinzierl <ingo@intevation.de>
+2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
 	  common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
