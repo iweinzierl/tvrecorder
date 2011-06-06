@@ -17,15 +17,18 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.util.List;
 import java.util.Map;
 
 import org.restlet.Context;
 import org.restlet.resource.ServerResource;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
+import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.Job;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
+import de.inselhome.tvrecorder.server.tvguide.TvShowManager;
 
 
 /**
@@ -53,6 +56,16 @@ extends      ServerResource
         Map attr = getAttr();
 
         return (Channel[]) attr.get(TvRecorderServer.CHANNELS_KEY);
+    }
+
+
+    public List<ChannelWithTvGuide> getTvGuide() {
+        Map attr = getAttr();
+
+        TvShowManager manager = (TvShowManager)
+            attr.get(TvRecorderServer.TVSHOW_MANAGER);
+
+        return manager.getChannels();
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

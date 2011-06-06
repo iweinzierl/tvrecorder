@@ -1,4 +1,32 @@
-2011-05-24  Ingo Weinzierl <ingo@intevation.de>
+2011-06-06  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowManager.java:
+	  New. The interface that describe a TvShowManager. Currently, we have a
+	  RssTvShowManager, but maybe there will be another manager some time ago.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/rss/RssTvShowManager.java:
+	  Implements the TvShowManager interface now.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java:
+	  Registered the TvShowManager in the context.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderResource.java:
+	  New method that returns the current TvShowManager.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/rss/RssTvShowUpdater.java:
+	  Adapted the default update interval - set to 1 hour.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Start the RssTvShowManager as thread.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvGuideServerResource.java:
+	  New. A REST resource that returns the tv shows of the channels supported
+	  by the TvShowManager.
+
+	  NOTE: We need to sync the RSS channels with the supported channels by
+	  the server (dvb-*).
+
+2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/AndroidManifest.xml: Registered the TvGuide as new
 	  activity for the TvRecorder android client.
@@ -23,7 +51,7 @@
 	  New. This activity has the goal to show all supported channels and a tv
 	  show listing for each of those channels.
 
-2011-05-24  Ingo Weinzierl <ingo@intevation.de>
+2011-05-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Channel.java,
 	  common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:

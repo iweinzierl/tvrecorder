@@ -47,7 +47,7 @@ public class RssTvShowUpdater implements TvShowUpdater {
 
 
     /** The default interval that is used to update the tv shows.*/
-    public static final long DEFAULT_INTERVAL = 120000;
+    public static final long DEFAULT_INTERVAL = 1000 * 60 * 60;
 
     public static final int MAX_THREAD_COUNT = 1;
 

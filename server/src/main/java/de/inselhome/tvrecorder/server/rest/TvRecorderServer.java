@@ -29,6 +29,8 @@ import de.inselhome.tvrecorder.common.objects.Channel;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.config.Config;
+import de.inselhome.tvrecorder.server.tvguide.TvShowManager;
+import de.inselhome.tvrecorder.server.tvguide.rss.RssTvShowManager;
 import de.inselhome.tvrecorder.server.utils.DVBSChannelsParser;
 
 
@@ -46,6 +48,12 @@ public class TvRecorderServer {
      * The key that is used to store the channels in the context.
      */
     public static final String CHANNELS_KEY = "tvrecorder.channels";
+
+    /**
+     * The key that is used to store a TvShowManager in the context.
+     */
+    public static final String TVSHOW_MANAGER = "tvrecorder.tvshowmanager";
+
 
 
     private static final Logger logger =
@@ -76,7 +84,10 @@ public class TvRecorderServer {
 
         logger.info("There are " + channels.length + " channels available.");
 
-        RestApp app = new RestApp(backend, channels);
+        TvShowManager manager = new RssTvShowManager();
+        manager.start();
+
+        RestApp app = new RestApp(backend, manager, channels);
 
         Component component = new Component();
 
