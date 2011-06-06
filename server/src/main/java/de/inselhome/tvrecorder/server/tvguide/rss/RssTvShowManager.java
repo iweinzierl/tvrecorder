@@ -26,6 +26,7 @@ import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
 
 import de.inselhome.tvrecorder.server.App;
+import de.inselhome.tvrecorder.server.tvguide.TvShowManager;
 import de.inselhome.tvrecorder.server.tvguide.TvShowUpdateEvent;
 import de.inselhome.tvrecorder.server.tvguide.TvShowUpdateListener;
 
@@ -33,9 +34,16 @@ import de.inselhome.tvrecorder.server.tvguide.TvShowUpdateListener;
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
-public class RssTvShowManager implements TvShowUpdateListener {
+public class RssTvShowManager implements TvShowManager, TvShowUpdateListener {
 
     private static Logger logger = Logger.getLogger(RssTvShowManager.class);
+
+
+    protected RssTvShowUpdater updater;
+
+    protected List<ChannelWithTvGuide> channels;
+
+    protected boolean isStandalone;
 
 
     public static void main(String[] args) {
@@ -43,16 +51,42 @@ public class RssTvShowManager implements TvShowUpdateListener {
 
         logger.debug("Start RssTvShowManager as standalone application.");
 
-        RssTvShowUpdater updater = new RssTvShowUpdater(null);
-        updater.addTvShowUpdateListener(new RssTvShowManager());
+        RssTvShowManager manager = new RssTvShowManager();
+        manager.isStandalone     = true;
+
+        manager.start();
+    }
+
+
+    public RssTvShowManager() {
+        updater      = new RssTvShowUpdater(null);
+        isStandalone = false;
+        updater.addTvShowUpdateListener(this);
+    }
+
+
+    public void start() {
         updater.start();
+    }
+
+
+    public List<ChannelWithTvGuide> getChannels() {
+        //if (updater.inProgress()) {
+        //    // TODO WAIT UNTIL THE UPDATE ENDS
+        //}
+
+        return channels;
     }
 
 
     public void onTvShowUpdate(TvShowUpdateEvent event) {
         List<ChannelWithTvGuide> channels = event.getUpdated();
 
-        dumpChannels(channels);
+        this.channels = channels;
+
+        if (isStandalone) {
+            dumpChannels(channels);
+        }
     }
 
     public static void dumpChannels(List<ChannelWithTvGuide> channels) {
