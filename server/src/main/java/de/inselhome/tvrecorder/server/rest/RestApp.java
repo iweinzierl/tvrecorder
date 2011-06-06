@@ -29,6 +29,7 @@ import org.restlet.routing.Router;
 import de.inselhome.tvrecorder.common.objects.Channel;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
+import de.inselhome.tvrecorder.server.tvguide.TvShowManager;
 
 
 /**
@@ -47,14 +48,17 @@ extends      Application
 
     protected Backend backend;
 
+    protected TvShowManager manager;
+
     protected Channel[] channels;
 
 
     /**
      * Creates a new {@link RestApp}.
      */
-    public RestApp(Backend backend, Channel[] channels) {
+    public RestApp(Backend backend, TvShowManager manager, Channel[] channels) {
         this.backend  = backend;
+        this.manager  = manager;
         this.channels = channels;
     }
 
@@ -72,6 +76,7 @@ extends      Application
         ConcurrentMap map = context.getAttributes();
         map.put("backend", backend);
         map.put(TvRecorderServer.CHANNELS_KEY, channels);
+        map.put(TvRecorderServer.TVSHOW_MANAGER, manager);
 
         Router router = new Router(context);
 
@@ -82,6 +87,10 @@ extends      Application
         logger.info(
             "Add service RecordResource: " + RecordServerResource.PATH);
         router.attach(RecordServerResource.PATH, RecordServerResource.class);
+
+        logger.info(
+            "Add service TvGuideResource: " + TvGuideServerResource.PATH);
+        router.attach(TvGuideServerResource.PATH, TvGuideServerResource.class);
 
         return router;
     }
