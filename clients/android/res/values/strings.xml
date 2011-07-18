@@ -45,5 +45,7 @@
     <string name="timepicker_ok">ok</string>
 
     <!-- ERRORS -->
+    <string name="error">Fehler</string>
     <string name="error_endtime_before_starttime">Die Startzeit muss vor der Endzeit liegen</string>
+    <string name="error_no_channels">Keine Kanäle gefunden!</string>
 </resources>

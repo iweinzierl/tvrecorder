@@ -23,6 +23,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -303,7 +304,14 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
                     tvrecorder, ChannelsResource.PATH);
 
                 ChannelsResource resource = cr.wrap(ChannelsResource.class);
-                return resource.retrieve();
+                try {
+                    return resource.retrieve();
+                }
+                catch (Exception e) {
+                    Log.e("TvR [TvRecorder]", e.getMessage());
+                }
+
+                return null;
             }
 
             protected void onPostExecute(Channel[] channels) {
@@ -321,6 +329,16 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
      */
     public void onChannelsUpdated(Channel[] channels) {
         dialog.dismiss();
+
+        if (channels == null) {
+            Log.w("TvR [TvRecorder]", "No channels found!");
+            AlertDialog.Builder adb = new AlertDialog.Builder(TvRecorder.this);
+            adb.setTitle(R.string.error);
+            adb.setMessage(R.string.error_no_channels);
+            adb.show();
+            return;
+        }
+
         Log.i("TvR [TvRecorder]", "Found " + channels.length + " channels");
 
         ArrayAdapter adapter = new ArrayAdapter(
