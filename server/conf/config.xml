@@ -10,7 +10,7 @@
     </database>
 
     <channels>
-        <config-file>/home/ingo/.mplayer/channels.conf</config-file>
+        <config-file>/path/to/your/channels.conf</config-file>
     </channels>
 
     <!-- Uncomment the following block to enable HTTP BasicAuth.
