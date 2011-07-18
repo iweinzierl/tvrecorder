@@ -1,4 +1,11 @@
-2011-07-19  Ingo Weinzierl <ingo@intevation.de>
+2011-07-19  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rss/RssReader.java:
+	  Workaround: subtract 1 hour after parsing dates. Dates are shifted for 1
+	  hour to the future after parsing. This will avoid wrong dates. But, it
+	  would be better to store dates in UTC only!
+
+2011-07-19  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
 	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
@@ -8,7 +15,7 @@
 	* clients/android/res/values/strings.xml: Added errors messages if no
 	  channels have been found.
 
-2011-07-18  Ingo Weinzierl <ingo@intevation.de>
+2011-07-18  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: Use
 	  Android native DatePickerDialog and TimePickerDialog.

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -165,6 +166,15 @@ public class RssReader {
 
             try {
                 Date date = sdf.parse(pubDate);
+
+                // XXX This is a workaround! Parsing the date string shifts the
+                // time for one hour to the future (+1 hour). A better solution
+                // would be saving all dates in UTC.
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                c.add(Calendar.HOUR, -1);
+
+                date = c.getTime();
 
                 return new RssItem(title, description, date);
             }
