@@ -23,7 +23,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -34,9 +36,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import org.restlet.resource.ClientResource;
 
@@ -45,8 +49,6 @@ import de.inselhome.tvrecorder.common.rest.ChannelsResource;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
 import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
-import de.inselhome.tvrecorder.client.ui.DatePickerDialog;
-import de.inselhome.tvrecorder.client.ui.TimePickerDialog;
 import de.inselhome.tvrecorder.client.activities.addjob.OnChannelsUpdatedListener;
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
@@ -105,6 +107,8 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
      * Initializes the UI components of this activity and its listeners.
      */
     protected void initLayout() {
+        Log.d("TvR [TvRecorderActivity]", "initLayout()");
+
         start_date = (TextView) findViewById(R.id.start_date);
         start_time = (TextView) findViewById(R.id.start_time);
         end_date   = (TextView) findViewById(R.id.end_date);
@@ -115,67 +119,97 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
 
         start_date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                DatePickerDialog picker = new DatePickerDialog(TvRecorder.this);
-                picker.setOnDateSelectListener(
-                    new DatePickerDialog.OnDateSelectListener() {
-                        public void onDateSelect(int year, int month, int day) {
-                            start_datetime.set(year, month, day);
+                new DatePickerDialog(
+                    TvRecorder.this,
+                    new DatePickerDialog.OnDateSetListener() {
+                        public void onDateSet(
+                            DatePicker picker,
+                            int        year,
+                            int        month,
+                            int        day)
+                        {
+                            Log.d("TvR [TvRecorderActivity]", "Selected start date");
+                            start_datetime.set(Calendar.YEAR, year);
+                            start_datetime.set(Calendar.MONTH, month);
+                            start_datetime.set(Calendar.DAY_OF_MONTH, day);
                             updateDateTime();
                         }
-                    }
-                );
-
-                picker.show();
+                    },
+                    start_datetime.get(Calendar.YEAR),
+                    start_datetime.get(Calendar.MONTH),
+                    start_datetime.get(Calendar.DAY_OF_MONTH)
+                ).show();
             }
         });
 
         start_time.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                TimePickerDialog t = new TimePickerDialog(TvRecorder.this, true);
-                t.setOnTimeSelectListener(
-                    new TimePickerDialog.OnTimeSelectListener() {
-                        public void onTimeSelect(int hours, int minutes) {
+                new TimePickerDialog(
+                    TvRecorder.this,
+                    new TimePickerDialog.OnTimeSetListener() {
+                        public void onTimeSet(
+                            TimePicker picker,
+                            int        hours,
+                            int        minutes)
+                        {
+                            Log.d("TvR [TvRecorderActivity]", "Selected start time");
                             start_datetime.set(Calendar.HOUR_OF_DAY, hours);
                             start_datetime.set(Calendar.MINUTE, minutes);
                             updateDateTime();
                         }
-                    }
-                );
-
-                t.show();
+                    },
+                    start_datetime.get(Calendar.HOUR),
+                    start_datetime.get(Calendar.MINUTE),
+                    true
+                ).show();
             }
         });
 
         end_date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                DatePickerDialog picker = new DatePickerDialog(TvRecorder.this);
-                picker.setOnDateSelectListener(
-                    new DatePickerDialog.OnDateSelectListener() {
-                        public void onDateSelect(int year, int month, int day) {
-                            end_datetime.set(year, month, day);
+                new DatePickerDialog(
+                    TvRecorder.this,
+                    new DatePickerDialog.OnDateSetListener() {
+                        public void onDateSet(
+                            DatePicker picker,
+                            int        year,
+                            int        month,
+                            int        day)
+                        {
+                            Log.d("TvR [TvRecorderActivity]", "Selected end date");
+                            end_datetime.set(Calendar.YEAR, year);
+                            end_datetime.set(Calendar.MONTH, month);
+                            end_datetime.set(Calendar.DAY_OF_MONTH, day);
                             updateDateTime();
                         }
-                    }
-                );
-
-                picker.show();
+                    },
+                    end_datetime.get(Calendar.YEAR),
+                    end_datetime.get(Calendar.MONTH),
+                    end_datetime.get(Calendar.DAY_OF_MONTH)
+                ).show();
             }
         });
 
         end_time.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                TimePickerDialog t = new TimePickerDialog(TvRecorder.this, true);
-                t.setOnTimeSelectListener(
-                    new TimePickerDialog.OnTimeSelectListener() {
-                        public void onTimeSelect(int hours, int minutes) {
+                new TimePickerDialog(
+                    TvRecorder.this,
+                    new TimePickerDialog.OnTimeSetListener() {
+                        public void onTimeSet(
+                            TimePicker picker,
+                            int        hours,
+                            int        minutes)
+                        {
+                            Log.d("TvR [TvRecorderActivity]", "Selected end time");
                             end_datetime.set(Calendar.HOUR_OF_DAY, hours);
                             end_datetime.set(Calendar.MINUTE, minutes);
                             updateDateTime();
                         }
-                    }
-                );
-
-                t.show();
+                    },
+                    end_datetime.get(Calendar.HOUR),
+                    end_datetime.get(Calendar.MINUTE),
+                    true
+                ).show();
             }
         });
 
@@ -188,6 +222,14 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
      * end_datetime.
      */
     protected void updateDateTime() {
+        Log.d(
+            "TvR [TvRecorderActivity]", "updateDateTime() - " +
+            "start: " + start_datetime.getTime());
+
+        Log.d(
+            "TvR [TvRecorderActivity]", "updateDateTime() - " +
+            "end: " + end_datetime.getTime());
+
         start_date.setText(DateUtils.format(
             start_datetime.getTime(), DateUtils.DATE_FORMAT));
 

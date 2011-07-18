@@ -1,3 +1,12 @@
+2011-07-18  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: Use
+	  Android native DatePickerDialog and TimePickerDialog.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/DatePickerDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TimePickerDialog.java:
+	  Removed.
+
 2011-06-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvshow/TvShowDetail.java,
