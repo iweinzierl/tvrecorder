@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -186,10 +187,17 @@ implements   TvGuideUpdateListener {
                 ClientResource cr = Config.getClientResource(
                     TvGuide.this, TvGuideResource.PATH);
 
-                TvGuideResource      resource = cr.wrap(TvGuideResource.class);
-                ChannelWithTvGuide[] channels = resource.retrieve();
+                try {
+                    TvGuideResource resource = cr.wrap(TvGuideResource.class);
+                    ChannelWithTvGuide[] channels = resource.retrieve();
 
-                return channels;
+                    return channels;
+                }
+                catch (Exception e) {
+                    Log.e("TvR [TvGuide]", "No channels found.");
+                }
+
+                return null;
             }
 
             protected void onPostExecute(ChannelWithTvGuide[] channels) {
@@ -219,6 +227,18 @@ implements   TvGuideUpdateListener {
 
         final ChannelWithTvGuide[] channels = event.getChannels();
         final Activity             activity = this;
+
+        if (channels == null) {
+            Log.w("TvR [TvGuide]", "No channels with TvShows found!");
+            progress.dismiss();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.error);
+            builder.setMessage(R.string.error_no_channels);
+            builder.show();
+
+            return;
+        }
 
         ArrayAdapter adapter = new ArrayAdapter(
             activity,
