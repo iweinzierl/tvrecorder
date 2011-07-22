@@ -1,3 +1,18 @@
+2011-07-22  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/conf/config.xml: The output-directory is now configurable in
+	  /server/record/output-directory/text().
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/config/Config.java:
+	  Added an XPath expression that returns the output directory from config.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/CmdProducer.java:
+	  Removed the default output directory constant. This static path
+	  shouldn't be used any longer.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/MPlayerCmdProducer.java:
+	  Use the Config to determine the output directory for records.
+
 2011-07-19  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rss/RssReader.java:
