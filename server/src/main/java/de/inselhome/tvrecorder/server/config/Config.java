@@ -38,6 +38,9 @@ public class Config {
     public static final String XPATH_SERVER_PORT =
         "/tvrecorder/server/port/text()";
 
+    public static final String XPATH_OUTPUT_DIRECTORY =
+        "/tvrecorder/record/output-directory/text()";
+
     public static final String XPATH_DATABASE_URL =
         "/tvrecorder/database/url/text()";
 

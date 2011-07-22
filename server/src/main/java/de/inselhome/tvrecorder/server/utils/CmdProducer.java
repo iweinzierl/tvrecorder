@@ -27,9 +27,6 @@ import de.inselhome.tvrecorder.common.objects.Job;
  */
 public interface CmdProducer {
 
-    /** The default directory that contains the records. */
-    public static final String DEFAULT_OUTPUT_DIR = "records/";
-
     /**
      * This method should produce the command line.
      *

@@ -22,6 +22,8 @@ import java.io.File;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
+import de.inselhome.tvrecorder.server.config.Config;
+
 
 /**
  * This class implements {@link CmdProducer} and produces a command line for
@@ -52,7 +54,9 @@ public class MPlayerCmdProducer implements CmdProducer {
             outname = DateUtils.format(job.getStart(), DateUtils.OUTPUT_FORMAT);
         }
 
-        File record = new File(CmdProducer.DEFAULT_OUTPUT_DIR, outname);
+        Config config = Config.getInstance();
+        String outdir = config.getProperty(Config.XPATH_OUTPUT_DIRECTORY);
+        File   record = new File(outdir, outname);
 
         StringBuilder sb = new StringBuilder();
         sb.append("mplayer ");

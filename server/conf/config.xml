@@ -5,6 +5,10 @@
         <port>8282</port>
     </server>
 
+    <record>
+        <output-directory>/path/to/output-directory</output-directory>
+    </record>
+
     <database>
         <url>tvrecorder.db</url>
     </database>
