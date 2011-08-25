@@ -41,9 +41,15 @@ public class TvShow implements Serializable, Comparable {
 
 
     public TvShow(String title, String description, Date start) {
+        this(title, description, start, null);
+    }
+
+
+    public TvShow(String title, String description, Date start, Date end) {
         this.title       = title;
         this.description = description;
         this.start       = start;
+        this.end         = end;
     }
 
 

@@ -56,6 +56,12 @@ public class Config {
     public static final String XPATH_AUTH_PASSWORD =
         "/tvrecorder/authentication/password/text()";
 
+    public static final String XPATH_DATETIME_FORMAT =
+        "/tvrecorder/tvguide/datetime-format/text()";
+
+    public static final String XPATH_UPDATE_INTERVAL =
+        "/tvrecorder/tvguide/update-interval/text()";
+
 
     private static Logger logger = Logger.getLogger(Config.class);
 

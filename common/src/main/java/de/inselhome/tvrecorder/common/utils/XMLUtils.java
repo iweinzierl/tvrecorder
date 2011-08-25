@@ -1,5 +1,8 @@
 package de.inselhome.tvrecorder.common.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -29,7 +32,7 @@ public final class XMLUtils {
 
     public static final Document parseDocument(InputStream inputStream) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
+        factory.setNamespaceAware(false);
 
         try {
             return factory.newDocumentBuilder().parse(inputStream);
@@ -43,6 +46,18 @@ public final class XMLUtils {
         catch (IOException ioe) {
             System.err.println(ioe.getLocalizedMessage());
         }
+        return null;
+    }
+
+
+    public static final Document parseDocument(File file) {
+        try {
+            return parseDocument(new FileInputStream(file));
+        }
+        catch (FileNotFoundException fnfe) {
+            System.err.println(fnfe.getLocalizedMessage());
+        }
+
         return null;
     }
 
