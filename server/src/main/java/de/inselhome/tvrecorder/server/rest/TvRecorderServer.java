@@ -30,7 +30,7 @@ import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.config.Config;
 import de.inselhome.tvrecorder.server.tvguide.TvShowManager;
-import de.inselhome.tvrecorder.server.tvguide.rss.RssTvShowManager;
+import de.inselhome.tvrecorder.server.tvguide.xmltv.XmlTvShowManager;
 import de.inselhome.tvrecorder.server.utils.DVBSChannelsParser;
 
 
@@ -84,7 +84,7 @@ public class TvRecorderServer {
 
         logger.info("There are " + channels.length + " channels available.");
 
-        TvShowManager manager = new RssTvShowManager();
+        TvShowManager manager = new XmlTvShowManager();
         manager.start();
 
         RestApp app = new RestApp(backend, manager, channels);

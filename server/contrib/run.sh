@@ -8,5 +8,6 @@ export CLASSPATH
 
 exec java -Xmx256m \
      -server \
+     -Dtvrecorder.config=conf/myconfig.xml \
      de.inselhome.tvrecorder.server.App \
      2>&1 > /dev/null

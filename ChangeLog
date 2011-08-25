@@ -1,4 +1,24 @@
-2011-07-22  Ingo Weinzierl <ingo@intevation.de>
+2011-08-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
+	  Added a new constructor that also takes an end date.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/XMLUtils.java:
+	  Added a method that allows reading Documents from File.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/config/Config.java:
+	  Added XPath expressions that point to the dateformat used for reading
+	  the datetime strings in tvguide and the interval the application should
+	  update the tvguide.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
+	  Use the XmlTvShowManager to provide tvguide information.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/xmltv/XmlTvShowManager.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/tvguide/xmltv/XmlTvShowUpdater.java:
+	  New. These classes provide tvguide information from XMLTV files.
+
+2011-07-22  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/conf/config.xml: The output-directory is now configurable in
 	  /server/record/output-directory/text().
