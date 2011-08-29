@@ -64,6 +64,7 @@ public class XmlTvShowUpdater implements TvShowUpdater {
 
     protected File xmltv;
 
+    protected String     dateStr;
     protected DateFormat dateFormat;
 
     protected long interval;
@@ -110,10 +111,9 @@ public class XmlTvShowUpdater implements TvShowUpdater {
 
 
     protected void initDateTimeFormat() {
-        Config cfg    = Config.getInstance();
-        String format = cfg.getProperty(Config.XPATH_DATETIME_FORMAT);
-
-        dateFormat = new SimpleDateFormat(format);
+        Config cfg = Config.getInstance();
+        dateStr    = cfg.getProperty(Config.XPATH_DATETIME_FORMAT);
+        dateFormat = new SimpleDateFormat(dateStr);
     }
 
 
@@ -204,6 +204,14 @@ public class XmlTvShowUpdater implements TvShowUpdater {
             e, "title/text()", XPathConstants.STRING);
         String desc      = (String) XMLUtils.xpath(
             e, "desc/text()",  XPathConstants.STRING);
+
+        startStr = startStr.length() > dateStr.length()
+            ? startStr.substring(0, dateStr.length())
+            : startStr;
+
+        endStr = endStr.length() > dateStr.length()
+            ? endStr.substring(0, dateStr.length())
+            : endStr;
 
         ChannelWithTvGuide channel = channels.get(channelId);
 
