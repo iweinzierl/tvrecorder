@@ -1,3 +1,18 @@
+2011-08-29  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/pom.xml: Added dependency to Restlet's JSON extension.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java,
+	  common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
+	  Added missing getter methods to fulfill Java Bean requirements.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  New function to parse date strings.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
+	  New. Helper class that currently provides functions to write channels
+	  and tv shows to JSON.
+
 2011-08-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:

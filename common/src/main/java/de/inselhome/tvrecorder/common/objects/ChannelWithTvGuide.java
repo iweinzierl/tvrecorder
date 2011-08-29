@@ -54,6 +54,11 @@ public class ChannelWithTvGuide extends Channel {
     }
 
 
+    protected Map<Date, TvShow> getListing() {
+        return listing;
+    }
+
+
     public Collection<TvShow> getSortedListing() {
         TreeMap sorted = new TreeMap(listing);
         return sorted.values();
