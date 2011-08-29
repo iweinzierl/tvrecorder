@@ -17,11 +17,7 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
-import java.util.Map;
-
-import org.restlet.Context;
 import org.restlet.resource.Get;
-import org.restlet.resource.ServerResource;
 
 import org.apache.log4j.Logger;
 

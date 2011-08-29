@@ -25,7 +25,6 @@ import org.restlet.resource.ServerResource;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
-import de.inselhome.tvrecorder.common.objects.Job;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.tvguide.TvShowManager;
