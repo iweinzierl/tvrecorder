@@ -33,15 +33,12 @@ import org.apache.log4j.Logger;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.utils.XMLUtils;
 
-import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.config.Config;
 import de.inselhome.tvrecorder.server.tvguide.TvShowUpdateEvent;
 import de.inselhome.tvrecorder.server.tvguide.TvShowUpdateListener;

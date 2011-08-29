@@ -1,5 +1,14 @@
 2011-08-29  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rss/RssReader.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/tvguide/xmltv/XmlTvShowUpdater.java:
+	  Removed needless imports.
+
+2011-08-29  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/conf/config.xml: Added config options for TvGuide update-interval,
 	 xmltv file and the date format used in the xmltv file.
 

@@ -18,7 +18,6 @@
 package de.inselhome.tvrecorder.server.rest;
 
 import java.util.Date;
-import java.util.Map;
 
 import org.restlet.resource.Post;
 
