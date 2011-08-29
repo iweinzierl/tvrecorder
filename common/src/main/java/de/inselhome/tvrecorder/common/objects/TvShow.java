@@ -73,6 +73,11 @@ public class TvShow implements Serializable, Comparable {
     }
 
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+
     public int compareTo(Object obj) {
         return obj instanceof TvShow
             ? start.compareTo(((TvShow) obj).start)

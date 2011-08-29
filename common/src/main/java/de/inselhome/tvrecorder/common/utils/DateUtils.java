@@ -18,6 +18,7 @@
 package de.inselhome.tvrecorder.common.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,6 +38,7 @@ public class DateUtils {
 
     public static final String TIME_FORMAT = "HH:mm";
 
+    public static final String XMLTV_FORMAT = "EEE MMM dd HH:mm:ss";
 
     /**
      * This function formats a given {@link Date} based on a given format.
@@ -55,6 +57,23 @@ public class DateUtils {
         DateFormat df = new SimpleDateFormat(format);
 
         return df.format(date);
+    }
+
+
+    public static Date parse(String date, String format) {
+        if (date == null || format == null) {
+            return null;
+        }
+
+        DateFormat df = new SimpleDateFormat(format);
+
+        try {
+            return df.parse(date);
+        }
+        catch (ParseException pe) {
+        }
+
+        return null;
     }
 
 
