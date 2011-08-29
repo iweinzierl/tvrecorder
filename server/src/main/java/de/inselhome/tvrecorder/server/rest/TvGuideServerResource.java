@@ -19,12 +19,15 @@ package de.inselhome.tvrecorder.server.rest;
 
 import java.util.List;
 
-import org.restlet.resource.Get;
+import org.json.JSONArray;
+
+import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
 
 import org.apache.log4j.Logger;
 
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
-import de.inselhome.tvrecorder.common.rest.TvGuideResource;
+import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 
 /**
@@ -34,7 +37,6 @@ import de.inselhome.tvrecorder.common.rest.TvGuideResource;
  */
 public class TvGuideServerResource
 extends      TvRecorderResource
-implements   TvGuideResource
 {
     /**
      * The relative path to this recource.
@@ -47,18 +49,25 @@ implements   TvGuideResource
     private static Logger logger = Logger.getLogger(TvGuideServerResource.class);
 
 
-    @Get
-    public ChannelWithTvGuide[] retrieve() {
-        logger.info("/tvguide - retrieve()");
+
+    @Override
+    public Representation get() {
+        logger.info(PATH + " - get()");
 
         List<ChannelWithTvGuide> tvguide = getTvGuide();
 
         int num = tvguide != null ? tvguide.size() : 0;
         logger.debug("Found " + num + " channels with TvShows.");
 
-        return tvguide != null
-            ? (ChannelWithTvGuide[]) tvguide.toArray(new ChannelWithTvGuide[num])
-            : null;
+        JSONArray arr = new JSONArray();
+
+        for (ChannelWithTvGuide channel: tvguide) {
+            arr.put(JSONUtils.toJSON(channel));
+        }
+
+        String json = arr.toString();
+
+        return new StringRepresentation(json);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

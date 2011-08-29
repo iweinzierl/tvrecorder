@@ -17,6 +17,12 @@
         <config-file>/path/to/your/channels.conf</config-file>
     </channels>
 
+    <tvguide>
+        <update-interval>360000</update-interval>
+        <xmltv>.data/xmltv.xml</xmltv>
+        <datetime-format>yyyyMMddHHmm</datetime-format>
+    </tvguide>
+
     <!-- Uncomment the following block to enable HTTP BasicAuth.
          It is absolutely recommended to do this!
          Currently, the only provided authentication type is HTTP BasicAuth. -->

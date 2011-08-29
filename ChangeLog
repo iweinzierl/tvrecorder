@@ -1,5 +1,18 @@
 2011-08-29  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* server/conf/config.xml: Added config options for TvGuide update-interval,
+	 xmltv file and the date format used in the xmltv file.
+
+	* server/pom.xml: Added dependency to Restlet's JSON extension.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/TvGuideServerResource.java:
+	  This service returns its data as JSON string now.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/xmltv/XmlTvShowUpdater.java:
+	  Read the new options from `config.xml` and parse date strings properly.
+
+2011-08-29  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/pom.xml: Added dependency to Restlet's JSON extension.
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java,
