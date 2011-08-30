@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -86,6 +88,8 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
         super.onCreate(savedInstanceState);
         Log.d("TvR [TvRecorderActivity]", "onCreate() - create view");
 
+        initEnvironment();
+
         listeners      = new ArrayList<OnChannelsUpdatedListener>();
         rawChannels    = new ArrayList<Channel>();
         start_datetime = new GregorianCalendar();
@@ -101,6 +105,20 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
         initLayout();
         updateDateTime();
         updateChannels();
+    }
+
+
+    private void initEnvironment() {
+        Log.d("TvR [TvGuide]", "Initialize environment.");
+
+        Locale   l  = Config.getLocale(this);
+        TimeZone tz = Config.getTimeZone(this);
+
+        Log.d("TvR [TvGuide]", "Set locale: " + l);
+        Log.d("TvR [TvGuide]", "Set timezone: " + tz);
+
+        Locale.setDefault(l);
+        TimeZone.setDefault(tz);
     }
 
 
