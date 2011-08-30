@@ -1,5 +1,22 @@
 2011-08-30  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/libs/org.restlet.lib.org.json-2.0.jar,
+	  clients/android/libs/org.restlet.ext.json.jar: Added dependencies to ext
+	  JSON extension (TvGuide service is the first service that uses the JSON
+	  representation).
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: Added
+	  functions that return the default locale and time zone used for the JVM.
+	  
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
+	  Initialize the environment (locale and timezone).
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  The TvGuide service serves the data as JSON, so we gonna read the tv
+	  guide's JSON representation now instead of serialized Java objects.
+
+2011-08-30  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java:
 	  Return an empty Collection if no TvShow are given instead of "null".
 

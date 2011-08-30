@@ -17,7 +17,9 @@
  */
 package de.inselhome.tvrecorder.client;
 
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
@@ -147,6 +149,16 @@ public class Config {
      */
     public static final String getServerResource(Context context, String res) {
         return getServer(context) + res;
+    }
+
+
+    public static final Locale getLocale(Context context) {
+        return Locale.GERMAN;
+    }
+
+
+    public static final TimeZone getTimeZone(Context context) {
+        return TimeZone.getTimeZone("Berlin");
     }
 
 
