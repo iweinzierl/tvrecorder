@@ -1,3 +1,12 @@
+2011-08-30  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java:
+	  Return an empty Collection if no TvShow are given instead of "null".
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
+	  Put long value of start/end time of a TvShow into JSON representation of
+	  a TvShow.
+
 2011-08-29  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java,

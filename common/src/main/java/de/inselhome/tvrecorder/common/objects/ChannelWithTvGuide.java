@@ -17,6 +17,7 @@
  */
 package de.inselhome.tvrecorder.common.objects;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,14 +55,18 @@ public class ChannelWithTvGuide extends Channel {
     }
 
 
-    protected Map<Date, TvShow> getListing() {
+    public Map<Date, TvShow> getListing() {
         return listing;
     }
 
 
     public Collection<TvShow> getSortedListing() {
-        TreeMap sorted = new TreeMap(listing);
-        return sorted.values();
+        if (listing != null && listing.size() > 0) {
+            TreeMap<Date, TvShow> sorted = new TreeMap<Date, TvShow>(listing);
+            return sorted.values();
+        }
+
+        return new ArrayList<TvShow>();
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

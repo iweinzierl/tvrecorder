@@ -59,8 +59,21 @@ public class JSONUtils {
     }
 
 
-    public static final JSONObject toJSON(TvShow show) {
-        return new JSONObject(show);
+    public static JSONObject toJSON(TvShow show) {
+        JSONObject obj = null;
+
+        try {
+            obj = new JSONObject();
+            obj.put("title", show.getTitle());
+            obj.put("description", show.getDescription());
+            obj.put("start", show.getStart().getTime());
+            obj.put("end", show.getEnd().getTime());
+        }
+        catch (JSONException je) {
+            return null;
+        }
+
+        return obj;
     }
 
 
@@ -97,12 +110,8 @@ public class JSONUtils {
     {
         String title = obj.getString("title");
         String desc  = obj.getString("description");
-        Date   start = DateUtils.parse(
-            obj.getString("start"),
-            DateUtils.XMLTV_FORMAT);
-        Date end = DateUtils.parse(
-            obj.getString("end"),
-            DateUtils.XMLTV_FORMAT);
+        Date   start = new Date(obj.getLong("start"));
+        Date   end   = new Date(obj.getLong("end"));
 
         return new TvShow(title, desc, start, end);
     }
