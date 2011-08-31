@@ -17,11 +17,8 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvguide;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -43,25 +40,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import org.restlet.data.MediaType;
-import org.restlet.ext.json.JsonConverter;
-import org.restlet.ext.json.JsonRepresentation;
-import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
-import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
-
 import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
-import de.inselhome.tvrecorder.common.rest.TvGuideResource;
-import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
-import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail;
 
 
@@ -198,46 +180,7 @@ implements   TvGuideUpdateListener {
 
         new AsyncTask<Void, Void, ChannelWithTvGuide[]>() {
             protected ChannelWithTvGuide[] doInBackground(Void... v) {
-                ClientResource cr = Config.getClientResource(
-                    TvGuide.this, TvGuideResource.PATH);
-
-                try {
-                    Representation repr = cr.get(MediaType.APPLICATION_JSON);
-
-                    Log.d(
-                        "TvR [TvGuide]",
-                        "HTTP request finished successfully.");
-
-                    String json = repr.getText();
-                    JSONArray a = new JSONArray(json);
-
-                    ChannelWithTvGuide[] cs = JSONUtils.tvGuideFromJSON(a);
-
-                    int numCS = cs != null ? cs.length : 0;
-
-                    Log.d(
-                        "TvR [TvGuide]",
-                        "Received "+ numCS +" channels (TvGuide) from server.");
-
-                    return cs;
-                }
-                catch (ResourceException e) {
-                    Log.e(
-                        "TvR [TvGuide]",
-                        "No channels found: " + e.getMessage());
-                }
-                catch (IOException ioe) {
-                    Log.e(
-                        "TvR [TvGuide]",
-                        "Broken JSON representation: " + ioe.getMessage());
-                }
-                catch (JSONException je) {
-                    Log.e(
-                        "TvR [TvGuide]",
-                        "Error while parsing TvGuide JSON: " + je.getMessage());
-                }
-
-                return null;
+                return TvGuideDataStore.get(TvGuide.this);
             }
 
             protected void onPostExecute(ChannelWithTvGuide[] channels) {
