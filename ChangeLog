@@ -1,3 +1,24 @@
+2011-08-31  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java:
+	  New. This class provides SQLite database support. All necessary tables
+	  are created while initializing an instance of this class if no such
+	  tables exist.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java:
+	  New. This class provides some methods to save/load channels to/from
+	  SQLite database.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:
+	  New. The TvGuideDataStore hides the code to fetch the data (from
+	  database or from server via HTTP). All classes that require TvGuide
+	  information should use this datastore to retrieve the data.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  We have two datastores now: the TvRecorder server and the SQLite
+	  database provided by SQLiteProvider. New data (TV shows) is only fetched
+	  from server if the last update is one day (or longer) ago.
+
 2011-08-30  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/libs/org.restlet.lib.org.json-2.0.jar,
