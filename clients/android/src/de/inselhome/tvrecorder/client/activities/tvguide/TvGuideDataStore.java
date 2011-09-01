@@ -48,9 +48,14 @@ public class TvGuideDataStore {
 
 
     public static ChannelWithTvGuide[] get(Context context) {
+        return get(context, false);
+    }
+
+
+    public static ChannelWithTvGuide[] get(Context context, boolean forceHttp) {
         ChannelSQLiteHelper db = new ChannelSQLiteHelper(context);
 
-        if (db.needsUpdate()) {
+        if (db.needsUpdate() || forceHttp) {
             Log.d("TvR [TvGuideDataStore]","Database needs update from server");
             return getFromServerAndUpdate(context, db);
         }

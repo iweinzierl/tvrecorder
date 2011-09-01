@@ -109,7 +109,7 @@ implements   TvGuideUpdateListener {
         String update = res.getString(R.string.tvguide_update_list);
 
         if (title.equals(update)) {
-            updateTvGuide();
+            updateTvGuide(true);
             return true;
         }
 
@@ -166,10 +166,15 @@ implements   TvGuideUpdateListener {
     }
 
 
+    protected void updateTvGuide() {
+        updateTvGuide(false);
+    }
+
+
     /**
      * This method triggers the update process of the TvShows.
      */
-    protected void updateTvGuide() {
+    protected void updateTvGuide(final boolean forceHttp) {
         Resources resources = getResources();
 
         progress = ProgressDialog.show(
@@ -180,7 +185,7 @@ implements   TvGuideUpdateListener {
 
         new AsyncTask<Void, Void, ChannelWithTvGuide[]>() {
             protected ChannelWithTvGuide[] doInBackground(Void... v) {
-                return TvGuideDataStore.get(TvGuide.this);
+                return TvGuideDataStore.get(TvGuide.this, forceHttp);
             }
 
             protected void onPostExecute(ChannelWithTvGuide[] channels) {

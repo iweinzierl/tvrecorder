@@ -62,7 +62,7 @@ extends      TvRecorderResource
         JSONArray arr = new JSONArray();
 
         for (ChannelWithTvGuide channel: tvguide) {
-            arr.put(JSONUtils.toJSON(channel));
+            arr.put(JSONUtils.toJSON(channel, false));
         }
 
         String json = arr.toString();
