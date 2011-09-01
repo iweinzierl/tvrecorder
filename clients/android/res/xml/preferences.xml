@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/prefs_server">
+        <EditTextPreference
+            android:title="@string/prefs_server_url"
+            android:name="@+id/prefs_server_url"
+            android:defaultValue="http://"
+            android:summary="@string/prefs_server_url_summary"
+            android:key="prefs_server_url"/>
+        <EditTextPreference
+            android:title="@string/prefs_server_port"
+            android:defaultValue="8181"
+            android:summary="@string/prefs_server_port_summary"
+            android:key="prefs_server_port"/>
+        <CheckBoxPreference
+            android:title="@string/prefs_server_authentication"
+            android:disableDependentsState="false"
+            android:defaultValue="false"
+            android:summary="@string/prefs_server_authentication_summary"
+            android:key="prefs_server_authentication"/>
+        <EditTextPreference
+            android:title="@string/prefs_server_user"
+            android:defaultValue="YOURNAME"
+            android:summary="@string/prefs_server_user_summary"
+            android:dependency="prefs_server_authentication"
+            android:key="prefs_server_user"/>
+        <EditTextPreference
+            android:title="@string/prefs_server_passwd"
+            android:defaultValue="YOURPASS"
+            android:summary="@string/prefs_server_passwd_summary"
+            android:dependency="prefs_server_authentication"
+            android:key="prefs_server_passwd"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefs_tvguide">
+        <CheckBoxPreference
+            android:title="@string/prefs_tvguide_update_automatically"
+            android:disableDependentsState="false"
+            android:defaultValue="true"
+            android:summary="@string/prefs_tvguide_update_automatically_summary"
+            android:key="prefs_tvguide_update_automatically"/>
+        <EditTextPreference
+            android:title="@string/prefs_tvguide_update_interval"
+            android:defaultValue="24"
+            android:summary="@string/prefs_tvguide_update_interval_summary"
+            android:dependency="prefs_tvguide_update_automatically"
+            android:key="prefs_tvguide_update_interval"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -26,7 +26,6 @@ import org.restlet.resource.ClientResource;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -38,13 +37,20 @@ import android.util.Log;
  */
 public class Config {
 
-    public static final String SETTINGS_SERVER_URL  = "settings_host_url";
+    public static final String SETTINGS_SERVER_URL =
+        "prefs_server_url";
 
-    public static final String SETTINGS_SERVER_PORT = "settings_host_port";
+    public static final String SETTINGS_SERVER_PORT =
+        "prefs_server_port";
 
-    public static final String SETTINGS_AUTH_USER   = "settings_auth_user";
+    public static final String SETTINGS_AUTH =
+        "prefs_server_authentication";
 
-    public static final String SETTINGS_AUTH_PASS   = "settings_auth_pass";
+    public static final String SETTINGS_AUTH_USER =
+        "prefs_server_user";
+
+    public static final String SETTINGS_AUTH_PASS =
+        "prefs_server_passwd";
 
     /**
      * This method retrieves the value of the preference specified by
@@ -57,43 +63,26 @@ public class Config {
      *
      * @return the preference value or <i>def</i>.
      */
-    protected static String getPreference(Context c, String key, String def) {
+    protected static Object getPreference(Context c, String key, String def) {
         SharedPreferences prefs =
             PreferenceManager.getDefaultSharedPreferences(c);
 
         Map settings = prefs.getAll();
 
-        String pref = (String) settings.get(key);
+        Object pref = settings.get(key);
 
         return pref != null ? pref : def;
     }
 
 
-    /**
-     * This function is called to check if all necessary preferences are set.
-     *
-     * @param c the {@link Context}
-     *
-     * @return true, if all necessary preferences are set, otherwise false.
-     */
-    public static boolean checkPreferences(Context c) {
-        Resources res     = c.getResources();
-        String[] settings = res.getStringArray(R.array.tvrecorder_settings);
+    protected static boolean getPreferenceAsBool(
+        Context c, String key, boolean def
+    ) {
+        Object pref = getPreference(c, key, null);
 
-        for (String setting: settings) {
-            if (setting.indexOf("auth") >= 0) {
-                continue;
-            }
-
-            String pref = getPreference(c, setting, null);
-
-            if (pref == null || pref.equals("")) {
-                return false;
-            }
-        }
-
-        return true;
+        return pref != null ? (Boolean) pref : def;
     }
+
 
     /**
      * This function retrieves the server url.
@@ -103,8 +92,8 @@ public class Config {
      * @return the server url as string.
      */
     public static final String getServer(Context context) {
-        String url  = getPreference(context, SETTINGS_SERVER_URL, "");
-        String port = getPreference(context, SETTINGS_SERVER_PORT, "");
+        String url  = (String) getPreference(context, SETTINGS_SERVER_URL, "");
+        String port = (String) getPreference(context, SETTINGS_SERVER_PORT, "");
 
         return url + ":" + port;
     }
@@ -119,7 +108,7 @@ public class Config {
      * @return the login name or null.
      */
     protected static final String getLogin(Context context) {
-        String login = getPreference(context, SETTINGS_AUTH_USER, null);
+        String login = (String)getPreference(context, SETTINGS_AUTH_USER, null);
 
         return login != null && !login.equals("") ? login : null;
     }
@@ -134,7 +123,7 @@ public class Config {
      * @return the configured password or null.
      */
     protected static final String getPassword(Context context) {
-        String pass = getPreference(context, SETTINGS_AUTH_PASS, null);
+        String pass = (String) getPreference(context, SETTINGS_AUTH_PASS, null);
         return pass != null && !pass.equals("") ? pass : null;
     }
 
@@ -165,13 +154,15 @@ public class Config {
     public static final ClientResource getClientResource(
         Context context, String res)
     {
-        String url   = getServerResource(context, res);
-        String login = getLogin(context);
-        String pass  = getPassword(context);
+        String url = getServerResource(context, res);
 
         ClientResource cr = new ClientResource(url);
 
-        if (login != null && pass != null) {
+        if (getPreferenceAsBool(context, SETTINGS_AUTH, false)) {
+            String login = getLogin(context);
+            String pass  = getPassword(context);
+
+
             Log.i(
                 "TvR [Config]",
                 "getClientResource() - prepare HTTP BasicAuth");

@@ -17,11 +17,6 @@
 
     <string name="tvshowdetail_title">Tv Show Details</string>
 
-    <string name="settings_host_url">URL des Servers</string>
-    <string name="settings_host_port">Port des Servers</string>
-    <string name="settings_auth_user">Benutzer</string>
-    <string name="settings_auth_pass">Passwort</string>
-
     <string name="keyvalueitem_change">ändern</string>
 
     <string name="addjob_start">Start</string>
@@ -48,4 +43,22 @@
     <string name="error">Fehler</string>
     <string name="error_endtime_before_starttime">Die Startzeit muss vor der Endzeit liegen</string>
     <string name="error_no_channels">Keine Kanäle gefunden!</string>
+
+    <!-- PREFERENCES -->
+    <string name="prefs_server">Einstellungen Server</string>
+    <string name="prefs_server_url">Server URL</string>
+    <string name="prefs_server_url_summary">Die HTTP Adresse des TvRecorder Servers.</string>
+    <string name="prefs_server_port">Server Port</string>
+    <string name="prefs_server_port_summary">Der Port über den der TvRecorder Server erreichbar ist.</string>
+    <string name="prefs_server_user">Nutzer</string>
+    <string name="prefs_server_user_summary">Der Nutzer, der sich am TvRecorder anmeldet.</string>
+    <string name="prefs_server_passwd">Passwort</string>
+    <string name="prefs_server_passwd_summary">Das Passwort, mit dem sich der Nutzer am TvRecorder anmeldet.</string>
+    <string name="prefs_server_authentication">Nutze Authentifizierung</string>
+    <string name="prefs_server_authentication_summary">Wenn Authentifizierung benötigt wird, diesen Haken setzen.</string>
+    <string name="prefs_tvguide">Einstellung TvGuide</string>
+    <string name="prefs_tvguide_update_automatically">Automatische Aktualisierung</string>
+    <string name="prefs_tvguide_update_automatically_summary">Bei automatischer Aktualisierung, wird der TvGuide nach dem einstellten Interval aktualisiert.</string>
+    <string name="prefs_tvguide_update_interval">Interval der Aktualisierung</string>
+    <string name="prefs_tvguide_update_interval_summary">Interval, in dem der TvGuide aktualisiert wird (in Stunden)</string>
 </resources>

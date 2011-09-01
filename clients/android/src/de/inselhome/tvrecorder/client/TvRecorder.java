@@ -91,10 +91,6 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
         start_datetime = new GregorianCalendar();
         end_datetime   = new GregorianCalendar();
 
-        if (!Config.checkPreferences(this)) {
-            startActivity(new Intent(this, TvRecorderSettings.class));
-        }
-
         addOnChannelsUpdatedListener(this);
 
         setContentView(R.layout.tvrecorder);

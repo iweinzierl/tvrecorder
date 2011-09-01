@@ -1,5 +1,26 @@
 2011-09-01  Ingo Weinzierl <ingo@intevation.de>
 
+	* clients/android/res/xml/preferences.xml: New. A layout description for
+	  the config options required/supported by TvRecorder Android client.
+
+	* M clients/android/res/values/strings.xml: New strings for the
+	  preferences activity.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: Renamed
+	  the config keys specific to the server. Furthermore, there is a new
+	  config option to enable/disable authentication.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: Do
+	  not check if there the required config entries are already set by the
+	  user.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java:
+	  Removed the whole layout stuff - use the preference layout description
+	  defined in preferences.xml instead (which is the recommended way
+	  anyway).
+
+2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
 	  Removed code to initialize the environment. This seems to be the wrong
 	  way - it seems to lead to incorrect dates/times.
