@@ -1,3 +1,9 @@
+2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
+	  Removed code to initialize the environment. This seems to be the wrong
+	  way - it seems to lead to incorrect dates/times.
+
 2011-08-31  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java:
