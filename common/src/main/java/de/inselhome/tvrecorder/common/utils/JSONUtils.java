@@ -35,12 +35,16 @@ public class JSONUtils {
     }
 
 
-    public static JSONObject toJSON(ChannelWithTvGuide channel) {
+    public static JSONObject toJSON(ChannelWithTvGuide channel, boolean old) {
         Collection<TvShow> shows = channel.getSortedListing();
         JSONArray arr = new JSONArray();
 
+        long current = System.currentTimeMillis();
+
         for (TvShow show: shows) {
-            arr.put(toJSON(show));
+            if (old || show.getStart().getTime() > current) {
+                arr.put(toJSON(show));
+            }
         }
 
         JSONObject obj = null;
