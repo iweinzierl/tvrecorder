@@ -17,15 +17,19 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.io.IOException;
 import java.util.Date;
-
-import org.restlet.resource.Post;
 
 import org.apache.log4j.Logger;
 
+import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
+
+import org.json.JSONObject;
+import org.json.JSONException;
+
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
-import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
@@ -41,7 +45,6 @@ import de.inselhome.tvrecorder.server.utils.StopAtJobCreator;
  */
 public class RecordServerResource
 extends      TvRecorderResource
-implements   RecordResource
 {
     /**
      * The relative path to this recource.
@@ -51,7 +54,7 @@ implements   RecordResource
     /**
      * The Logger.
      */
-    private static Logger logger = Logger.getLogger(RecordResource.class);
+    private static Logger logger = Logger.getLogger(RecordServerResource.class);
 
 
     /**
@@ -61,10 +64,34 @@ implements   RecordResource
      *
      * @param job The incoming job to record.
      */
-    @Post
-    public void add(Job job) {
-        logger.info("/record - add()");
+    @Override
+    public Representation post(Representation job) {
+        logger.info("/record - post()");
 
+        try {
+            JSONObject json = new JSONObject(job.getText());
+
+            String name  = json.getString("name");
+            String chan  = json.getString("channel");
+            Date   start = new Date(json.getLong("start"));
+            Date   end   = new Date(json.getLong("end"));
+
+            doRecord(new Job(start, end, new Channel(chan, chan), name));
+
+            return new StringRepresentation("SUCCESS");
+        }
+        catch (IOException ioe) {
+            logger.error("Broken JSON representation: " + ioe.getMessage());
+        }
+        catch (JSONException je) {
+            logger.error("Error while parsing JSON Job: " + je.getMessage());
+        }
+
+        return new StringRepresentation("ERROR");
+    }
+
+
+    protected void doRecord(Job job) {
         if (job == null) {
             logger.warn("Job to record is null!");
             throw new IllegalArgumentException("Could not create job - missing information.");

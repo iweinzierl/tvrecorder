@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
+import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.objects.TvShow;
 
 
@@ -72,6 +73,23 @@ public class JSONUtils {
             obj.put("description", show.getDescription());
             obj.put("start", show.getStart().getTime());
             obj.put("end", show.getEnd().getTime());
+        }
+        catch (JSONException je) {
+            return null;
+        }
+
+        return obj;
+    }
+
+
+    public static JSONObject toJSON(Job job) {
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("name", job.getName());
+            obj.put("channel", job.getChannel().getKey());
+            obj.put("start", job.getStart().getTime());
+            obj.put("end", job.getEnd().getTime());
         }
         catch (JSONException je) {
             return null;

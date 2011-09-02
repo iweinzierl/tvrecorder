@@ -17,6 +17,7 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvguide;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,11 +41,21 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import de.inselhome.tvrecorder.client.R;
+import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
+import org.restlet.resource.ClientResource;
+
+import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
+import de.inselhome.tvrecorder.common.rest.RecordResource;
+import de.inselhome.tvrecorder.common.utils.DateUtils;
+import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
+import de.inselhome.tvrecorder.client.Config;
+import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail;
 
 
@@ -306,8 +318,52 @@ implements   TvGuideUpdateListener {
 
 
     protected void recordShow(TvShow show) {
-        // TODO IMPLEMENT ME
-        Log.e("TvR [TvGuide]", "recordShow() currently not implemented.");
+        ClientResource cr = Config.getClientResource(this, RecordResource.PATH);
+
+        ChannelWithTvGuide channel =
+            (ChannelWithTvGuide) channelList.getSelectedItem();
+
+        String name = show.getTitle().replace(" ", "_");
+        Job    job  = new Job(show.getStart(), show.getEnd(), channel, name);
+        String json = JSONUtils.toJSON(job).toString();
+
+        Representation res = cr.post(new StringRepresentation(json));
+
+        String result = null;
+        try {
+            result = res.getText();
+        }
+        catch (IOException ioe) {
+        }
+
+        Resources r = getResources();
+        Toast popup = null;
+
+        if (result != null && result.equals("SUCCESS")) {
+            String msg =  r.getString(R.string.addjob_recorded_message) +"\n";
+            msg += r.getString(R.string.addjob_recorded_start) + " ";
+            msg += DateUtils.format(
+                show.getStart(), DateUtils.DATETIME_FORMAT);
+            msg += "\n" + r.getString(R.string.addjob_recorded_end) + " ";
+            msg += DateUtils.format(
+                show.getEnd(), DateUtils.DATETIME_FORMAT);
+            msg += "\n" + r.getString(R.string.addjob_recorded_channel) + " ";
+            msg += channel.getDescription();
+            msg += "\n" + r.getString(R.string.addjob_recorded_name) + " ";
+            msg += name;
+
+            popup = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        }
+        else {
+            String msg =
+                r.getString(R.string.addjob_recorded_error_title)
+                + " NOT SUCCESSFUL!";
+
+            popup = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        }
+
+        popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        popup.show();
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
