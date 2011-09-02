@@ -25,12 +25,15 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
+import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
+import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.Config;
@@ -98,12 +101,13 @@ implements   View.OnClickListener
 
             ClientResource c = Config.getClientResource(
                 recorder, RecordResource.PATH);
-            RecordResource resource = c.wrap(RecordResource.class);
 
-            Job job = new Job(start.getTime(), end.getTime(), chann, name);
+            Job    job  = new Job(start.getTime(), end.getTime(), chann, name);
+            String json = JSONUtils.toJSON(job).toString();
 
             Log.i("TvR [RecordJobListener]", "createJob() - add new job.");
-            resource.add(job);
+
+            Representation result = c.post(new StringRepresentation(json));
 
             Toast popup = Toast.makeText(recorder, msg, Toast.LENGTH_SHORT);
             popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

@@ -1,6 +1,22 @@
 2011-09-01  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
+	  New function that returns a JSON representation of a record Job.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  The RecordResource is no longer able to take a serialized Job - instead,
+	  this resource will now take a JSON representation of a Job.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Implemented the method to record a tv show.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Adapted the code to start a record Job - the HTTP communication now uses
+	  the JSON representation instead of serialized Java objects.
+
+2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
 	  Added a flag to toJSON() that forces to export old tv shows as well to
 	  JSON. Otherwise, only future tv shows are included in the JSON
 	  representation.
