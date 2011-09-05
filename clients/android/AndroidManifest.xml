@@ -24,6 +24,9 @@
                   android:label="@string/tvshowdetail_title">
         </activity>
 
+        <!-- SERVICES -->
+        <service android:name="de.inselhome.tvrecorder.client.services.TvGuideUpdateService"/>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 
