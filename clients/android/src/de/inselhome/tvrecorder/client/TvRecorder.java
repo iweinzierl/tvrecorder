@@ -53,6 +53,7 @@ import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
 import de.inselhome.tvrecorder.client.activities.addjob.OnChannelsUpdatedListener;
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
+import de.inselhome.tvrecorder.client.services.TvGuideUpdateService;
 
 
 /**
@@ -97,6 +98,15 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
         initLayout();
         updateDateTime();
         updateChannels();
+
+        boolean autoUpdate = Config.getPreferenceAsBool(
+            this, Config.SETTINGS_TVGUIDE_AUTO_UPDATE, false);
+
+        if (autoUpdate) {
+            Log.d("TvR [TvRecorderActivity]", "Start TvGuideUpdateService");
+            Intent service = new Intent(this, TvGuideUpdateService.class);
+            startService(service);
+        }
     }
 
 

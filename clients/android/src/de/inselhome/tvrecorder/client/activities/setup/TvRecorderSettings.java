@@ -17,11 +17,16 @@
  */
 package de.inselhome.tvrecorder.client.activities.setup;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
+import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.services.TvGuideUpdateService;
 
 
 /**
@@ -44,6 +49,32 @@ extends      PreferenceActivity
 
         Log.d("TvR [TvRecorderSettings]", "onCreate()");
         addPreferencesFromResource(R.xml.preferences);
+
+        Preference autoUpdate = (Preference)
+            findPreference(Config.SETTINGS_TVGUIDE_AUTO_UPDATE);
+
+        autoUpdate.setOnPreferenceChangeListener(
+            new OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference pref, Object val) {
+                    String key = pref.getKey();
+
+                    if (key.equals(Config.SETTINGS_TVGUIDE_AUTO_UPDATE)) {
+                        if (Boolean.valueOf(String.valueOf(val))) {
+                            restartTvGuideUpdateService();
+                        }
+                    }
+
+                    return true;
+                }
+        });
+    }
+
+
+    protected void restartTvGuideUpdateService() {
+        Log.i("TvR [TvRecorderSettings]", "Start TvGuideUpdateService.");
+
+        Intent service = new Intent(this, TvGuideUpdateService.class);
+        startService(service);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

@@ -52,6 +52,12 @@ public class Config {
     public static final String SETTINGS_AUTH_PASS =
         "prefs_server_passwd";
 
+    public static final String SETTINGS_TVGUIDE_AUTO_UPDATE =
+        "prefs_tvguide_update_automatically";
+
+    public static final String SETTINGS_TVGUIDE_UPDATE_INTERVAL =
+        "prefs_tvguide_update_interval";
+
     /**
      * This method retrieves the value of the preference specified by
      * <i>key</i>.
@@ -75,12 +81,30 @@ public class Config {
     }
 
 
-    protected static boolean getPreferenceAsBool(
+    public static boolean getPreferenceAsBool(
         Context c, String key, boolean def
     ) {
         Object pref = getPreference(c, key, null);
 
         return pref != null ? (Boolean) pref : def;
+    }
+
+
+    public static Double getPreferenceAsDouble(
+        Context c, String key, Double def
+    ) {
+        String pref = (String) getPreference(c, key, null);
+
+        return pref != null ? Double.parseDouble(pref) : def;
+    }
+
+
+    public static Integer getPreferenceAsInteger(
+        Context c, String key, Integer def
+    ) {
+        String pref = (String) getPreference(c, key, null);
+
+        return pref != null ? Integer.parseInt(pref) : def;
     }
 
 
