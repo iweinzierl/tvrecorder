@@ -55,6 +55,12 @@ public class Config {
     public static final String SETTINGS_TVGUIDE_AUTO_UPDATE =
         "prefs_tvguide_update_automatically";
 
+    public static final String SETTINGS_TVGUIDE_WIFI_UPDATE =
+        "prefs_tvguide_update_wifi_only";
+
+    public static final String SETTINGS_TVGUIDE_ROAMING =
+        "prefs_tvguide_update_roaming";
+
     public static final String SETTINGS_TVGUIDE_UPDATE_INTERVAL =
         "prefs_tvguide_update_interval";
 

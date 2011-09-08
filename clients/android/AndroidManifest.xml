@@ -27,6 +27,13 @@
         <!-- SERVICES -->
         <service android:name="de.inselhome.tvrecorder.client.services.TvGuideUpdateService"/>
 
+        <!-- BROADCAST RECEIVERS -->
+        <receiver android:name="de.inselhome.tvrecorder.client.receivers.TvGuideUpdateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 

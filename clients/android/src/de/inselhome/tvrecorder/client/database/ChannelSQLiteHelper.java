@@ -40,6 +40,8 @@ import de.inselhome.tvrecorder.common.objects.TvShow;
  */
 public class ChannelSQLiteHelper {
 
+    public static final String TAG = "TvR [ChannelSQLiteHelper]";
+
     protected Context context;
 
     protected SQLiteProvider sqlite;
@@ -88,12 +90,17 @@ public class ChannelSQLiteHelper {
             long id = db.insert(SQLiteProvider.CHANNEL_TBL_NAME, null, values);
 
             Collection<TvShow> shows = c.getSortedListing();
+
+            Log.d(
+                TAG,
+                "Channel '" + c.getKey() + "' has " + shows.size() + " shows.");
+
             for (TvShow show: shows) {
                 insert(id, show);
             }
         }
         catch (SQLException se) {
-            Log.d("TvR [ChannelSQLiteHelper]", se.getMessage());
+            Log.d(TAG, se.getMessage());
         }
     }
 
@@ -195,19 +202,40 @@ public class ChannelSQLiteHelper {
     }
 
 
-    public void setLastUpdate(long now) {
-        // TODO Implement me
-    }
+    public boolean needsUpdate(int hours) {
+        if (db == null) {
+            db = getDatabase().getReadableDatabase();
+        }
 
+        Cursor cursor = db.query(
+            SQLiteProvider.UPDATE_TBL_NAME,
+            new String[] { SQLiteProvider.UPDATE_TBL_COLUMN_TIMESTAMP },
+            SQLiteProvider.UPDATE_TBL_COLUMN_TBL + " = ?",
+            new String[] { SQLiteProvider.TVSHOW_TBL_NAME },
+            null,
+            null,
+            null);
 
-    public boolean needsUpdate() {
-        return false;
+        cursor.moveToFirst();
+
+        long millis = cursor.getLong(0) * 1000;
+        long next   = millis + (hours * 60 * 60 * 1000);
+
+        Log.d(TAG, "Update interval set to: " + hours + " hours.");
+        Log.d(TAG, "Last update on: " + millis);
+        Log.d(TAG, "Next update on: " + next);
+        Log.d(TAG, "Now:            " + System.currentTimeMillis());
+
+        boolean needUpdate = System.currentTimeMillis() > next;
+        Log.d(TAG, "Need update? " + needUpdate);
+
+        return needUpdate;
     }
 
 
     public void doIt() {
         if (db != null) {
-            Log.d("TvR [ChannelSQLiteHelper]", "End transaction.");
+            Log.d(TAG, "End transaction.");
 
             db.setTransactionSuccessful();
             db.endTransaction();

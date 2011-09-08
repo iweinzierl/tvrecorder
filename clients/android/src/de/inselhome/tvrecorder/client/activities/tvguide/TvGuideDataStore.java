@@ -44,7 +44,7 @@ import de.inselhome.tvrecorder.client.database.ChannelSQLiteHelper;
  */
 public class TvGuideDataStore {
 
-    public static final int UPDATE_INTERVAL = 24 * 60 * 60 * 1000;
+    public static final String TAG = "TvR [TvGuideDataStore]";
 
 
     public static ChannelWithTvGuide[] get(Context context) {
@@ -55,15 +55,16 @@ public class TvGuideDataStore {
     public static ChannelWithTvGuide[] get(Context context, boolean forceHttp) {
         ChannelSQLiteHelper db = new ChannelSQLiteHelper(context);
 
-        if (db.needsUpdate() || forceHttp) {
-            Log.d("TvR [TvGuideDataStore]","Database needs update from server");
+        int updateInterval = Config.getPreferenceAsInteger(
+            context, Config.SETTINGS_TVGUIDE_UPDATE_INTERVAL, null);
+
+        if (db.needsUpdate(updateInterval) || forceHttp) {
+            Log.d(TAG,"Database needs update from server");
             return getFromServerAndUpdate(context, db);
         }
         else {
             List<ChannelWithTvGuide> tmps = db.getAll();
-            Log.d(
-                "TvR [TvGuideDataStore]",
-                "Found " + tmps.size() + " channels in DB!");
+            Log.d(TAG, "Found " + tmps.size() + " channels in DB!");
 
             if (tmps != null && !tmps.isEmpty()) {
                 return (ChannelWithTvGuide[])
@@ -84,7 +85,6 @@ public class TvGuideDataStore {
 
         for (ChannelWithTvGuide c: cs) {
             db.insert(c);
-            db.setLastUpdate(System.currentTimeMillis());
         }
 
         db.doIt();
@@ -98,9 +98,11 @@ public class TvGuideDataStore {
         ChannelWithTvGuide[] cs = getFromServer(context);
 
         if (cs == null || cs.length == 0) {
+            Log.d(TAG, "Received no channels via Http from server.");
             return null;
         }
 
+        Log.d(TAG, "Received " + cs.length + " channels via http from server.");
         updateDatabase(db, cs);
 
         return cs;
@@ -114,9 +116,7 @@ public class TvGuideDataStore {
         try {
             Representation repr = cr.get(MediaType.APPLICATION_JSON);
 
-            Log.d(
-                "TvR [TvGuideDataStore]",
-                "HTTP request finished successfully.");
+            Log.d(TAG, "HTTP request finished successfully.");
 
             String json = repr.getText();
             JSONArray a = new JSONArray(json);
@@ -124,19 +124,13 @@ public class TvGuideDataStore {
             return JSONUtils.tvGuideFromJSON(a);
         }
         catch (ResourceException e) {
-            Log.e(
-                "TvR [TvGuideDataStore]",
-                "No channels found: " + e.getMessage());
+            Log.e(TAG, "No channels found: " + e.getMessage());
         }
         catch (IOException ioe) {
-            Log.e(
-                "TvR [TvGuideDataStore]",
-                "Broken JSON representation: " + ioe.getMessage());
+            Log.e(TAG, "Broken JSON representation: " + ioe.getMessage());
         }
         catch (JSONException je) {
-            Log.e(
-                "TvR [TvGuideDataStore]",
-                "Error while parsing TvGuide JSON: " + je.getMessage());
+            Log.e(TAG, "Error while parsing TvGuide JSON: " + je.getMessage());
         }
 
         return null;
