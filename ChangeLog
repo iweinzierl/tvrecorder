@@ -1,3 +1,37 @@
+2011-09-08  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/receivers/TvGuideUpdateReceiver.java:
+	  New. A BroadcastReceiver that is used to update the database (TvShows)
+	  based on the network state and the configuration.
+
+	* clients/android/AndroidManifest.xml: Registered the
+	  TvGuideUpdateReceiver with an IntentFilter to listen for network state
+	  changes.
+
+	* clients/android/res/xml/preferences.xml: Added further config options to
+	  prevent updates if no wifi connection is available or if roaming is
+	  active.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java: Added
+	  new config keys.
+
+	* clients/android/res/values/strings.xml: Added new strings for the two
+	  config options.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java: Do
+	  not start the TvGuideUpdateService. The update mechanism uses the
+	  TvGuideUpdateReceiver. This should minimize battery costs.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java:
+	  Implemented the needsUpdate() method. An update is required if
+	    last update time + INTERVAL <= now.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:
+	  Adapted the call of ChannelSQLiteHelper.needsUpdate().
+
+	* clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java:
+	  Added a new table that stores the last update times for each table.
+
 2011-09-05  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/services/TvGuideUpdateService.java:

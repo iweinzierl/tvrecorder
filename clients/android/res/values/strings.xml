@@ -59,6 +59,10 @@
     <string name="prefs_tvguide">Einstellung TvGuide</string>
     <string name="prefs_tvguide_update_automatically">Automatische Aktualisierung</string>
     <string name="prefs_tvguide_update_automatically_summary">Bei automatischer Aktualisierung, wird der TvGuide nach dem einstellten Interval aktualisiert.</string>
+    <string name="prefs_tvguide_update_wifi_only">Wifi Verbindung erforderlich</string>
+    <string name="prefs_tvguide_update_wifi_only_summary">Wenn diese Option gewählt ist, muss mindestens eine Wifi Verbindung zur Aktualisierugn bestehen.</string>
+    <string name="prefs_tvguide_update_roaming">Aktualisierung erlaubt, falls Roaming aktiv?</string>
+    <string name="prefs_tvguide_update_roaming_summary">Wenn diese Option gewählt ist, wird eine Aktualisierung auch bei Roaming durchgeführt.</string>
     <string name="prefs_tvguide_update_interval">Interval der Aktualisierung</string>
     <string name="prefs_tvguide_update_interval_summary">Interval, in dem der TvGuide aktualisiert wird (in Stunden)</string>
 </resources>

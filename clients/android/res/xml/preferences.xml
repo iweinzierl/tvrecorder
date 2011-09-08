@@ -39,6 +39,18 @@
             android:defaultValue="true"
             android:summary="@string/prefs_tvguide_update_automatically_summary"
             android:key="prefs_tvguide_update_automatically"/>
+        <CheckBoxPreference
+            android:title="@string/prefs_tvguide_update_wifi_only"
+            android:defaultValue="true"
+            android:summary="@string/prefs_tvguide_update_wifi_only_summary"
+            android:dependency="prefs_tvguide_update_automatically"
+            android:key="prefs_tvguide_update_wifi_only"/>
+        <CheckBoxPreference
+            android:title="@string/prefs_tvguide_update_roaming"
+            android:defaultValue="false"
+            android:summary="@string/prefs_tvguide_update_roaming_summary"
+            android:dependency="prefs_tvguide_update_automatically"
+            android:key="prefs_tvguide_update_roaming"/>
         <EditTextPreference
             android:title="@string/prefs_tvguide_update_interval"
             android:defaultValue="24"
