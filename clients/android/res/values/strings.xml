@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">TvRecorder</string>
 
+    <!-- THE MAIN MENU -->
+    <string name="main_menu_tvrecorder_button">TvRecorder</string>
+    <string name="main_menu_tvguide_button">TvGuide</string>
+    <string name="main_menu_settings_button">Einstellungen</string>
+
     <!-- THE RECORD ACTIVITY -->
     <string name="tvrecorder_contextmenu_quit">Beenden</string>
     <string name="tvrecorder_contextmenu_settings">Einstellungen</string>
