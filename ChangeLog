@@ -1,3 +1,28 @@
+2011-09-13  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java: New.
+	  This activity is now launched at application start. It uses the menu.xml
+	  UI declaration which displays buttons for each user interface.
+
+	* clients/android/res/layout/menu.xml: UI definition for the MainMenu.
+	  There is a button displayed for each activity that should be visible to
+	  the user.
+
+	* clients/android/AndroidManifest.xml: Registered MainMenu activity as
+	  startup activity.
+
+	* clients/android/res/values/strings.xml: New strings for the MainMenu.
+
+	* clients/android/res/drawable/main_menu_button.png: Background image for
+	  buttons in the MainMenu.
+
+	* clients/android/res/drawable/settings_button.png,
+	  clients/android/res/drawable/tvguide_button.png,
+	  clients/android/res/drawable/tvrecorder_button.png: Button images for
+	  TvRecorder, TvGuide and TvRecorderSettings activities.
+
+	  TODO: Create nice button images! The current ones are really ugly!
+
 2011-09-08  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/receivers/TvGuideUpdateReceiver.java:
