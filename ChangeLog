@@ -1,5 +1,17 @@
 2011-09-13  Ingo Weinzierl <ingo@intevation.de>
 
+	* clients/android/res/drawable/main_menu_button_state.xml: New. An Android
+	  selector that is used to give users an optical feedback while pressing
+	  buttons in the main menu.
+
+	* clients/android/res/layout/menu.xml: Make use of the
+	  main_menu_button_state selector.
+
+	* clients/android/res/drawable/main_menu_button_pressed.png: New. This
+	  image is displayed if the user presses a button in the main menu.
+
+2011-09-13  Ingo Weinzierl <ingo@intevation.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java: New.
 	  This activity is now launched at application start. It uses the menu.xml
 	  UI declaration which displays buttons for each user interface.

@@ -17,7 +17,7 @@
         android:layout_marginRight="50dp"
         android:orientation="vertical"
         android:clickable="true"
-        android:background="@drawable/main_menu_button">
+        android:background="@drawable/main_menu_button_state">
 
         <ImageView
             android:src="@drawable/tvrecorder_button"
@@ -49,7 +49,7 @@
         android:layout_marginRight="50dp"
         android:orientation="vertical"
         android:clickable="true"
-        android:background="@drawable/main_menu_button">
+        android:background="@drawable/main_menu_button_state">
 
         <ImageView
             android:src="@drawable/tvguide_button"
@@ -81,7 +81,7 @@
         android:layout_marginRight="50dp"
         android:orientation="vertical"
         android:clickable="true"
-        android:background="@drawable/main_menu_button">
+        android:background="@drawable/main_menu_button_state">
 
         <ImageView
             android:src="@drawable/settings_button"
