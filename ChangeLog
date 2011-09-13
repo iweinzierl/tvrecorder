@@ -1,5 +1,15 @@
 2011-09-13  Ingo Weinzierl <ingo@intevation.de>
 
+	* clients/android/res/layout/menu.xml: Replaced selfmade button icons and
+	  adjusted the style a bit.
+
+	* clients/android/res/drawable/settings_button.png,
+	  clients/android/res/drawable/tvguide_button.png,
+	  clients/android/res/drawable/tvrecorder_button.png: Replaced buttons
+	  icons with nice ones.
+
+2011-09-13  Ingo Weinzierl <ingo@intevation.de>
+
 	* clients/android/res/drawable/main_menu_button_state.xml: New. An Android
 	  selector that is used to give users an optical feedback while pressing
 	  buttons in the main menu.
