@@ -1,4 +1,9 @@
-2011-09-14  Ingo Weinzierl <ingo@intevation.de>
+2011-09-14  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/res/layout/tvrecorder.xml: Improved the layout - added
+	  some margins for a better usage of space.
+
+2011-09-14  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/drawable-land/main_menu_button.png,
 	  clients/android/res/drawable-land/main_menu_button_pressed.png,
@@ -12,7 +17,7 @@
 	  clients/android/res/layout-land/tvrecorder.xml: New. Layout definitions
 	  for the main menu and the tvrecorder activities in landscape mode.
 
-2011-09-13  Ingo Weinzierl <ingo@intevation.de>
+2011-09-13  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/layout/menu.xml: Replaced selfmade button icons and
 	  adjusted the style a bit.
@@ -22,7 +27,7 @@
 	  clients/android/res/drawable/tvrecorder_button.png: Replaced buttons
 	  icons with nice ones.
 
-2011-09-13  Ingo Weinzierl <ingo@intevation.de>
+2011-09-13  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/drawable/main_menu_button_state.xml: New. An Android
 	  selector that is used to give users an optical feedback while pressing
@@ -34,7 +39,7 @@
 	* clients/android/res/drawable/main_menu_button_pressed.png: New. This
 	  image is displayed if the user presses a button in the main menu.
 
-2011-09-13  Ingo Weinzierl <ingo@intevation.de>
+2011-09-13  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java: New.
 	  This activity is now launched at application start. It uses the menu.xml
@@ -59,7 +64,7 @@
 
 	  TODO: Create nice button images! The current ones are really ugly!
 
-2011-09-08  Ingo Weinzierl <ingo@intevation.de>
+2011-09-08  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/receivers/TvGuideUpdateReceiver.java:
 	  New. A BroadcastReceiver that is used to update the database (TvShows)
@@ -93,7 +98,7 @@
 	* clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java:
 	  Added a new table that stores the last update times for each table.
 
-2011-09-05  Ingo Weinzierl <ingo@intevation.de>
+2011-09-05  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/services/TvGuideUpdateService.java:
 	  New. This service is update to update the TvGuide stored in the database
@@ -116,7 +121,7 @@
 	  Added a handler that listens to tv guide update relevant config changes.
 	  If the auto-update option is set, the TvGuideUpdateService is started.
 
-2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+2011-09-01  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
 	  New function that returns a JSON representation of a record Job.
@@ -132,7 +137,7 @@
 	  Adapted the code to start a record Job - the HTTP communication now uses
 	  the JSON representation instead of serialized Java objects.
 
-2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+2011-09-01  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
 	  Added a flag to toJSON() that forces to export old tv shows as well to
@@ -143,7 +148,7 @@
 	  This service only provides tv shows that take place in the future (this
 	  should minimize the HTTP traffic a bit).
 
-2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+2011-09-01  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/xml/preferences.xml: New. A layout description for
 	  the config options required/supported by TvRecorder Android client.
@@ -164,7 +169,7 @@
 	  defined in preferences.xml instead (which is the recommended way
 	  anyway).
 
-2011-09-01  Ingo Weinzierl <ingo@intevation.de>
+2011-09-01  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java:
 	  Removed code to initialize the environment. This seems to be the wrong
@@ -442,13 +447,13 @@
 
 	* .hgignore: New. A ignore file for mercurial.
 
-2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/contrib/update.sh: New. A shell script to start the
 	  RssTvShowManager as standalone application. Currently used for
 	  development reason.
 
-2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdateEvent.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/tvguide/TvShowUpdateListener.java:
@@ -473,7 +478,7 @@
 	  feeds :-/ Otherwise - without sleeping - all channels will have the same
 	  tv shows...
 
-2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/ChannelWithTvGuide.java:
 	  New. This special channel class provides information about the tv shows
@@ -483,7 +488,7 @@
 	  New. This model class represents a tv show with title, description and a
 	  start date at minimum.
 
-2011-05-23  Ingo Weinzierl <ingo@intevation.de>
+2011-05-23  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/rss/RssFeed.java,
 	  clients/android/src/de/inselhome/tvrecorder/rss/RssItem.java,
@@ -499,7 +504,7 @@
 	  server/src/main/java/de/inselhome/tvrecorder/server/rss/RssXMLUtils.java:
 	  New. Moved from android client.
 
-2011-05-20  Ingo Weinzierl <ingo@intevation.de>
+2011-05-20  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/model/ChannelUpdateJob.java:
 	  New. This class contains a channel and an URL that is used to update the
@@ -511,7 +516,7 @@
 	* clients/android/src/de/inselhome/tvrecorder/client/model/TvShow.java:
 	  New. A tv show with title, description, start and end date.
 
-2011-05-19  Ingo Weinzierl <ingo@intevation.de>
+2011-05-19  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/rss/RssReader.java,
 	  clients/android/src/de/inselhome/tvrecorder/rss/RssFeed.java,
@@ -519,13 +524,13 @@
 	  clients/android/src/de/inselhome/tvrecorder/rss/RssXMLUtils.java: New. A
 	  rss reader and required model classes.
 
-2011-05-19  Ingo Weinzierl <ingo@intevation.de>
+2011-05-19  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/XMLUtils.java:
 	  New. A helper class that support some basic functions to work with XML
 	  files.
 
-2011-03-08  Ingo Weinzierl <ingo@intevation.de>
+2011-03-08  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/conf/config.xml: Added an example block that shows the usage of
 	  HTTP BasicAuth.
@@ -540,7 +545,7 @@
 	  NOTE: The only authentication type that is currently supported is the
 	  HTTP BasicAuth!
 
-2011-03-07  Ingo Weinzierl <ingo@intevation.de>
+2011-03-07  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/values/arrays.xml: Added two further config options
 	  for HTTP BasicAuth.
@@ -556,20 +561,20 @@
 	  ClientResource is needed, because that resource is prepared for
 	  authentication (if configured).
 
-2011-03-24  Ingo Weinzierl <ingo@intevation.de>
+2011-03-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/pom.xml,
 	  server/pom.xml: Fixed broken Restlet dependency - the repository structure
 	  of the Restlet maven repository has changed.
 
-2011-01-13  Ingo Weinzierl <ingo@intevation.de>
+2011-01-13  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* NEWS: A NEWS file that contains the major changes for each release.
 
 	=== RELEASE 0.1 ====
 
 
-2011-01-13  Ingo Weinzierl <ingo@intevation.de>
+2011-01-13  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java:
 	  New. An activity that allows the user to edit the settings of the
@@ -622,7 +627,7 @@
 	* clients/android/res/values/strings.xml: The strings that occur in the user
 	  interface.
 
-2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+2011-01-08  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
 	  Added a new function that checks, if two time ranges collide.
@@ -644,7 +649,7 @@
 	  jobs: the job retrieved by the client may not collide with an existing
 	  job.
 
-2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+2011-01-08  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
 	  The incoming job request is validated before an at job is created. The job
@@ -655,7 +660,7 @@
 	  NOTE: we should further check if there are no collisions with other jobs
 	  that are already started/created.
 
-2011-01-08  Ingo Weinzierl <ingo@intevation.de>
+2011-01-08  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/utils/DateUtils.java:
 	  Removed. The client uses the DateUtils class from common package now.
@@ -667,13 +672,13 @@
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
 	  Added new date format strings used by the client.
 
-2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+2011-01-07  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/ChannelsServerResource.java:
 	  This resource returns the real channel list from context now - the dummy
 	  values are removed.
 
-2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+2011-01-07  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/rest/TvRecorderServer.java:
@@ -681,13 +686,13 @@
 	  the context of the RestApp now. They are retrievable via the constant
 	  TvRecorderServer.CHANNELS_KEY.
 
-2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+2011-01-07  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/DVBSChannelsParser.java:
 	  Bugfix: avoided a NullPointerException if no lines are returned from
 	  FileUtils while parsing the channels configuration file.
 
-2011-01-07  Ingo Weinzierl <ingo@intevation.de>
+2011-01-07  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/XMLUtils.java:
 	  Introduced a helper class to work with XML documents.
@@ -710,7 +715,7 @@
 	  the server should listen on, the path to the sqlite database file and the
 	  path to the channels configuration file.
 
-2011-01-06  Ingo Weinzierl <ingo@intevation.de>
+2011-01-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:
 	  Added a new function that retrieves the lines of a file as String array.
@@ -719,7 +724,7 @@
 	  This class represents a parser that is used to extract the channels of a
 	  MPlayer DVB-S configuration file.
 
-2011-01-06  Ingo Weinzierl <ingo@intevation.de>
+2011-01-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java: 
 	  After a job has arrived here, a new At job is created. This job executes a
@@ -751,7 +756,7 @@
 	* server/src/main/java/de/inselhome/tvrecorder/server/utils/FileUtils.java:
 	  A helper class for working with files.
 
-2011-01-05  Ingo Weinzierl <ingo@intevation.de>
+2011-01-05  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
 	  A helper class that should make it easier to work with Date objects.
@@ -802,7 +807,7 @@
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
 	  Removed a debug line that has been commited by accident.
 
-2010-12-25  Ingo Weinzierl <ingo@intevation.de>
+2010-12-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java: The
 	  job stores its start and end time as Date objects now, because there have
