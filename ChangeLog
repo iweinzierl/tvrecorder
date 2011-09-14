@@ -1,3 +1,17 @@
+2011-09-14  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/res/drawable-land/main_menu_button.png,
+	  clients/android/res/drawable-land/main_menu_button_pressed.png,
+	  clients/android/res/drawable-land/main_menu_button_state.xml,
+	  clients/android/res/drawable-land/settings_button.png,
+	  clients/android/res/drawable-land/tvguide_button.png,
+	  clients/android/res/drawable-land/tvrecorder_button.png: Copied from
+	  res/drawable.
+
+	* clients/android/res/layout-land/menu.xml,
+	  clients/android/res/layout-land/tvrecorder.xml: New. Layout definitions
+	  for the main menu and the tvrecorder activities in landscape mode.
+
 2011-09-13  Ingo Weinzierl <ingo@intevation.de>
 
 	* clients/android/res/layout/menu.xml: Replaced selfmade button icons and

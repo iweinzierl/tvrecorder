@@ -1,0 +1,134 @@
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+
+    <TableRow
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:textSize="20sp"
+            android:text="@string/addjob_recorded_start" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:textSize="20sp"
+                android:gravity="left|center_vertical"/>
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="left|center_vertical"/>
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:textSize="20sp"
+            android:text="@string/addjob_recorded_end" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:textSize="20sp"
+                android:gravity="left|center_vertical"/>
+
+            <TextView
+                android:id="@+id/end_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="left|center_vertical"/>
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:textSize="20sp"
+            android:text="@string/addjob_recorded_channel" />
+
+        <Spinner
+            android:id="@+id/addjob_channel_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="55px"
+            android:layout_weight="3"
+            android:prompt="@string/addjob_recorded_channel"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:textSize="20sp"
+            android:text="@string/addjob_recorded_name" />
+
+        <EditText
+            android:id="@+id/addjob_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="left|center_vertical"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addjob_start_record" />
+
+    </TableRow>
+
+</TableLayout>
