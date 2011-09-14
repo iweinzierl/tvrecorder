@@ -1,5 +1,15 @@
 2011-09-14  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/icons/icon.xcf: New. The gimp template of the icon that
+	  is used as launcher icon.
+
+	* clients/android/res/drawable-hdpi/icon.png,
+	  clients/android/res/drawable-ldpi/icon.png,
+	  clients/android/res/drawable-mdpi/icon.png: New. Icons in different
+	  sizes for the launcher.
+
+2011-09-14  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/layout/tvrecorder.xml: Improved the layout - added
 	  some margins for a better usage of space.
 
