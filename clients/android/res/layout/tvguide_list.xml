@@ -6,25 +6,38 @@
     android:padding="6dip">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dip"
-        android:layout_weight="1"
-        android:layout_height="35px">
+        android:id="@+id/show"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/timetext"
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:gravity="center_vertical"/>
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/titletext"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
             android:layout_weight="1"
-            android:singleLine="true"
-            android:ellipsize="marquee"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/timetext"
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/titletext"
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:ellipsize="marquee"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

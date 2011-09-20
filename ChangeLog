@@ -1,3 +1,26 @@
+2011-09-20  Ingo Weinzierl <ingo@intevation.de>
+
+	* clients/android/res/layout/tvguide_list.xml: Added a column to select /
+	  unselect a TvShow by using a checkbox.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java:
+	  Save a boolean value for each TvShow provided by the adapter. Selected
+	  TvShows might be received using the getSelectedTvShows() method.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  The TvGuide no longer supports a context menu by long press on a
+	  specific TvShow. The context menu has been replaced by an
+	  OnClickListener that starts the TvShowDetail Activity for showing
+	  TvShows details and a further option menu item that triggers a process
+	  to record all selected TvShows.
+
+	  NOTE: Currently, the process to record the selected TvShows is not
+	  implemented as well as the server doesn't support recording more than a
+	  single job at once.
+
+	* clients/android/res/values/strings.xml: Added a button string for
+	  recording selected TvShows.
+
 2011-09-14  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/icons/icon.xcf: New. The gimp template of the icon that
