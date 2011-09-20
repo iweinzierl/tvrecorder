@@ -17,17 +17,26 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvguide;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
 import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail;
 
 
 /**
@@ -35,7 +44,8 @@ import de.inselhome.tvrecorder.client.R;
  */
 public class TvShowsAdapter extends ArrayAdapter<TvShow>
 {
-    protected TvShow[] shows;
+    protected TvShow[]  shows;
+    protected boolean[] selection;
 
 
     public TvShowsAdapter(Context context, int resourceId) {
@@ -45,7 +55,34 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
 
     public TvShowsAdapter(Context context, int resourceId, TvShow[] shows) {
         super(context, resourceId, shows);
-        this.shows = shows;
+        this.shows     = shows;
+        this.selection = new boolean[shows.length];
+
+        Arrays.fill(selection, 0, selection.length-1, false);
+    }
+
+
+    public boolean[] getSelection() {
+        return selection;
+    }
+
+    public void setSelection(int pos, boolean selected) {
+        if (pos >= 0 && pos < selection.length) {
+            selection[pos] = selected;
+        }
+    }
+
+
+    public List<TvShow> getSelectedTvShows() {
+        List<TvShow> selected = new ArrayList<TvShow>();
+
+        for (int i = 0, len = selection.length; i < len; i++) {
+            if (selection[i]) {
+                selected.add(shows[i]);
+            }
+        }
+
+        return selected;
     }
 
 
@@ -60,11 +97,24 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
             v = vi.inflate(R.layout.tvguide_list, null);
         }
 
-        TvShow o = shows[pos];
+        final TvShow o     = shows[pos];
+        final int position = pos;
 
         if (o != null) {
-            TextView tt = (TextView) v.findViewById(R.id.timetext);
-            TextView bt = (TextView) v.findViewById(R.id.titletext);
+            CheckBox     cb = (CheckBox) v.findViewById(R.id.checkbox);
+            TextView     tt = (TextView) v.findViewById(R.id.timetext);
+            TextView     bt = (TextView) v.findViewById(R.id.titletext);
+            LinearLayout ll = (LinearLayout) v.findViewById(R.id.show);
+
+            if (cb != null) {
+                cb.setChecked(selection[pos]);
+                cb.setOnClickListener(new OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox tmp = (CheckBox) v;
+                        setSelection(position, tmp.isChecked());
+                    }
+                });
+            }
 
             if (tt != null) {
                 tt.setText(
@@ -74,9 +124,25 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
             if (bt != null) {
                 bt.setText(o.getTitle());
             }
+
+            if (ll != null) {
+                ll.setOnClickListener(new OnClickListener() {
+                    public void onClick(View v) {
+                        showDetails(v.getContext(), o);
+                    }
+                });
+            }
         }
 
         return v;
+    }
+
+    protected void showDetails(Context context, TvShow show) {
+        Intent intent = new Intent(context, TvShowDetail.class);
+        intent.putExtra(TvShowDetail.SHOW_TITLE, show.getTitle());
+        intent.putExtra(TvShowDetail.SHOW_DESCRIPTION, show.getDescription());
+        intent.putExtra(TvShowDetail.SHOW_STARTDATE, show.getStart());
+        context.startActivity(intent);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

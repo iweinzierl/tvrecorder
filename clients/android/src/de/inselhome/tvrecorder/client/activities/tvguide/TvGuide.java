@@ -25,7 +25,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,7 +55,6 @@ import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.R;
-import de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail;
 
 
 /**
@@ -106,6 +104,7 @@ implements   TvGuideUpdateListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("TvR [TvGuide]", " - onCreateOptionsMenu()");
         menu.add(R.string.tvguide_update_list);
+        menu.add(R.string.tvguide_record_shows);
         return true;
     }
 
@@ -119,10 +118,15 @@ implements   TvGuideUpdateListener {
         Resources res = getResources();
 
         String update = res.getString(R.string.tvguide_update_list);
+        String record = res.getString(R.string.tvguide_record_shows);
 
         if (title.equals(update)) {
             updateTvGuide(true);
             return true;
+        }
+        else if (title.equals(record)) {
+            TvShowsAdapter adapter = (TvShowsAdapter) tvShows.getAdapter();
+            recordShows(adapter.getSelectedTvShows());
         }
 
         return super.onOptionsItemSelected(item);
@@ -149,32 +153,6 @@ implements   TvGuideUpdateListener {
         getMenuInflater().inflate(R.menu.tvguide_list_context, menu);
 
         menu.setHeaderTitle(show.getTitle());
-    }
-
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-
-        TvShow show = (TvShow) tvShows.getAdapter().getItem(info.position);
-
-        if (show == null) {
-            Log.d("TvR [TvGuide]", "Context menu selected no item.");
-            return super.onContextItemSelected(item);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.details: {
-                showDetails(show);
-                break;
-            }
-            case R.id.record: {
-                recordShow(show);
-                break;
-            }
-        }
-
-        return super.onContextItemSelected(item);
     }
 
 
@@ -308,59 +286,16 @@ implements   TvGuideUpdateListener {
     }
 
 
-    protected void showDetails(TvShow show) {
-        Intent intent = new Intent(this, TvShowDetail.class);
-        intent.putExtra(TvShowDetail.SHOW_TITLE, show.getTitle());
-        intent.putExtra(TvShowDetail.SHOW_DESCRIPTION, show.getDescription());
-        intent.putExtra(TvShowDetail.SHOW_STARTDATE, show.getStart());
-        startActivity(intent);
-    }
-
-
-    protected void recordShow(TvShow show) {
-        ClientResource cr = Config.getClientResource(this, RecordResource.PATH);
-
-        ChannelWithTvGuide channel =
-            (ChannelWithTvGuide) channelList.getSelectedItem();
-
-        String name = show.getTitle().replace(" ", "_");
-        Job    job  = new Job(show.getStart(), show.getEnd(), channel, name);
-        String json = JSONUtils.toJSON(job).toString();
-
-        Representation res = cr.post(new StringRepresentation(json));
-
-        String result = null;
-        try {
-            result = res.getText();
-        }
-        catch (IOException ioe) {
+    protected void recordShows(List<TvShow> shows) {
+        if (shows == null || shows.isEmpty()) {
+            return;
         }
 
-        Resources r = getResources();
-        Toast popup = null;
-
-        if (result != null && result.equals("SUCCESS")) {
-            String msg =  r.getString(R.string.addjob_recorded_message) +"\n";
-            msg += r.getString(R.string.addjob_recorded_start) + " ";
-            msg += DateUtils.format(
-                show.getStart(), DateUtils.DATETIME_FORMAT);
-            msg += "\n" + r.getString(R.string.addjob_recorded_end) + " ";
-            msg += DateUtils.format(
-                show.getEnd(), DateUtils.DATETIME_FORMAT);
-            msg += "\n" + r.getString(R.string.addjob_recorded_channel) + " ";
-            msg += channel.getDescription();
-            msg += "\n" + r.getString(R.string.addjob_recorded_name) + " ";
-            msg += name;
-
-            popup = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-        }
-        else {
-            String msg =
-                r.getString(R.string.addjob_recorded_error_title)
-                + " NOT SUCCESSFUL!";
-
-            popup = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-        }
+        Toast popup = Toast.makeText(
+            this,
+            "Record " + shows.size() + " TvShows.\n" +
+            "Currently not implemented.",
+            Toast.LENGTH_SHORT);
 
         popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         popup.show();
