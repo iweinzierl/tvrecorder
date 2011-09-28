@@ -1,5 +1,9 @@
 2011-09-28  Ingo Weinzierl <ingo@intevation.de>
 
+	* .hgignore: Ignore .pyc files.
+
+2011-09-28  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/contrib/epgloader/__init__.py,
 	  server/contrib/epgloader/epgdownload.py: A python tool for reading EPG
 	  data from different sources (currently, only OTR is supported) and
