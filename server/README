@@ -11,6 +11,8 @@ Library Dependencie:
   * Log4J 1.2.14
   * tvrecorder-common 0.1 SNAPSHOT
   * Xerial 3.7.2
+  * Python2.6   (used for the contrib/epgdownloader tool only)
+  * Python-lxml (used for the contrib/epgdownloader tool only)
 
 Note: the dependencies can be downloaded using the Maven build tool that is the
 prefered way to build this package.
