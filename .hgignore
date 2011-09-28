@@ -7,3 +7,4 @@ common/target/*
 clients/android/bin/*
 *.swp
 *.orig
+*.pyc
