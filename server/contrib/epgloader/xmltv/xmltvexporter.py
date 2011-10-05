@@ -70,8 +70,16 @@ class XmltvExporter(Exporter):
                 desc = etree.Element('desc')
                 desc.text = p.description.decode('utf-8')
 
+                category = etree.Element('category')
+                category.text = p.category.decode('utf-8')
+
+                length = etree.Element('length')
+                length.text = str(p.length)
+
                 programme.append(title)
                 programme.append(desc)
+                programme.append(category)
+                programme.append(length)
 
                 tv.append(programme)
 
