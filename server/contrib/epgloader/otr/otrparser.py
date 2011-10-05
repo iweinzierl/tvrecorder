@@ -43,10 +43,12 @@ class OtrParser(EpgParser):
     def parseItem(self, item):
         channel = item.findtext('sender')
 
-        title = item.findtext('titel')
-        desc  = item.findtext('text')
-        start = float(item.findtext('beginn'))
-        end   = float(item.findtext('ende'))
+        title    = item.findtext('titel')
+        desc     = item.findtext('text')
+        start    = float(item.findtext('beginn'))
+        end      = float(item.findtext('ende'))
+        category = item.findtext('typ')
+        length   = int(item.findtext('dauer'))
 
         if type(title) is unicode:
             title = title.encode('utf-8')
@@ -54,14 +56,16 @@ class OtrParser(EpgParser):
         if type(desc) is unicode:
             desc = desc.encode('utf-8')
 
-        if "Die Simpsons" is title:
-            print dt.fromtimestamp(start)
+        if type(category) is unicode:
+            category = category.encode('utf-8')
 
         program = Program(
             title,
             desc,
             dt.fromtimestamp(start),
-            dt.fromtimestamp(end))
+            dt.fromtimestamp(end),
+            category,
+            length)
 
         self.exporter.add_program(channel, program)
 

@@ -1,5 +1,16 @@
 2011-10-05  Ingo Weinzierl <ingo@intevation.de>
 
+	* server/contrib/epgloader/otr/otrparser.py: Parse category and length of
+	  a program.
+
+	* server/contrib/epgloader/model.py: Added constructor arguments for
+	  category and length.
+
+	* server/contrib/epgloader/xmltv/xmltvexporter.py: Write out category and
+	  length of programs.
+
+2011-10-05  Ingo Weinzierl <ingo@intevation.de>
+
 	* server/contrib/epgloader/epgdownload.py: Added command line options for
 	  start and end date.
 

@@ -17,11 +17,13 @@
 
 class Program:
 
-    def __init__(self, title, description, start, end):
+    def __init__(self, title, description, start, end, category='', length=-1):
         self.title       = title
         self.description = description
         self.start       = start
         self.end         = end
+        self.category    = category
+        self.length      = length
 
     def __str__(self):
         return "|%s,%s,%s,%s|" % (
