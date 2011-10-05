@@ -34,8 +34,8 @@ __DST_FORMAT__  = 'xmltv'
 def main():
     (options, args) = parseOpts()
 
-    print "Fetch EPG data from '%s'." % get_url()
-    raw     = urllib2.urlopen(get_url(), 'utf-8')
+    print "Fetch EPG data from '%s'." % get_url(options)
+    raw     = urllib2.urlopen(get_url(options), 'utf-8')
     content = parse(raw)
 
     exporter = XmltvExporter(options.output)
@@ -50,38 +50,45 @@ def parseOpts():
     parser.add_option(
         "-o", "--output",
         dest="output", help="Destination xmltv file path")
+    parser.add_option(
+        "-s", "--start",
+        dest="start", help="Start time for fetching EPG data")
+    parser.add_option(
+        "-e", "--end",
+        dest="end", help="Stop time for fetching EPG data")
+
     return parser.parse_args()
 
 
-def get_url():
+def get_url(opts):
     static_str = 'aktion=epg_export&btn_ok=OK'
     return "%s?%s&format=%s&stations=%s&from=%s&to=%s" % (
-        get_base_url(),
+        get_base_url(opts),
         static_str,
-        get_format(),
-        get_stations(),
-        get_start_date(),
-        get_stop_date())
+        get_format(opts),
+        get_stations(opts),
+        get_start_date(opts),
+        get_stop_date(opts))
 
 
-def get_base_url():
+def get_base_url(opts):
     return __TVGUIDE_URL__
 
 
-def get_format():
+def get_format(opts):
     return __SRC_FORMAT__
 
 
-def get_stations():
+def get_stations(opts):
     return __STATIONS__
 
 
-def get_start_date():
-    return '27.09.2011'
+def get_start_date(opts):
+    return opts.start
 
 
-def get_stop_date():
-    return '29.09.2011'
+def get_stop_date(opts):
+    return opts.end
 
 
 if __name__ == "__main__":
