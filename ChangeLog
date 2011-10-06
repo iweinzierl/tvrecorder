@@ -1,5 +1,15 @@
 2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JobBuilder.java:
+	  New. This builder helps creating new record Jobs. There are methods to
+	  add Jobs and to write out the collected Jobs to JSONArray.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Make use of the JobBuilder to create the required JSONArray for
+	  recording selected jobs.
+
+2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/conf/log4j.properties: Modified the layout pattern: write the
 	  classname to log only - do not write the fully qualified name (with
 	  package names).
