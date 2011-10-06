@@ -1,5 +1,14 @@
 2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* server/conf/log4j.properties: Modified the layout pattern: write the
+	  classname to log only - do not write the fully qualified name (with
+	  package names).
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Added some more debug output in the collision detection for new jobs.
+
+2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
 	  Improvded this resource to be able to record a list of jobs. It will now
 	  accept a JSONObject representing a single Job or a JSONArray which
