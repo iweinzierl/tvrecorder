@@ -46,12 +46,11 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 
-import de.inselhome.tvrecorder.common.objects.Job;
+import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
-import de.inselhome.tvrecorder.common.utils.DateUtils;
-import de.inselhome.tvrecorder.common.utils.JSONUtils;
+import de.inselhome.tvrecorder.common.utils.JobBuilder;
 
 import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.R;
@@ -291,11 +290,49 @@ implements   TvGuideUpdateListener {
             return;
         }
 
-        Toast popup = Toast.makeText(
-            this,
-            "Record " + shows.size() + " TvShows.\n" +
-            "Currently not implemented.",
-            Toast.LENGTH_SHORT);
+        Channel    channel = (Channel) channelList.getSelectedItem();
+        JobBuilder builder = new JobBuilder();
+
+        int success = 0;
+
+        for (TvShow show: shows) {
+            if(builder.addJob(channel, show)) {
+                success++;
+            };
+        }
+
+        String json = builder.toJSON().toString();
+
+        ClientResource c = Config.getClientResource(this, RecordResource.PATH);
+
+        Representation result = c.post(new StringRepresentation(json));
+
+        String message = null;
+        Toast  popup   = null;
+
+        try {
+            message = result.getText();
+        }
+        catch (IOException ioe) {
+            popup = Toast.makeText(
+                this,
+                ioe.getMessage(),
+                Toast.LENGTH_SHORT);
+        }
+
+        if (popup == null && message != null && message.equals("SUCCESS")) {
+            popup = Toast.makeText(
+                this,
+                "Successfully added " + success + " / " +
+                shows.size() + " TvShows.",
+                Toast.LENGTH_SHORT);
+        }
+        else if (popup == null) {
+            popup = Toast.makeText(
+                this,
+                "Adding jobs was not successful!",
+                Toast.LENGTH_SHORT);
+        }
 
         popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         popup.show();
