@@ -1,4 +1,11 @@
-2011-10-06  Ingo Weinzierl <ingo@intevation.de>
+2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Improvded this resource to be able to record a list of jobs. It will now
+	  accept a JSONObject representing a single Job or a JSONArray which
+	  represents a list of JSONObject representing single jobs.
+
+2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java: A
 	  TvShow can now have a category and a length (which is not specified by its
@@ -11,7 +18,7 @@
 	  Take category and length of TvShows into account while reading/writing
 	  TvShows from/to JSON representation.
 
-2011-10-05  Ingo Weinzierl <ingo@intevation.de>
+2011-10-05  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/contrib/epgloader/otr/otrparser.py: Parse category and length of
 	  a program.
@@ -22,16 +29,16 @@
 	* server/contrib/epgloader/xmltv/xmltvexporter.py: Write out category and
 	  length of programs.
 
-2011-10-05  Ingo Weinzierl <ingo@intevation.de>
+2011-10-05  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/contrib/epgloader/epgdownload.py: Added command line options for
 	  start and end date.
 
-2011-09-28  Ingo Weinzierl <ingo@intevation.de>
+2011-09-28  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* .hgignore: Ignore .pyc files.
 
-2011-09-28  Ingo Weinzierl <ingo@intevation.de>
+2011-09-28  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/contrib/epgloader/__init__.py,
 	  server/contrib/epgloader/epgdownload.py: A python tool for reading EPG
@@ -61,7 +68,7 @@
 
 	* server/README: Added Python2.6 and Python-lxml dependencies.
 
-2011-09-20  Ingo Weinzierl <ingo@intevation.de>
+2011-09-20  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/layout/tvguide_list.xml: Added a column to select /
 	  unselect a TvShow by using a checkbox.
