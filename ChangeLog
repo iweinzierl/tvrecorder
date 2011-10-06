@@ -1,3 +1,16 @@
+2011-10-06  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java: A
+	  TvShow can now have a category and a length (which is not specified by its
+	  start and end time).
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/tvguide/xmltv/XmlTvShowUpdater.java:
+	  Read category and length from XmlTv file while parsing TvShows.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
+	  Take category and length of TvShows into account while reading/writing
+	  TvShows from/to JSON representation.
+
 2011-10-05  Ingo Weinzierl <ingo@intevation.de>
 
 	* server/contrib/epgloader/otr/otrparser.py: Parse category and length of

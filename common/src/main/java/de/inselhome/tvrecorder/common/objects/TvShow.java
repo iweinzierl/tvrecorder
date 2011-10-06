@@ -31,9 +31,11 @@ public class TvShow implements Serializable, Comparable {
 
     protected String title;
     protected String description;
+    protected String category;
     protected String imageUrl;
     protected Date   start;
     protected Date   end;
+    protected int    length;
 
 
     public TvShow() {
@@ -46,10 +48,24 @@ public class TvShow implements Serializable, Comparable {
 
 
     public TvShow(String title, String description, Date start, Date end) {
+        this(title, description, start, end, null, -1);
+    }
+
+
+    public TvShow(
+        String title,
+        String description,
+        Date   start,
+        Date   end,
+        String category,
+        int    length
+    ) {
         this.title       = title;
         this.description = description;
         this.start       = start;
         this.end         = end;
+        this.category    = category;
+        this.length      = length;
     }
 
 
@@ -75,6 +91,16 @@ public class TvShow implements Serializable, Comparable {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+
+    public int getLength() {
+        return length;
     }
 
 
