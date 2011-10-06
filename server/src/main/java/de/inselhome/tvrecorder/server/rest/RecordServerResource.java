@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
@@ -69,14 +70,21 @@ extends      TvRecorderResource
         logger.info("/record - post()");
 
         try {
-            JSONObject json = new JSONObject(job.getText());
+            JSONArray items = readJobItems(job.getText());
+            int    numItems = items != null ? items.length() : 0;
 
-            String name  = json.getString("name");
-            String chan  = json.getString("channel");
-            Date   start = new Date(json.getLong("start"));
-            Date   end   = new Date(json.getLong("end"));
+            logger.debug("Found " + numItems + " items for recording.");
 
-            doRecord(new Job(start, end, new Channel(chan, chan), name));
+            for (int i = 0; i < numItems; i++) {
+                JSONObject json = items.getJSONObject(i);
+
+                String name  = json.getString("name");
+                String chan  = json.getString("channel");
+                Date   start = new Date(json.getLong("start"));
+                Date   end   = new Date(json.getLong("end"));
+
+                doRecord(new Job(start, end, new Channel(chan, chan), name));
+            }
 
             return new StringRepresentation("SUCCESS");
         }
@@ -88,6 +96,39 @@ extends      TvRecorderResource
         }
 
         return new StringRepresentation("ERROR");
+    }
+
+
+    /**
+     * Reads job items from <i>json</i> string. The string might be one of
+     * JSONArray (for multiple job items) or JSONObject (for a single job item).
+     *
+     * @param json A JSON string.
+     *
+     * @return an array of Job items.
+     */
+    protected JSONArray readJobItems(String json) {
+        JSONArray array = new JSONArray();
+
+        try {
+            array = new JSONArray(json);
+            return array;
+        }
+        catch (JSONException je) {
+            logger.debug("String is no JSONArray.");
+        }
+
+        try {
+            array.put(new JSONObject(json));
+            return array;
+        }
+        catch (JSONException je) {
+            logger.debug("String is no JSONObject.");
+        }
+
+        logger.warn("Unable to read Job items from string.");
+
+        return array;
     }
 
 
