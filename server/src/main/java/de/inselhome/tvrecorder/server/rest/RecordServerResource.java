@@ -148,7 +148,7 @@ extends      TvRecorderResource
         }
 
         if (!isJobValid(job)) {
-            String msg = "The job is not valid!";
+            String msg = "The job '" + job.getName() + "' is not valid!";
             logger.error(msg);
 
             throw new IllegalArgumentException(msg);
@@ -229,7 +229,9 @@ extends      TvRecorderResource
         for (Job job: queue) {
             if (!DateUtils.doesTimerangesCollide(
                 job.getStart(), job.getEnd(), start, end)) {
-                logger.warn("Job collides with queued job.");
+                logger.warn("Job collides with queued job: " + job.getName());
+                logger.debug("Queued job starts at: " + job.getStart());
+                logger.debug("Queued job ends   at: " + job.getEnd());
                 return false;
             }
         }
