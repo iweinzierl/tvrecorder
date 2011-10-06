@@ -201,6 +201,10 @@ public class XmlTvShowUpdater implements TvShowUpdater {
             e, "title/text()", XPathConstants.STRING);
         String desc      = (String) XMLUtils.xpath(
             e, "desc/text()",  XPathConstants.STRING);
+        String category  = (String) XMLUtils.xpath(
+            e, "category/text()", XPathConstants.STRING);
+        String lengthStr = (String) XMLUtils.xpath(
+            e, "length/text()", XPathConstants.STRING);
 
         startStr = startStr.length() > dateStr.length()
             ? startStr.substring(0, dateStr.length())
@@ -209,6 +213,14 @@ public class XmlTvShowUpdater implements TvShowUpdater {
         endStr = endStr.length() > dateStr.length()
             ? endStr.substring(0, dateStr.length())
             : endStr;
+
+        int length = -1;
+        try {
+            length = Integer.valueOf(lengthStr);
+        }
+        catch (NumberFormatException nfe) {
+            logger.warn("Could not parse length from string: '"+lengthStr+"'");
+        }
 
         ChannelWithTvGuide channel = channels.get(channelId);
 
@@ -227,7 +239,9 @@ public class XmlTvShowUpdater implements TvShowUpdater {
                 title,
                 desc,
                 dateFormat.parse(startStr),
-                dateFormat.parse(endStr)));
+                dateFormat.parse(endStr),
+                category,
+                length));
         }
         catch (ParseException pe) {
             logger.warn(pe, pe);

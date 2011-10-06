@@ -73,6 +73,10 @@ public class JSONUtils {
             obj.put("description", show.getDescription());
             obj.put("start", show.getStart().getTime());
             obj.put("end", show.getEnd().getTime());
+            obj.put("length", show.getLength());
+
+            String category = show.getCategory();
+            obj.put("category", category != null ? category : "");
         }
         catch (JSONException je) {
             return null;
@@ -134,8 +138,10 @@ public class JSONUtils {
         String desc  = obj.getString("description");
         Date   start = new Date(obj.getLong("start"));
         Date   end   = new Date(obj.getLong("end"));
+        int    len   = obj.getInt("length");
+        String categ = obj.getString("category");
 
-        return new TvShow(title, desc, start, end);
+        return new TvShow(title, desc, start, end, categ, len);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
