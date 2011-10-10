@@ -1,5 +1,31 @@
 2011-10-10  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/layout/tvshowdetail.xml: Display 'category' and
+	  'length' and the start and end time of a TvShow. Furthermore, there is
+	  an ImageView at the left top corner that might be used to display images
+	  for a TvShow. If there is no image specified, we will display
+	  'tvdetail_no_image.png'.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvshow/TvShowDetail.java:
+	  Set 'category' and 'length' information of TvShows.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Added a new formatter string that displays the name of the week day
+	  besides the date.
+
+	* clients/android/res/values/strings.xml: New string used as suffix for
+	  the datetime string in the TvShowDetail activity.
+
+	* clients/android/res/drawable/tvdetail_no_image.png: New image that is
+	  used in the TvShowDetail activity. It is displayed if there is no image
+	  specified for a TvShow.
+
+	* clients/android/res/values/colors.xml: New resource file where colors
+	  should be specified.
+
+2011-10-10  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java,
 	  clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java:
 	  Prepared sqlite database and sqlite helper class to support 'category'

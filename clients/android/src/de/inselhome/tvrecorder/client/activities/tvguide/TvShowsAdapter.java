@@ -141,7 +141,13 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
         Intent intent = new Intent(context, TvShowDetail.class);
         intent.putExtra(TvShowDetail.SHOW_TITLE, show.getTitle());
         intent.putExtra(TvShowDetail.SHOW_DESCRIPTION, show.getDescription());
+        intent.putExtra(TvShowDetail.SHOW_CATEGORY, show.getCategory());
         intent.putExtra(TvShowDetail.SHOW_STARTDATE, show.getStart());
+        intent.putExtra(TvShowDetail.SHOW_ENDDATE, show.getEnd());
+        intent.putExtra(
+            TvShowDetail.SHOW_LENGTH,
+            String.valueOf(show.getLength()));
+
         context.startActivity(intent);
     }
 }
