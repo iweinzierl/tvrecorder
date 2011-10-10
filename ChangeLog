@@ -1,3 +1,10 @@
+2011-10-10  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java:
+	  Prepared sqlite database and sqlite helper class to support 'category'
+	  and 'length' of TvShows.
+
 2011-10-06  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JobBuilder.java:
