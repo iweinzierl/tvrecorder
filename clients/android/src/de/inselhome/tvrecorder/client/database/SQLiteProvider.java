@@ -50,6 +50,8 @@ public class SQLiteProvider extends SQLiteOpenHelper {
     public static final String TVSHOW_TBL_COLUMN_CHANNEL_ID = "channel_id";
     public static final String TVSHOW_TBL_COLUMN_TITLE = "title";
     public static final String TVSHOW_TBL_COLUMN_DESCRIPTION = "desc";
+    public static final String TVSHOW_TBL_COLUMN_CATEGORY = "category";
+    public static final String TVSHOW_TBL_COLUMN_LENGTH = "length";
     public static final String TVSHOW_TBL_COLUMN_IMG_URL = "img_url";
     public static final String TVSHOW_TBL_COLUMN_START = "start";
     public static final String TVSHOW_TBL_COLUMN_END = "end";
@@ -101,6 +103,8 @@ public class SQLiteProvider extends SQLiteOpenHelper {
             + TVSHOW_TBL_COLUMN_CHANNEL_ID  + " INTEGER,"
             + TVSHOW_TBL_COLUMN_TITLE       + " TEXT,"
             + TVSHOW_TBL_COLUMN_DESCRIPTION + " TEXT,"
+            + TVSHOW_TBL_COLUMN_CATEGORY    + " TEXT,"
+            + TVSHOW_TBL_COLUMN_LENGTH      + " INTEGER,"
             + TVSHOW_TBL_COLUMN_IMG_URL     + " TEXT,"
             + TVSHOW_TBL_COLUMN_START       + " INTEGER,"
             + TVSHOW_TBL_COLUMN_END         + " INTEGER,"

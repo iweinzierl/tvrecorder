@@ -118,6 +118,12 @@ public class ChannelSQLiteHelper {
             SQLiteProvider.TVSHOW_TBL_COLUMN_DESCRIPTION,
             show.getDescription());
         values.put(
+            SQLiteProvider.TVSHOW_TBL_COLUMN_CATEGORY,
+            show.getCategory());
+        values.put(
+            SQLiteProvider.TVSHOW_TBL_COLUMN_LENGTH,
+            show.getLength());
+        values.put(
             SQLiteProvider.TVSHOW_TBL_COLUMN_START,
             show.getStart().getTime());
         values.put(
@@ -179,7 +185,9 @@ public class ChannelSQLiteHelper {
                 SQLiteProvider.TVSHOW_TBL_COLUMN_DESCRIPTION,
                 SQLiteProvider.TVSHOW_TBL_COLUMN_START,
                 SQLiteProvider.TVSHOW_TBL_COLUMN_END,
-                SQLiteProvider.TVSHOW_TBL_COLUMN_IMG_URL },
+                SQLiteProvider.TVSHOW_TBL_COLUMN_IMG_URL,
+                SQLiteProvider.TVSHOW_TBL_COLUMN_CATEGORY,
+                SQLiteProvider.TVSHOW_TBL_COLUMN_LENGTH },
             SQLiteProvider.TVSHOW_TBL_COLUMN_CHANNEL_ID + " = ?"
                 + " AND " + SQLiteProvider.TVSHOW_TBL_COLUMN_END
                 + " > " + System.currentTimeMillis(),
@@ -195,7 +203,9 @@ public class ChannelSQLiteHelper {
                 cursor.getString(0),
                 cursor.getString(1),
                 new Date(cursor.getLong(2)),
-                new Date(cursor.getLong(3))));
+                new Date(cursor.getLong(3)),
+                cursor.getString(5),
+                cursor.getInt(6)));
         }
 
         cursor.close();
