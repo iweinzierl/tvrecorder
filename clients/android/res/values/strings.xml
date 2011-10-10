@@ -22,6 +22,7 @@
     <string name="tvguide_context_record">Aufnehmen</string>
 
     <string name="tvshowdetail_title">Tv Show Details</string>
+    <string name="tvshowdetail_datesuffix">Uhr</string>
 
     <string name="keyvalueitem_change">ändern</string>
 

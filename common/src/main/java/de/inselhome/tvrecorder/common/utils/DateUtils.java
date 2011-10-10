@@ -36,6 +36,8 @@ public class DateUtils {
 
     public static final String DATE_FORMAT = "dd.MM.yyyy";
 
+    public static final String DAY_DATE_FORMAT = "E dd.MM.yyyy";
+
     public static final String TIME_FORMAT = "HH:mm";
 
     public static final String XMLTV_FORMAT = "EEE MMM dd HH:mm:ss";
