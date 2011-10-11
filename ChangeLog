@@ -1,3 +1,17 @@
+2011-10-11  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:
+	  Added the option to fetch TvGuide information from database only - which
+	  means to suppress HTTP traffic.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  HTTP traffic is suppressed while fetching TvGuide information when the UI
+	  is created initially. The user still has the option to update the TvGuide
+	  himself by selecting the "update" item in the options menu.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/receivers/TvGuideUpdateReceiver.java:
+	  Adapted the TvGuideDataStore.get() call to allow HTTP traffic.
+
 2011-10-10  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/layout/tvshowdetail.xml: Display 'category' and

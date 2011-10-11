@@ -58,7 +58,7 @@ public class TvGuideUpdateReceiver extends BroadcastReceiver {
 
 
         if (doUpdate(context, netInfo)) {
-            TvGuideDataStore.get(context, true);
+            TvGuideDataStore.get(context, true, true);
         }
         else {
             Log.d(TAG, "No Update necessary/possible.");
