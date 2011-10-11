@@ -1,5 +1,11 @@
 2011-10-12  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Bugfix: Allow HTTP traffic and force synchronization of TvGuide when the
+	  user selects the "update" item in the options menu.
+
+2011-10-12  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:
 	  Add notification when we have fetched new TvGuide information from HTTP
 	  server.
