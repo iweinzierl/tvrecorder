@@ -120,7 +120,7 @@ implements   TvGuideUpdateListener {
         String record = res.getString(R.string.tvguide_record_shows);
 
         if (title.equals(update)) {
-            updateTvGuide(true);
+            updateTvGuide(true, true);
             return true;
         }
         else if (title.equals(record)) {
