@@ -20,6 +20,9 @@
     <string name="tvguide_channel_prompt">Kanal wählen</string>
     <string name="tvguide_context_open">Details</string>
     <string name="tvguide_context_record">Aufnehmen</string>
+    <string name="tvguide_notification_ticker">TvGuide: neue TvShows geladen</string>
+    <string name="tvguide_notification_title">Neue TvShows vom Server geladen</string>
+    <string name="tvguide_notification_text">$SHOWS neue TvShows / $CHANNELS neue Channels</string>
 
     <string name="tvshowdetail_title">Tv Show Details</string>
     <string name="tvshowdetail_datesuffix">Uhr</string>
