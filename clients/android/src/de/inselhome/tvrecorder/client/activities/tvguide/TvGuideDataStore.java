@@ -53,12 +53,21 @@ public class TvGuideDataStore {
 
 
     public static ChannelWithTvGuide[] get(Context context, boolean forceHttp) {
+        return get(context, forceHttp, false);
+    }
+
+
+    public static ChannelWithTvGuide[] get(
+        Context   context,
+        boolean   forceHttp,
+        boolean   allowHttp
+    ) {
         ChannelSQLiteHelper db = new ChannelSQLiteHelper(context);
 
         int updateInterval = Config.getPreferenceAsInteger(
             context, Config.SETTINGS_TVGUIDE_UPDATE_INTERVAL, null);
 
-        if (db.needsUpdate(updateInterval) || forceHttp) {
+        if (allowHttp && (db.needsUpdate(updateInterval) || forceHttp)) {
             Log.d(TAG,"Database needs update from server");
             return getFromServerAndUpdate(context, db);
         }
@@ -70,8 +79,11 @@ public class TvGuideDataStore {
                 return (ChannelWithTvGuide[])
                     tmps.toArray(new ChannelWithTvGuide[tmps.size()]);
             }
-            else {
+            else if (allowHttp) {
                 return getFromServerAndUpdate(context, db);
+            }
+            else {
+                return new ChannelWithTvGuide[0];
             }
         }
     }

@@ -160,10 +160,18 @@ implements   TvGuideUpdateListener {
     }
 
 
+    protected void updateTvGuide(final boolean allowHttp) {
+        updateTvGuide(allowHttp, false);
+    }
+
+
     /**
      * This method triggers the update process of the TvShows.
      */
-    protected void updateTvGuide(final boolean forceHttp) {
+    protected void updateTvGuide(
+        final boolean allowHttp,
+        final boolean forceHttp
+    ) {
         Resources resources = getResources();
 
         progress = ProgressDialog.show(
@@ -174,7 +182,7 @@ implements   TvGuideUpdateListener {
 
         new AsyncTask<Void, Void, ChannelWithTvGuide[]>() {
             protected ChannelWithTvGuide[] doInBackground(Void... v) {
-                return TvGuideDataStore.get(TvGuide.this, forceHttp);
+                return TvGuideDataStore.get(TvGuide.this, forceHttp, allowHttp);
             }
 
             protected void onPostExecute(ChannelWithTvGuide[] channels) {
