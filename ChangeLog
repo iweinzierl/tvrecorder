@@ -1,3 +1,12 @@
+2011-10-12  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:
+	  Add notification when we have fetched new TvGuide information from HTTP
+	  server.
+
+	* clients/android/res/values/strings.xml: Added strings used in the
+	  notification bar.
+
 2011-10-11  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:

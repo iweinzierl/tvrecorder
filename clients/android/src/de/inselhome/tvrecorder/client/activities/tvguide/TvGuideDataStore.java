@@ -20,7 +20,12 @@ package de.inselhome.tvrecorder.client.activities.tvguide;
 import java.io.IOException;
 import java.util.List;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 
 import org.restlet.data.MediaType;
@@ -36,6 +41,7 @@ import de.inselhome.tvrecorder.common.rest.TvGuideResource;
 import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 import de.inselhome.tvrecorder.client.Config;
+import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.database.ChannelSQLiteHelper;
 
 
@@ -114,6 +120,8 @@ public class TvGuideDataStore {
             return null;
         }
 
+        notify(context, cs);
+
         Log.d(TAG, "Received " + cs.length + " channels via http from server.");
         updateDatabase(db, cs);
 
@@ -146,6 +154,44 @@ public class TvGuideDataStore {
         }
 
         return null;
+    }
+
+
+    protected static void notify(Context context, ChannelWithTvGuide[] channels) {
+        NotificationManager mNotificationManager = (NotificationManager)
+            context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Resources r = context.getResources();
+
+        String ticker = r.getString(R.string.tvguide_notification_ticker);
+        String title  = r.getString(R.string.tvguide_notification_title);
+        String text   = r.getString(R.string.tvguide_notification_text);
+
+        text = text.replace("$CHANNELS", String.valueOf(channels.length));
+        text = text.replace("$SHOWS", String.valueOf(numShows(channels)));
+
+        int icon  = R.drawable.icon;
+        long when = System.currentTimeMillis();
+
+        Notification   notification = new Notification(icon, ticker, when);
+        Intent   notificationIntent = new Intent(context, TvGuide.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(
+            context, 0, notificationIntent, 0);
+
+        notification.setLatestEventInfo(context, title, text, contentIntent);
+
+        mNotificationManager.notify(1, notification);
+    }
+
+
+    public static int numShows(ChannelWithTvGuide[] channels) {
+        int num = 0;
+
+        for (ChannelWithTvGuide channel: channels) {
+            num += channel.getSortedListing().size();
+        }
+
+        return num;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
