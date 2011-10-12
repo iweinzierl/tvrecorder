@@ -58,7 +58,9 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
         this.shows     = shows;
         this.selection = new boolean[shows.length];
 
-        Arrays.fill(selection, 0, selection.length-1, false);
+        if (selection.length >= 1) {
+            Arrays.fill(selection, 0, selection.length-1, false);
+        }
     }
 
 

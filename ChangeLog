@@ -1,5 +1,32 @@
 2011-10-12  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvsearch/TvSearch.java:
+	  New. Activity that displays a list with all TvShows and an editable
+	  textfield. The textfield might be used to filter the TvShow list.
+
+	* clients/android/res/layout/menu.xml: Added  a menu button for the TvSearch
+	  activity.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java: Start
+	  TvSearch Activity if its button was pressed.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java:
+	  Made it more robust to support empty TvShow lists.
+
+	* clients/android/res/layout/tvsearch.xml: New. The layout description of
+	  TvSearch.
+
+	* clients/android/res/drawable/search_button.png: New. TvSearch icon for
+	  the main menu.
+
+	* clients/android/AndroidManifest.xml: Registered the new TvSearch
+	  Activity.
+
+	* clients/android/res/values/strings.xml: New strings for the TvSearch
+	  Activity.
+
+2011-10-12  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	=== RELEASE 0.2 ====
 
 	* NEWS: Prepared NEWS for release 0.2
