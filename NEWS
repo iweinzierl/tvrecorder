@@ -1,3 +1,46 @@
+Version 0.2
+===========
+
+    * common
+
+      - New helper class for working with XML files
+      - New helper class for working with JSON strings
+      - New model classes used to support a TvGuide
+      - New builder class for tv job creation
+      - Improved DateUtils helper class
+
+
+    * server
+
+      - !! Modified all REST operations - they will now return/accept JSON strings !!
+      - Added support for HTTP BasicAuth authentication
+      - Added support for reading TvGuide information from RSS feeds
+      - Added support for reading TvGuide information from XmlTv files
+      - Added a python tool that fetches TvGuide information from OTR (online tv
+        recorder) and export the data to XmlTv file
+      - New REST operation to retrieve TvGuide
+      - Improved REST operation for recordings jobs - it now supports recording
+        more than one job at ones
+      - Improved the server configuration (see example config for more information)
+
+
+    * client
+
+      - Added support for HTTP BasicAuth authentication
+      - Added a main menu that displays buttons for each Activity where the user
+        should navigate to
+      - Added a SQLite datastore: currently used by the TvGuide
+      - Added a receiver that refreshes TvGuide information in background
+      - New Activity that displays TvGuide information - users are able to
+        select and record TvShows from TvGuide
+      - New Activity that displays details for a specific TvShow
+      - Removed all layout stuff from Java code; do layout work in resource files
+      - Improved the settings Activity to support settings for the TvGuide
+      - Improved layout of all existing Activities; added layout descriptions
+        for landscape view
+
+
+
 Version 0.1
 ===========
 
