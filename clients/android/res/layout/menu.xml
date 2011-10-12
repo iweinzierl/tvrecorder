@@ -7,100 +7,168 @@
 
     <!-- first row -->
     <LinearLayout
-        android:id="@+id/tvrecorder"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginRight="75dp"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:background="@drawable/main_menu_button_state">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:src="@drawable/tvrecorder_button"
-            android:scaleType="center"
-            android:layout_gravity="center"
+        <!-- first row / first column -->
+        <LinearLayout
+            android:id="@+id/tvrecorder"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/main_menu_tvrecorder_button"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/main_menu_button_state">
+
+            <ImageView
+                android:src="@drawable/tvrecorder_button"
+                android:scaleType="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:text="@string/main_menu_tvrecorder_button"/>
+
+        </LinearLayout>
+
+        <!-- first row / second column -->
+        <LinearLayout
+            android:id="@+id/tvguide"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/main_menu_button_state">
+
+            <ImageView
+                android:src="@drawable/tvguide_button"
+                android:scaleType="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:text="@string/main_menu_tvguide_button"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
     <!-- second row -->
     <LinearLayout
-        android:id="@+id/tvguide"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginRight="75dp"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:background="@drawable/main_menu_button_state">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:src="@drawable/tvguide_button"
-            android:scaleType="center"
-            android:layout_gravity="center"
+        <!-- second row / first column -->
+        <LinearLayout
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/main_menu_tvguide_button"/>
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/main_menu_button_state">
 
-    </LinearLayout>
+            <ImageView
+                android:src="@drawable/search_button"
+                android:scaleType="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"/>
 
-    <!-- third row -->
-    <LinearLayout
-        android:id="@+id/settings"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginRight="75dp"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:background="@drawable/main_menu_button_state">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:text="@string/main_menu_search_button"/>
 
-        <ImageView
-            android:src="@drawable/settings_button"
-            android:scaleType="center"
-            android:layout_gravity="center"
+        </LinearLayout>
+
+        <!-- second row / second column -->
+        <LinearLayout
+            android:id="@+id/settings"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/main_menu_settings_button"/>
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/main_menu_button_state">
+
+            <ImageView
+                android:src="@drawable/settings_button"
+                android:scaleType="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:text="@string/main_menu_settings_button"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
+import de.inselhome.tvrecorder.client.activities.tvsearch.TvSearch;
 
 
 /**
@@ -56,6 +57,14 @@ public class MainMenu extends Activity {
             public void onClick(View view) {
                 startActivity(
                     new Intent(MainMenu.this, TvGuide.class));
+            }
+        });
+
+        View searchBtn = findViewById(R.id.search);
+        searchBtn.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
+                startActivity(
+                    new Intent(MainMenu.this, TvSearch.class));
             }
         });
 

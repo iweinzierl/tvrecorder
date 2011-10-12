@@ -6,6 +6,7 @@
     <string name="main_menu_tvrecorder_button">TvRecorder</string>
     <string name="main_menu_tvguide_button">TvGuide</string>
     <string name="main_menu_settings_button">Einstellungen</string>
+    <string name="main_menu_search_button">Suche</string>
 
     <!-- THE RECORD ACTIVITY -->
     <string name="tvrecorder_contextmenu_quit">Beenden</string>
@@ -26,6 +27,8 @@
 
     <string name="tvshowdetail_title">Tv Show Details</string>
     <string name="tvshowdetail_datesuffix">Uhr</string>
+
+    <string name="tvsearch_title">Tv Search</string>
 
     <string name="keyvalueitem_change">ändern</string>
 
