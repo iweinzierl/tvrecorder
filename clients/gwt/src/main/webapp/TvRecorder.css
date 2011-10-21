@@ -1,0 +1,30 @@
+/** Add css rules here for your application. */
+body {
+    background: lightgray;
+}
+
+.root {
+}
+
+.header {
+}
+
+.module-list {
+    border: 1px solid #DDDDDD;
+}
+
+.content {
+    border: 1px solid #DDDDDD;
+}
+
+.abstract-module {
+    margin:   5px;
+    padding:  5px;
+    border:  1px solid #DDDDDD;
+}
+
+.module-image {
+}
+
+.module-label {
+}
