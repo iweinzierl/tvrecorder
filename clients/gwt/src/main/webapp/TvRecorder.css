@@ -28,3 +28,28 @@ body {
 
 .module-label {
 }
+
+.button {
+    border:     1px solid #DDDDDD;
+    background: #E2E2E2;
+}
+
+.buttonOver {
+    border:     1px solid #DDDDDD;
+    background: #EFEFEF;
+}
+
+.buttonDown {
+    border:     1px solid #DDDDDD;
+    background: #0FAFFF;
+}
+
+.buttonSelected {
+    border:     1px solid #DDDDDD;
+    background: #EFEFEF;
+}
+
+.buttonSelectedOver {
+    border:     1px solid #DDDDDD;
+    background: #EFEFEF;
+}
