@@ -1,5 +1,24 @@
 2011-10-21  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TButton.java:
+	  New. This text button shoud be used around the whole application.
+
+	* clients/gwt/src/main/webapp/TvRecorder.css: Added styles for the
+	  TButton.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/ManualModule.java:
+	  Implemented an inital view of this module. It contains text fields for
+	  entering start and end date/time, the output name, a listbox that
+	  displays the availabe channels and a button bar to create a new Job and
+	  to reset the view.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/Channel.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/DefaultChannel.java:
+	  The Channel interface used around this client and its default
+	  implementation.
+
+2011-10-21  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/gwt/README.txt,
 	  clients/gwt/pom.xml,
 	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/TvRecorder.gwt.xml,
