@@ -19,18 +19,23 @@ package de.inselhome.tvrecorder.client.gwt.shared.model;
 
 import java.io.Serializable;
 
-import java.util.List;
+import java.util.Date;
 
 
-public interface Channel extends Serializable {
+public interface TvShow extends Serializable {
 
-    String getKey();
+    String getTitle();
 
-    String getName();
+    String getDescription();
 
-    void addTvShow(TvShow tvshow);
+    String getCategory();
 
-    void addTvShows(List<TvShow> tvshow);
+    String getImageUrl();
 
-    List<TvShow> getTvShows();
+    Date getStart();
+
+    Date getEnd();
+
+    int getLength();
 }
+// vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

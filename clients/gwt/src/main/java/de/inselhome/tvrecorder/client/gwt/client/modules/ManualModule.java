@@ -17,7 +17,6 @@
  */
 package de.inselhome.tvrecorder.client.gwt.client.modules;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.ui.ListBox;
@@ -33,8 +32,8 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.inselhome.tvrecorder.client.gwt.client.TvRecorder;
 import de.inselhome.tvrecorder.client.gwt.client.widgets.TButton;
+import de.inselhome.tvrecorder.client.gwt.shared.TvGuideFaker;
 import de.inselhome.tvrecorder.client.gwt.shared.model.Channel;
-import de.inselhome.tvrecorder.client.gwt.shared.model.DefaultChannel;
 
 
 public class ManualModule extends AbstractModule {
@@ -62,10 +61,8 @@ public class ManualModule extends AbstractModule {
             new Img(TvRecorder.IMG.moduleManual().getURL()),
             TvRecorder.MSG.moduleManual());
 
-        this.channels = new ArrayList<Channel>();
-        this.channels.add(new DefaultChannel("RTL", "RTL"));
-        this.channels.add(new DefaultChannel("SAT1", "SAT1"));
-        this.channels.add(new DefaultChannel("PRO7", "PRO7"));
+        // XXX Remove this line when REST services are ready.
+        this.channels = TvGuideFaker.getChannels(false);
     }
 
 
