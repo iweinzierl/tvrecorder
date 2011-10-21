@@ -1,3 +1,25 @@
+2011-10-21  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/gwt/README.txt,
+	  clients/gwt/pom.xml,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/TvRecorder.gwt.xml,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/TvRecorder.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/TvRecorderConstants.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/TvRecorderConstants.properties,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/TvRecorderImages.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/images/moduleManual.png,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/images/moduleTvGuide.png,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/images/moduleTvSearch.png,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/AbstractModule.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/ManualModule.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvGuideModule.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvRecorderModuleList.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvSearchModule.java,
+	  clients/gwt/src/main/webapp/TvRecorder.css,
+	  clients/gwt/src/main/webapp/TvRecorder.html,
+	  clients/gwt/src/main/webapp/WEB-INF/web.xml: Initial checkin of a WWW
+	  client based on GWT (Google Web Toolkit).
+
 2011-10-12  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvsearch/TvSearch.java:
