@@ -1,5 +1,25 @@
 2011-10-21  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/Channel.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/DefaultChannel.java:
+	  New. A Channel and its default implementation used in the GWT client.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/TvShow.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/DefaultTvShow.java:
+	  New. A TvShow and its default implementation used in the GWT client.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/TvGuideFaker.java:
+	  New. The TvGuideFaker implements a method that returns a static list of
+	  Channels with or without static TvShows. This class is used until the
+	  REST services of this client are ready so that we are able to fetch
+	  Channels and TvShows from TvRecorder server.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/ManualModule.java:
+	  Use TvGuideFaker.getChannels() to retrieve a list of Channels instead of
+	  creating Channels manually.
+
+2011-10-21  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TButton.java:
 	  New. This text button shoud be used around the whole application.
 

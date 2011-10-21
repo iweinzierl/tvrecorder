@@ -17,16 +17,22 @@
  */
 package de.inselhome.tvrecorder.client.gwt.shared.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DefaultChannel implements Channel {
 
     protected String key;
     protected String name;
 
+    protected List<TvShow> tvshows;
+
 
     public DefaultChannel(String key, String name) {
-        this.key  = key;
-        this.name = name;
+        this.key     = key;
+        this.name    = name;
+        this.tvshows = new ArrayList<TvShow>();
     }
 
 
@@ -38,4 +44,20 @@ public class DefaultChannel implements Channel {
     public String getName() {
         return name;
     }
+
+
+    public void addTvShow(TvShow tvshow) {
+        tvshows.add(tvshow);
+    }
+
+
+    public void addTvShows(List<TvShow> tvshows) {
+        this.tvshows.addAll(tvshows);
+    }
+
+
+    public List<TvShow> getTvShows() {
+        return tvshows;
+    }
 }
+// vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
