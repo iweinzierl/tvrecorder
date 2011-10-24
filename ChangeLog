@@ -1,5 +1,35 @@
 2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/TvRecorder.java:
+	  Added the TvGuideService as static member.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/services/TvGuideService.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/services/TvGuideServiceAsync.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/server/TvGuideServiceImpl.java:
+	  New. A RPC service that is used to fetch TvGuide information from
+	  TvRecorder server.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvGuideModule.java:
+	  Read TvGuide (Channels with TvShows) from TvGuideService.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/server/Log4JInitServlet.java:
+	  New. A servlet that is used to initialize Log4J logging.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/DefaultChannel.java,
+	  clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/model/DefaultTvShow.java:
+	  Added empty constructors required by GWT.
+
+	* clients/gwt/pom.xml: Added a dependency to Log4J.
+
+	* clients/gwt/src/main/webapp/WEB-INF/log4j.properties: New. A Log4J
+	  properties file.
+
+	* clients/gwt/src/main/webapp/WEB-INF/web.xml: Registered the
+	  TvGuideService and Log4JInitServlet. The Log4JInitServlet is called
+	  initially to setup Log4J logging.
+
+2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/AbstractModule.java:
 	  Implements Stateful. Changing the selection of a module will change its
 	  style.

@@ -15,53 +15,19 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.gwt.shared.model;
+package de.inselhome.tvrecorder.client.gwt.client.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-public class DefaultChannel implements Channel {
-
-    protected String key;
-    protected String name;
-
-    protected List<TvShow> tvshows;
+import de.inselhome.tvrecorder.client.gwt.shared.model.Channel;
 
 
-    public DefaultChannel() {
-    }
+@RemoteServiceRelativePath("tvguide")
+public interface TvGuideService extends RemoteService {
 
-
-    public DefaultChannel(String key, String name) {
-        this.key     = key;
-        this.name    = name;
-        this.tvshows = new ArrayList<TvShow>();
-    }
-
-
-    public String getKey() {
-        return key;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void addTvShow(TvShow tvshow) {
-        tvshows.add(tvshow);
-    }
-
-
-    public void addTvShows(List<TvShow> tvshows) {
-        this.tvshows.addAll(tvshows);
-    }
-
-
-    public List<TvShow> getTvShows() {
-        return tvshows;
-    }
+    List<Channel> getTvGuide();
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
