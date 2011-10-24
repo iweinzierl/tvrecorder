@@ -1,5 +1,21 @@
 2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/AbstractModule.java:
+	  Implements Stateful. Changing the selection of a module will change its
+	  style.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvRecorderModuleList.java:
+	  Mark selected modules (AbstractModule.setSelected(true)) and deselect
+	  previously selected modules.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TvShowCell.java:
+	  Implements Stateful now.
+
+	* clients/gwt/src/main/webapp/TvRecorder.css: Added a style for a selected
+	  AbstractModule.
+
+2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/ChannelColumn.java:
 	  New. A ChannelColumn inherits from VLayout. It renders all TvShows of a
 	  Channel in vertical order with the help of TvShowCells.

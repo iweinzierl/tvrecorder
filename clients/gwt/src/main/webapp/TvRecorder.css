@@ -23,6 +23,13 @@ body {
     border:  1px solid #DDDDDD;
 }
 
+.abstract-module-selected {
+    background: #EEFFCC;
+    border:     1px solid #DDDDDD;
+    margin:     5px;
+    padding:    5px;
+}
+
 .module-image {
 }
 
