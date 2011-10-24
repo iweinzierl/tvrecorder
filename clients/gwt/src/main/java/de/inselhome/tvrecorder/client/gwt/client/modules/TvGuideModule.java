@@ -17,11 +17,17 @@
  */
 package de.inselhome.tvrecorder.client.gwt.client.modules;
 
+import java.util.List;
+
+import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
-import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.layout.HLayout;
 
 import de.inselhome.tvrecorder.client.gwt.client.TvRecorder;
+import de.inselhome.tvrecorder.client.gwt.client.widgets.ChannelColumn;
+import de.inselhome.tvrecorder.client.gwt.shared.TvGuideFaker;
+import de.inselhome.tvrecorder.client.gwt.shared.model.Channel;
 
 
 public class TvGuideModule extends AbstractModule {
@@ -29,10 +35,17 @@ public class TvGuideModule extends AbstractModule {
     public static final String NAME = "module.tvguide";
 
 
+    protected List<Channel> channels;
+
+    protected HLayout layout;
+
+
     public TvGuideModule() {
         super(
             new Img(TvRecorder.IMG.moduleTvGuide().getURL()),
             TvRecorder.MSG.moduleTvGuide());
+
+        this.channels = TvGuideFaker.getChannels(true);
     }
 
 
@@ -44,7 +57,19 @@ public class TvGuideModule extends AbstractModule {
 
     @Override
     public Canvas doRender() {
-        return new Label("HELLO TvGuide MODULE.");
+        if (layout == null) {
+            layout = new HLayout();
+            layout.setWidth100();
+            layout.setHeight100();
+            layout.setOverflow(Overflow.SCROLL);
+            layout.setMembersMargin(5);
+
+            for (Channel channel: channels) {
+                layout.addMember(new ChannelColumn(channel));
+            }
+        }
+
+        return layout;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

@@ -1,4 +1,25 @@
-2011-10-24  Ingo Weinzierl <ingo@intevation.de>
+2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/ChannelColumn.java:
+	  New. A ChannelColumn inherits from VLayout. It renders all TvShows of a
+	  Channel in vertical order with the help of TvShowCells.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TvShowCell.java:
+	  New. A TvShowCell renders the most important information (title, start,
+	  end, length, category, description) in a VLayout. A TvShowCell implements
+	  Stateful.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/Stateful.java:
+	  New. This interface is used to mark classes having a state (selected, not
+	  selected).
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvGuideModule.java:
+	  Implemented doRender() which now creates a HLayout with ChannelColumn.
+
+	* clients/gwt/src/main/webapp/TvRecorder.css: Added styles for TvShowCell
+	  and ChannelColumn.
+
+2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* .hgignore: Ignore 'clients/gwt/target' directory.
 
