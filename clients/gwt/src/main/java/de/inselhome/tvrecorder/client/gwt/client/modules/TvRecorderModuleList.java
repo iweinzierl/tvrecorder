@@ -34,6 +34,8 @@ public class TvRecorderModuleList extends HLayout {
 
     protected Canvas content;
 
+    protected AbstractModule current;
+
     protected Map<String, AbstractModule> modules;
 
 
@@ -90,6 +92,16 @@ public class TvRecorderModuleList extends HLayout {
     }
 
 
+    public AbstractModule getCurrentModule() {
+        return current;
+    }
+
+
+    protected void setCurrentModule(AbstractModule current) {
+        this.current = current;
+    }
+
+
     public void openModule(String name) {
         AbstractModule module = modules.get(name);
         if (module == null) {
@@ -97,9 +109,21 @@ public class TvRecorderModuleList extends HLayout {
             return;
         }
 
-        removeCurrentModule();
+        deactivateCurrentModule();
+
+        setCurrentModule(module);
 
         displayModule(module);
+    }
+
+
+    protected void deactivateCurrentModule() {
+        AbstractModule current = getCurrentModule();
+
+        if (current != null) {
+            removeCurrentModule();
+            current.setSelected(false);
+        }
     }
 
 
@@ -112,6 +136,7 @@ public class TvRecorderModuleList extends HLayout {
 
 
     protected void displayModule(AbstractModule module) {
+        module.setSelected(true);
         content.addChild(module.doRender());
     }
 }

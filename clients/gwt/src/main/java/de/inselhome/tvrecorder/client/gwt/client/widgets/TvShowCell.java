@@ -31,8 +31,10 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.inselhome.tvrecorder.client.gwt.shared.model.TvShow;
 
+import de.inselhome.tvrecorder.client.gwt.client.widgets.Stateful;
 
-public class TvShowCell extends VLayout {
+
+public class TvShowCell extends VLayout implements Stateful {
 
     public static final String STYLE                = "tvshow-cell";
     public static final String STYLE_SELECTED       = "tvshow-cell-selected";

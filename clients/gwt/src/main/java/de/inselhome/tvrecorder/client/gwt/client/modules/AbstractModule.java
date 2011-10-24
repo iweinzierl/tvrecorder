@@ -25,10 +25,13 @@ import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Img;
 import com.smartgwt.client.widgets.layout.VLayout;
 
+import de.inselhome.tvrecorder.client.gwt.client.widgets.Stateful;
 
-public abstract class AbstractModule extends VLayout {
 
-    public static final String STYLE_NAME       = "abstract-module";
+public abstract class AbstractModule extends VLayout implements Stateful {
+
+    public static final String STYLE            = "abstract-module";
+    public static final String STYLE_SELECTED   = "abstract-module-selected";
     public static final String STYLE_NAME_LABEL = "module-label";
     public static final String STYLE_NAME_IMAGE = "module-image";
 
@@ -36,6 +39,8 @@ public abstract class AbstractModule extends VLayout {
     protected Img image;
 
     protected String label;
+
+    protected boolean selected;
 
 
     public AbstractModule(Img image, String label) {
@@ -57,7 +62,31 @@ public abstract class AbstractModule extends VLayout {
         addMember(getLabel());
         addMember(getImage());
 
-        setStyleName(getModuleStyleName());
+        setStyleName(STYLE);
+    }
+
+
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
+
+
+    @Override
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+
+        onSelectionChanged();
+    }
+
+
+    protected void onSelectionChanged() {
+        if (selected) {
+            setStyleName(STYLE_SELECTED);
+        }
+        else {
+            setStyleName(STYLE);
+        }
     }
 
 
@@ -76,11 +105,6 @@ public abstract class AbstractModule extends VLayout {
         label.setHeight(25);
 
         return label;
-    }
-
-
-    protected String getModuleStyleName() {
-        return STYLE_NAME;
     }
 
 
