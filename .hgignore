@@ -5,6 +5,7 @@ server/records/*
 server/logs/*
 common/target/*
 clients/android/bin/*
+clients/gwt/target/*
 *.swp
 *.orig
 *.pyc
