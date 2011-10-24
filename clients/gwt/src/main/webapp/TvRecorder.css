@@ -53,3 +53,50 @@ body {
     border:     1px solid #DDDDDD;
     background: #EFEFEF;
 }
+
+.channel-column-title {
+    background:   #33CC33;
+    font-size:    20px;
+    font-weight:  bold;
+    padding-left: 5px;
+}
+
+.tvshow-cell {
+    background: #FFFFFF;
+    border:     1px solid #DDDDDD;
+}
+
+.tvshow-cell-hover {
+    background: #FFFFFF;
+    border:     2px solid red;
+}
+
+.tvshow-cell-hover-sel {
+    background: #FFFFFF;
+    border:     2px solid red;
+}
+
+.tvshow-cell-selected {
+    background: #FFFFFF;
+    border:     2px solid green;
+}
+
+.tvshow-cell-title-row {
+}
+
+.tvshow-cell-title {
+    background:  #0099FF;
+    font-size:   15px;
+    font-weight: bold;
+    padding:     0px 0px 0px 3px;
+}
+
+.tvshow-cell-details {
+    padding:   0px 0px 0px 3px;
+    font-size: 10px;
+}
+
+.tvshow-cell-desc-box {
+    font-size: 11px;
+    padding:   0px 5px 0px 3px;
+}
