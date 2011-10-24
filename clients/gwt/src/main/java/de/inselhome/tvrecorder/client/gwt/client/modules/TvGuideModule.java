@@ -19,14 +19,16 @@ package de.inselhome.tvrecorder.client.gwt.client.modules;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
 import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
 import com.smartgwt.client.widgets.layout.HLayout;
 
 import de.inselhome.tvrecorder.client.gwt.client.TvRecorder;
 import de.inselhome.tvrecorder.client.gwt.client.widgets.ChannelColumn;
-import de.inselhome.tvrecorder.client.gwt.shared.TvGuideFaker;
 import de.inselhome.tvrecorder.client.gwt.shared.model.Channel;
 
 
@@ -44,8 +46,11 @@ public class TvGuideModule extends AbstractModule {
         super(
             new Img(TvRecorder.IMG.moduleTvGuide().getURL()),
             TvRecorder.MSG.moduleTvGuide());
+    }
 
-        this.channels = TvGuideFaker.getChannels(true);
+
+    public void setChannels(List<Channel> channels) {
+        this.channels = channels;
     }
 
 
@@ -58,18 +63,39 @@ public class TvGuideModule extends AbstractModule {
     @Override
     public Canvas doRender() {
         if (layout == null) {
+            updateTvGuide();
+
             layout = new HLayout();
             layout.setWidth100();
             layout.setHeight100();
             layout.setOverflow(Overflow.SCROLL);
             layout.setMembersMargin(5);
-
-            for (Channel channel: channels) {
-                layout.addMember(new ChannelColumn(channel));
-            }
         }
 
         return layout;
+    }
+
+
+    protected void updateUI() {
+        for (Channel channel: channels) {
+            layout.addMember(new ChannelColumn(channel));
+        }
+    }
+
+
+    protected void updateTvGuide() {
+        TvRecorder.TVGUIDE.getTvGuide(new AsyncCallback<List<Channel>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                SC.warn("Error while fetching TvGuide: " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(List<Channel> channels) {
+                setChannels(channels);
+                updateUI();
+            }
+        });
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

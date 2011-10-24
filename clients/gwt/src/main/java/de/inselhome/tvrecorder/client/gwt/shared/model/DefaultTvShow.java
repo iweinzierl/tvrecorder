@@ -33,6 +33,10 @@ public class DefaultTvShow implements TvShow {
     protected int length;
 
 
+    public DefaultTvShow() {
+    }
+
+
     public DefaultTvShow(String title, String description) {
         this.title       = title;
         this.description = description;

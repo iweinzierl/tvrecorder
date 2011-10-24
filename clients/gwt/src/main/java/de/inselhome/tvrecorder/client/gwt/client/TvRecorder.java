@@ -28,6 +28,8 @@ import com.smartgwt.client.widgets.layout.Layout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.inselhome.tvrecorder.client.gwt.client.modules.TvRecorderModuleList;
+import de.inselhome.tvrecorder.client.gwt.client.services.TvGuideService;
+import de.inselhome.tvrecorder.client.gwt.client.services.TvGuideServiceAsync;
 
 
 /**
@@ -44,6 +46,9 @@ public class TvRecorder implements EntryPoint {
 
     public static final TvRecorderImages IMG =
         GWT.create(TvRecorderImages.class);
+
+    public static final TvGuideServiceAsync TVGUIDE =
+        GWT.create(TvGuideService.class);
 
 
     /**
