@@ -5,6 +5,21 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
+  <context-param>
+    <param-name>tvrecorder-server-url</param-name>
+    <param-value>http://192.168.0.210:8484</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>user</param-name>
+    <param-value>your-user</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>your-password</param-value>
+  </context-param>
+
   <!-- Servlets -->
   <servlet>
     <servlet-name>Log4JInitServlet</servlet-name>

@@ -1,3 +1,26 @@
+2011-10-26  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/gwt/pom.xml: Added a dependency to Restlet.
+
+	* clients/gwt/src/main/webapp/WEB-INF/web.xml: Added context-params for
+	  user and password. Both parameters are used for Http BasicAuth if
+	  required by TvRecorder server.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/server/HttpClient.java:
+	  New. This class is used to handle Http traffic between this WWW client
+	  and the TvRecorder server.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/server/TvRecorderService.java:
+	  New. This service should be the parent of all RPC services used in this
+	  client. It provides some basic methods for Http traffic.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/server/TvGuideServiceImpl.java:
+	  Now subclasses TvRecorderService and implements the getTvGuide() method.
+	  The TvGuide is fetched from TvRecorder server via Http using HttpClient.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/JSONHelper.java:
+	  New. A helper class for working with JSON strings/objects.
+
 2011-10-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/TvRecorder.java:
