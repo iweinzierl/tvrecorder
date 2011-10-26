@@ -65,12 +65,11 @@ body {
     background:   #33CC33;
     font-size:    20px;
     font-weight:  bold;
-    padding-left: 5px;
+    padding-left: 8px;
 }
 
 .tvshow-cell {
-    background: #FFFFFF;
-    border:     1px solid #DDDDDD;
+    border: 1px solid #DDDDDD;
 }
 
 .tvshow-cell-hover {
@@ -95,15 +94,18 @@ body {
     background:  #0099FF;
     font-size:   15px;
     font-weight: bold;
-    padding:     0px 0px 0px 3px;
+    padding:     5px 0px 5px 3px;
+    margin:      0;
 }
 
 .tvshow-cell-details {
-    padding:   0px 0px 0px 3px;
     font-size: 10px;
+    padding:   0px 0px 0px 3px;
+    margin:    0;
 }
 
 .tvshow-cell-desc-box {
     font-size: 11px;
     padding:   0px 5px 0px 3px;
+    margin:    0 0 5 0;
 }

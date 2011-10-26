@@ -20,21 +20,28 @@ package de.inselhome.tvrecorder.client.gwt.client.modules;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.view.client.MultiSelectionModel;
 
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.inselhome.tvrecorder.client.gwt.client.TvRecorder;
-import de.inselhome.tvrecorder.client.gwt.client.widgets.ChannelColumn;
+import de.inselhome.tvrecorder.client.gwt.client.widgets.TvShowCell;
 import de.inselhome.tvrecorder.client.gwt.shared.model.Channel;
+import de.inselhome.tvrecorder.client.gwt.shared.model.TvShow;
 
 
 public class TvGuideModule extends AbstractModule {
 
     public static final String NAME = "module.tvguide";
+
+    public static final String STYLE_CHANNEL_TITLE = "channel-column-title";
 
 
     protected List<Channel> channels;
@@ -68,7 +75,7 @@ public class TvGuideModule extends AbstractModule {
             layout = new HLayout();
             layout.setWidth100();
             layout.setHeight100();
-            layout.setOverflow(Overflow.SCROLL);
+            layout.setOverflow(Overflow.AUTO);
             layout.setMembersMargin(5);
         }
 
@@ -77,8 +84,25 @@ public class TvGuideModule extends AbstractModule {
 
 
     protected void updateUI() {
+        TvShowCell empty = new TvShowCell();
         for (Channel channel: channels) {
-            layout.addMember(new ChannelColumn(channel));
+            VLayout vertical = new VLayout();
+            vertical.setWidth100();
+
+            CellList<TvShow> list = new CellList<TvShow>(empty);
+            list.setRowData(0, channel.getTvShows());
+            list.setSelectionModel(new MultiSelectionModel());
+            list.setWidth("175px");
+
+            Label channelName = new Label(channel.getName());
+            channelName.setWidth("175px");
+            channelName.setHeight("35px");
+            channelName.setStyleName(STYLE_CHANNEL_TITLE);
+
+            vertical.addMember(channelName);
+            vertical.addMember(list);
+
+            layout.addMember(vertical);
         }
     }
 

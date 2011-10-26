@@ -1,5 +1,21 @@
 2011-10-26  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TvShowCell.java:
+	  Subclasses GWT's AbstractCell now. The layout stuff is done by native
+	  html elements instead of using SmartGWT widgets which is a lot faster.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/TvGuideModule.java:
+	  The TvShows of each Channel are displayed in CellList provided by GWT
+	  that consists of TvShowCells.
+
+	* clients/gwt/src/main/webapp/TvRecorder.css: Adapted styles for
+	  TvShowCell.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/ChannelColumn.java:
+	  Deleted.
+
+2011-10-26  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/gwt/pom.xml: Added a dependency to Restlet.
 
 	* clients/gwt/src/main/webapp/WEB-INF/web.xml: Added context-params for
