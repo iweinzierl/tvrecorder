@@ -12,12 +12,12 @@
 
   <context-param>
     <param-name>user</param-name>
-    <param-value>your-user</param-value>
+    <param-value>ingo</param-value>
   </context-param>
 
   <context-param>
     <param-name>password</param-name>
-    <param-value>your-password</param-value>
+    <param-value>ingo84w</param-value>
   </context-param>
 
   <!-- Servlets -->
