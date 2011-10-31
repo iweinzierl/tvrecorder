@@ -1,5 +1,14 @@
 2011-10-31  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/ManualModule.java:
+	  Load Channels from TvGuideService - removed TvGuideFaker.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/TvGuideFaker.java:
+	  Removed. We are able to fetch TvGuide information from TvRecorder server
+	  now.
+
+2011-10-31  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/DateUtils.java:
 	  New. This utility class is used to work with dates in GWT clients.
 

@@ -19,11 +19,13 @@ package de.inselhome.tvrecorder.client.gwt.client.modules;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
 import com.smartgwt.client.widgets.Label;
@@ -32,7 +34,6 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.inselhome.tvrecorder.client.gwt.client.TvRecorder;
 import de.inselhome.tvrecorder.client.gwt.client.widgets.TButton;
-import de.inselhome.tvrecorder.client.gwt.shared.TvGuideFaker;
 import de.inselhome.tvrecorder.client.gwt.shared.model.Channel;
 
 
@@ -60,9 +61,31 @@ public class ManualModule extends AbstractModule {
         super(
             new Img(TvRecorder.IMG.moduleManual().getURL()),
             TvRecorder.MSG.moduleManual());
+    }
 
-        // XXX Remove this line when REST services are ready.
-        this.channels = TvGuideFaker.getChannels(false);
+
+    protected void updateChannels() {
+        TvRecorder.TVGUIDE.getTvGuide(new AsyncCallback<List<Channel>>() {
+            @Override
+            public void onFailure(Throwable t) {
+                SC.warn("Error while fetching Channels: " + t.getMessage());
+            }
+
+            @Override
+            public void onSuccess(List<Channel> channels) {
+                setChannels(channels);
+            }
+        });
+    }
+
+
+    protected void setChannels(List<Channel> channels) {
+        this.channels = channels;
+
+        channelList.clear();
+        for (Channel channel: channels) {
+            channelList.addItem(channel.getName(), channel.getName());
+        }
     }
 
 
@@ -83,6 +106,8 @@ public class ManualModule extends AbstractModule {
         layout.addMember(buildName());
         layout.addMember(buildChannel());
         layout.addMember(buildButtons());
+
+        updateChannels();
 
         return layout;
     }
@@ -140,8 +165,10 @@ public class ManualModule extends AbstractModule {
 
         channelList = new ListBox(false);
 
-        for (Channel channel: channels) {
-            channelList.addItem(channel.getName(), channel.getName());
+        if (channels != null && channels.size() > 0) {
+            for (Channel channel: channels) {
+                channelList.addItem(channel.getName(), channel.getName());
+            }
         }
 
         layout.addMember(buildLabel("Sender"));
