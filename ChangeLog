@@ -1,3 +1,11 @@
+2011-10-31  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/shared/DateUtils.java:
+	  New. This utility class is used to work with dates in GWT clients.
+
+	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TvShowCell.java:
+	  Display start and end of a TvShow.
+
 2011-10-26  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/widgets/TvShowCell.java:

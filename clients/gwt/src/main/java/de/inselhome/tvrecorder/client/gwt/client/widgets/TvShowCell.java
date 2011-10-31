@@ -22,6 +22,7 @@ import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
+import de.inselhome.tvrecorder.client.gwt.shared.DateUtils;
 import de.inselhome.tvrecorder.client.gwt.shared.model.TvShow;
 
 
@@ -38,6 +39,18 @@ public class TvShowCell extends AbstractCell<TvShow> {
         if (value == null) {
             return;
         }
+
+        String startDate = DateUtils.format(
+            value.getStart(),
+            DateUtils.DATE_FORMAT);
+
+        String startTime = DateUtils.format(
+            value.getStart(),
+            DateUtils.TIME_FORMAT);
+
+        String endTime = DateUtils.format(
+            value.getEnd(),
+            DateUtils.TIME_FORMAT);
 
         // title row
         sb.appendHtmlConstant("<table width='100%' class='" + STYLE + "'>");
@@ -67,12 +80,12 @@ public class TvShowCell extends AbstractCell<TvShow> {
         sb.appendHtmlConstant("<tr>");
         sb.appendHtmlConstant("<td>");
         sb.appendHtmlConstant("<p class='" + STYLE_DETAILS + "'>");
-        sb.append(SafeHtmlUtils.fromString("--start--"));
+        sb.append(SafeHtmlUtils.fromString(startDate));
         sb.appendHtmlConstant("</p>");
         sb.appendHtmlConstant("</td>");
         sb.appendHtmlConstant("<td>");
         sb.appendHtmlConstant("<p class='" + STYLE_DETAILS + "'>");
-        sb.append(SafeHtmlUtils.fromString("--end--"));
+        sb.append(SafeHtmlUtils.fromString(startTime + " - " + endTime));
         sb.appendHtmlConstant("</p>");
         sb.appendHtmlConstant("</td>");
         sb.appendHtmlConstant("</tr>");
