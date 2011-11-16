@@ -22,6 +22,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
@@ -41,6 +43,8 @@ public class DateUtils {
     public static final String TIME_FORMAT = "HH:mm";
 
     public static final String XMLTV_FORMAT = "EEE MMM dd HH:mm:ss";
+
+    public static final Logger logger = Logger.getLogger(DateUtils.class);
 
     /**
      * This function formats a given {@link Date} based on a given format.
@@ -116,7 +120,13 @@ public class DateUtils {
         long secondStartTime = secondStart.getTime();
         long secondEndTime   = secondEnd.getTime();
 
-        return !(secondStartTime > firstEndTime || secondEndTime < firstEndTime);
+        if (secondStartTime < firstEndTime) {
+            logger.warn("Second job begins before first job is finished.");
+            return true;
+        }
+
+        return false;
+        //return !(secondStartTime > firstEndTime || secondEndTime < firstEndTime);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

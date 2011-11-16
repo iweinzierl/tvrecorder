@@ -1,3 +1,16 @@
+2011-11-16  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/pom.xml: Added dependency to Apache log4j.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Improved collision detection.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Improved collision detection of time.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/StartAtJobCreator.java:
+	  Replace whitespaces in job files.
+
 2011-10-31  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/gwt/src/main/java/de/inselhome/tvrecorder/client/gwt/client/modules/ManualModule.java:
