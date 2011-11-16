@@ -108,7 +108,7 @@ public class StartAtJobCreator extends AtJobCreator {
         String out = job.getName();
         if (out != null && !out.equals("")) {
             sb.append("-");
-            sb.append(out);
+            sb.append(out.replace(" ", "_"));
         }
 
         sb.append(".sh");
