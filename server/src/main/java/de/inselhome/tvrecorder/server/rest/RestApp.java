@@ -92,6 +92,10 @@ extends      Application
             "Add service TvGuideResource: " + TvGuideServerResource.PATH);
         router.attach(TvGuideServerResource.PATH, TvGuideServerResource.class);
 
+        logger.info(
+            "Add service JobListResource: " + JobListServerResource.PATH);
+        router.attach(JobListServerResource.PATH, JobListServerResource.class);
+
         return router;
     }
 }

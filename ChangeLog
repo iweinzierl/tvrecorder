@@ -1,3 +1,13 @@
+2011-11-17  Ingo Weinzierl <ingo@intevation.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/rest/JobListResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/JobListServerResource.java:
+	  New. This resource implements the HTTP GET operation which will return a
+	  JsonRepresentation with jobs that are marked to be recorded.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RestApp.java:
+	  Registered the JobListServerResource.
+
 2011-11-16  Ingo Weinzierl <ingo@intevation.de>
 
 	* common/pom.xml: Added dependency to Apache log4j.
