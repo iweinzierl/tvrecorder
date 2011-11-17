@@ -32,6 +32,10 @@
                   android:label="@string/tvsearch_title">
         </activity>
 
+        <activity android:name="de.inselhome.tvrecorder.client.activities.tvjoblist.TvJoblist"
+                  android:label="@string/tvjoblist_title">
+        </activity>
+
         <!-- SERVICES -->
         <service android:name="de.inselhome.tvrecorder.client.services.TvGuideUpdateService"/>
 

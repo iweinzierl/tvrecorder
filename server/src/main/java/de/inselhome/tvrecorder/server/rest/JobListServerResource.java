@@ -21,9 +21,9 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.EmptyRepresentation;
 import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
 
 import org.json.JSONArray;
 
@@ -70,7 +70,7 @@ implements   JobListResource
             arr.put(JSONUtils.toJSON(job));
         }
 
-        return new JsonRepresentation(arr);
+        return new StringRepresentation(arr.toString());
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

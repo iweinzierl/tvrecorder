@@ -1,5 +1,37 @@
 2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:
+	  New. This activity displays all existing jobs in queue.
+	  
+	* clients/android/src/de/inselhome/tvrecorder/client/data/JobProvider.java:
+	  New. This class should be used to fetch a list of queued jobs from
+	  server.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblistAdapter.java:
+	  New. An ArrayAdapter that is used for displaying Jobs in a ListView.
+
+	* clients/android/res/layout/tvjob_list.xml,
+	  clients/android/res/layout/tvjoblist.xml: New. Layout definitions for
+	  the TvJoblist Activity and its ListView.
+
+	* clients/android/AndroidManifest.xml: Registered the TvJoblist Activity.
+
+	* clients/android/res/values/strings.xml: Added a title for the TvJoblist
+	  Activity.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java:
+	  Defined an OnClickListener that start the TvJoblist Activity.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
+	  Added functions to parse Jobs or a list of Jobs from
+	  JSONArray/JSONObject.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/JobListServerResource.java:
+	  This resource now returns a StringRepresentation with a JSON string now.
+	  The JsonRepresentation could not be read on the Android client.
+
+2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/layout/menu.xml: Added a button to enter the (not
 	  existing) joblist activity.
 

@@ -31,6 +31,8 @@
 
     <string name="tvsearch_title">Tv Search</string>
 
+    <string name="tvjoblist_title">Tv Joblist</string>
+
     <string name="keyvalueitem_change">ändern</string>
 
     <string name="addjob_start">Start</string>

@@ -17,13 +17,16 @@
  */
 package de.inselhome.tvrecorder.common.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.objects.TvShow;
@@ -142,6 +145,33 @@ public class JSONUtils {
         String categ = obj.getString("category");
 
         return new TvShow(title, desc, start, end, categ, len);
+    }
+
+
+    public static List<Job> jobsFromJSON(JSONArray arr)
+    throws JSONException
+    {
+        int len = arr.length();
+
+        List<Job> jobs = new ArrayList<Job>(len);
+
+        for (int i = 0; i < len; i++) {
+            jobs.add(jobFromJSON(arr.getJSONObject(i)));
+        }
+
+        return jobs;
+    }
+
+
+    public static Job jobFromJSON(JSONObject obj)
+    throws JSONException
+    {
+        String name = obj.getString("name");
+        String chan = obj.getString("channel");
+        Date start  = new Date(obj.getLong("start"));
+        Date end    = new Date(obj.getLong("end"));
+
+        return new Job(start, end, new Channel(chan, chan), name);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
