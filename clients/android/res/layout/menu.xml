@@ -11,8 +11,8 @@
         android:layout_height="fill_parent"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -95,8 +95,8 @@
         android:layout_height="fill_parent"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -105,8 +105,8 @@
             android:id="@+id/search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
@@ -134,6 +134,54 @@
                 android:text="@string/main_menu_search_button"/>
 
         </LinearLayout>
+
+        <!-- second row / second column -->
+        <LinearLayout
+            android:id="@+id/joblist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/main_menu_button_state">
+
+            <ImageView
+                android:src="@drawable/joblist_button"
+                android:scaleType="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:text="@string/main_menu_joblist_button"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- third row -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <!-- second row / second column -->
         <LinearLayout

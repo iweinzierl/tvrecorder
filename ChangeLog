@@ -1,5 +1,19 @@
 2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/layout/menu.xml: Added a button to enter the (not
+	  existing) joblist activity.
+
+	* clients/android/res/values/strings.xml: Added a title for the joblist
+	  menu button.
+
+	* clients/android/res/drawable/joblist_button.png: New. An icon for the
+	  joblist menu button.
+
+	* clients/android/res/layout/main.xml: Removed. It was initially created
+	  at project start and never used.
+
+2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
 	  Removed Log4J logger which is not usable on Android platforms.
 

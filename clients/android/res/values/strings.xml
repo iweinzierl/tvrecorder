@@ -7,6 +7,7 @@
     <string name="main_menu_tvguide_button">TvGuide</string>
     <string name="main_menu_settings_button">Einstellungen</string>
     <string name="main_menu_search_button">Suche</string>
+    <string name="main_menu_joblist_button">Aufträge</string>
 
     <!-- THE RECORD ACTIVITY -->
     <string name="tvrecorder_contextmenu_quit">Beenden</string>
