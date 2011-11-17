@@ -1,4 +1,11 @@
-2011-11-17  Ingo Weinzierl <ingo@intevation.de>
+2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Removed Log4J logger which is not usable on Android platforms.
+
+	* common/pom.xml: Removed Apache log4j dependency.
+
+2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* common/src/main/java/de/inselhome/tvrecorder/common/rest/JobListResource.java,
 	  server/src/main/java/de/inselhome/tvrecorder/server/rest/JobListServerResource.java:
