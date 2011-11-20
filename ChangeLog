@@ -1,6 +1,12 @@
 2011-11-20  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:
+	  Improved exception handling while fetching queued jobs. The Activity
+	  will no longer crash when the server does not respond for any reason.
+
+2011-11-20  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:
 	  Display a progress dialog while fetching queued jobs from server.
 
 	* clients/android/res/values/strings.xml: Added strings used in the

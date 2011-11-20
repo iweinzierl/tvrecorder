@@ -63,23 +63,29 @@ extends      Activity
     protected void updateJobs() {
         beforeUpdateJobs();
 
-        try {
-            new AsyncTask<Void, Void, List<Job>>() {
-                protected List<Job> doInBackground(Void... v) {
+        new AsyncTask<Void, Void, List<Job>>() {
+            protected List<Job> doInBackground(Void... v) {
+                try {
                     return JobProvider.getJobs(TvJoblist.this);
                 }
-
-                protected void onPostExecute(List<Job> jobs) {
-                    Log.d(TAG, "HTTP request finished.");
-                    displayJobs(jobs);
+                catch (Exception e) {
+                    Log.e(TAG, "INTERNAL SERVER ERROR");
                     afterUpdateJobs();
                 }
-            }.execute();
-        }
-        catch (Exception e) {
-            Log.e(TAG, "INTERNAL SERVER ERROR");
-            afterUpdateJobs();
-        }
+
+                return null;
+            }
+
+            protected void onPostExecute(List<Job> jobs) {
+                Log.d(TAG, "HTTP request finished.");
+
+                if (jobs != null && jobs.size() > 0) {
+                    displayJobs(jobs);
+                }
+
+                afterUpdateJobs();
+            }
+        }.execute();
     }
 
 
