@@ -1,5 +1,13 @@
 2011-11-20  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:
+	  Display a progress dialog while fetching queued jobs from server.
+
+	* clients/android/res/values/strings.xml: Added strings used in the
+	  progress dialog.
+
+2011-11-20  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/layout/tvjob_list.xml: Improved the list layout.
 
 2011-11-17  Ingo Weinzierl <ingo_weinzierl@web.de>
