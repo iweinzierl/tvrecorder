@@ -20,6 +20,9 @@ package de.inselhome.tvrecorder.client.activities.tvjoblist;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
@@ -40,6 +43,8 @@ extends      Activity
 
     protected ListView joblist;
 
+    protected ProgressDialog progress;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,12 +61,41 @@ extends      Activity
 
 
     protected void updateJobs() {
+        beforeUpdateJobs();
+
         try {
-            List<Job> jobs = JobProvider.getJobs(this);
-            displayJobs(jobs);
+            new AsyncTask<Void, Void, List<Job>>() {
+                protected List<Job> doInBackground(Void... v) {
+                    return JobProvider.getJobs(TvJoblist.this);
+                }
+
+                protected void onPostExecute(List<Job> jobs) {
+                    Log.d(TAG, "HTTP request finished.");
+                    displayJobs(jobs);
+                    afterUpdateJobs();
+                }
+            }.execute();
         }
         catch (Exception e) {
             Log.e(TAG, "INTERNAL SERVER ERROR");
+            afterUpdateJobs();
+        }
+    }
+
+
+    protected void beforeUpdateJobs() {
+        Resources res = getResources();
+        progress = ProgressDialog.show(
+            this,
+            res.getString(R.string.tvjoblist_load_progress_title),
+            res.getString(R.string.tvjoblist_load_progress_text),
+            true);
+    }
+
+
+    protected void afterUpdateJobs() {
+        if (progress != null) {
+            progress.dismiss();
         }
     }
 

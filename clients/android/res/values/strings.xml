@@ -32,6 +32,8 @@
     <string name="tvsearch_title">Tv Search</string>
 
     <string name="tvjoblist_title">Tv Joblist</string>
+    <string name="tvjoblist_load_progress_title">Aktualisierung</string>
+    <string name="tvjoblist_load_progress_text">Lade Aufträge</string>
 
     <string name="keyvalueitem_change">ändern</string>
 
