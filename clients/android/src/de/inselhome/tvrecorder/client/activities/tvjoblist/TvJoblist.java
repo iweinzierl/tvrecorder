@@ -20,6 +20,7 @@ package de.inselhome.tvrecorder.client.activities.tvjoblist;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -82,6 +83,18 @@ extends      Activity
                 if (jobs != null && jobs.size() > 0) {
                     displayJobs(jobs);
                 }
+                else if (jobs != null && jobs.size() == 0) {
+                    displayInformation(
+                        R.string.tvjoblist_no_jobs_title,
+                        R.string.tvjoblist_no_jobs_text
+                    );
+                }
+                else {
+                    displayInformation(
+                        R.string.tvjoblist_load_failed_title,
+                        R.string.tvjoblist_load_failed_text
+                    );
+                }
 
                 afterUpdateJobs();
             }
@@ -115,6 +128,15 @@ extends      Activity
             this,
             R.layout.tvjob_list,
             data));
+    }
+
+
+    protected void displayInformation(int titleId, int messageId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TvJoblist.this);
+        builder.setTitle(titleId);
+        builder.setMessage(messageId);
+
+        builder.show();
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
