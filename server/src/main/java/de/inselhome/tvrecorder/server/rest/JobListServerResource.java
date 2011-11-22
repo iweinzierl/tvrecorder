@@ -17,7 +17,9 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
@@ -66,11 +68,22 @@ implements   JobListResource
 
         JSONArray arr = new JSONArray();
 
-        for (Job job: jobs) {
+        for (Job job: orderJobs(jobs)) {
             arr.put(JSONUtils.toJSON(job));
         }
 
         return new StringRepresentation(arr.toString());
+    }
+
+
+    protected static Collection<Job> orderJobs(Job[] jobs) {
+        TreeMap<Date, Job> sorted = new TreeMap<Date, Job>();
+
+        for (Job job: jobs) {
+            sorted.put(job.getStart(), job);
+        }
+
+        return sorted.values();
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

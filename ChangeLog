@@ -1,5 +1,11 @@
 2011-11-22  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/JobListServerResource.java:
+	  Order Jobs based on their start time. Usually, this should be done in
+	  clients, but we want to increase performance on this way.
+
+2011-11-22  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java:
 	  Added setter methods for start and end time.
 
