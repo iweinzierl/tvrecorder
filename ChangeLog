@@ -1,3 +1,15 @@
+2011-11-22  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/Job.java:
+	  Added setter methods for start and end time.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/DateUtils.java:
+	  Fixed wrong time collision detection.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Prepare icoming Jobs: add 1 second to its start time to avoid collisions
+	  with other jobs that end in the same minute.
+
 2011-11-20  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:

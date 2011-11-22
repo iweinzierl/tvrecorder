@@ -138,6 +138,8 @@ extends      TvRecorderResource
             throw new IllegalArgumentException("Could not create job - missing information.");
         }
 
+        prepareJob(job);
+
         if (logger.isDebugEnabled()) {
             logger.debug("=================== New record ==================");
             logger.debug("= Channel: " + job.getChannel().getDescription());
@@ -167,6 +169,14 @@ extends      TvRecorderResource
     }
 
 
+    protected void prepareJob(Job job) {
+        logger.debug("Add 1 second to Job's start time.");
+
+        Date start = job.getStart();
+        start.setTime(start.getTime() + 1000);
+    }
+
+
     /**
      * This method validates the retrieved {@link Job}. The start date needs to
      * be smaller than the end date - this is verified by {@link
@@ -178,9 +188,23 @@ extends      TvRecorderResource
      * @return true, if every check was ok, otherwise false.
      */
     public boolean isJobValid(Job job) {
-        return (DateUtils.isEndGreaterThanStart(job.getEnd(), job.getStart()) &&
-                isChannelValid(job.getChannel()) &&
-                isDateValid(job.getStart(), job.getEnd()));
+
+        if (!DateUtils.isEndGreaterThanStart(job.getEnd(), job.getStart())) {
+            logger.warn("Start time needs to be earlier than end time.");
+            return false;
+        }
+
+        if (!isChannelValid(job.getChannel())) {
+            logger.warn("Channel is not valid.");
+            return false;
+        }
+
+        if (!isDateValid(job.getStart(), job.getEnd())) {
+            logger.warn("Date is not valid.");
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -224,9 +248,16 @@ extends      TvRecorderResource
             return true;
         }
 
-        logger.debug("Found " + queue.length + "queued jobs.");
+        logger.debug("Found " + queue.length + " queued job(s).");
 
         for (Job job: queue) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("  test: "
+                    + DateUtils.format(job.getStart(), DateUtils.XMLTV_FORMAT)
+                    + " - "
+                    + DateUtils.format(job.getEnd(), DateUtils.XMLTV_FORMAT));
+            }
+
             if (DateUtils.doesTimerangesCollide(
                 job.getStart(), job.getEnd(), start, end)) {
                 return false;

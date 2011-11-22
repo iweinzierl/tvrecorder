@@ -81,6 +81,11 @@ implements   Serializable
     }
 
 
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+
     /**
      * Retrieves the end time.
      *
@@ -88,6 +93,11 @@ implements   Serializable
      */
     public Date getEnd() {
         return end;
+    }
+
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
 
