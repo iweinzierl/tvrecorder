@@ -117,12 +117,15 @@ public class DateUtils {
         long secondStartTime = secondStart.getTime();
         long secondEndTime   = secondEnd.getTime();
 
-        if (secondStartTime < firstEndTime) {
+        if (secondStartTime >= firstStartTime && secondStartTime < firstEndTime) {
+            return true;
+        }
+
+        if (secondEndTime >= firstStartTime && secondEndTime <= firstEndTime) {
             return true;
         }
 
         return false;
-        //return !(secondStartTime > firstEndTime || secondEndTime < firstEndTime);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
