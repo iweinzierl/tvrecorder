@@ -5,7 +5,8 @@ CREATE TABLE jobs (
     name    VARCHAR(64),
     start   TIMESTAMP,
     end     TIMESTAMP,
-    channel VARCHAR(32)
+    channel VARCHAR(32),
+    atJobId INTEGER
 );
 
 END;

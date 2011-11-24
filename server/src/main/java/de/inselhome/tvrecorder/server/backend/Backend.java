@@ -43,7 +43,10 @@ public class Backend {
         "SELECT * FROM jobs where start >= ? OR end >= ?";
 
     public static final String SQL_INSERT_NEW_JOB  =
-        "INSERT INTO jobs (start, end, channel, name) VALUES (?, ?, ?, ?)";
+        "INSERT INTO jobs (start, end, channel, name, atJobId) VALUES (?, ?, ?, ?, ?)";
+
+    public static final String SQL_FIND_AT_JOB_ID =
+        "SELECT atJobId FROM jobs WHERE start = ? AND end = ?";
 
     private static Logger logger = Logger.getLogger(Backend.class);
 
@@ -144,7 +147,7 @@ public class Backend {
      *
      * @param The job that we want to insert.
      */
-    public void insertJob(Job job) {
+    public void insertJob(Job job, int jobId) {
         try {
             Connection connection       = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -154,6 +157,7 @@ public class Backend {
             statement.setDate(2, new Date(job.getEnd().getTime()));
             statement.setString(3, job.getChannel().getKey());
             statement.setString(4, job.getName());
+            statement.setInt(5, jobId);
 
             statement.executeUpdate();
         }
@@ -163,6 +167,34 @@ public class Backend {
         catch (ClassNotFoundException cnfe) {
             logger.error(cnfe.getLocalizedMessage());
         }
+    }
+
+
+    public int findAtJobId(Job job) {
+        int jobId = -1;
+
+        try {
+            Connection connection       = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                SQL_INSERT_NEW_JOB);
+
+            statement.setDate(1, new Date(job.getStart().getTime()));
+            statement.setDate(2, new Date(job.getEnd().getTime()));
+
+            ResultSet rs = statement.executeQuery();
+
+            rs.first();
+
+            jobId = rs.getInt("atJobId");
+        }
+        catch (SQLException sqle) {
+            logger.error(sqle.getLocalizedMessage());
+        }
+        catch (ClassNotFoundException cnfe) {
+            logger.error(cnfe.getLocalizedMessage());
+        }
+
+        return jobId;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
