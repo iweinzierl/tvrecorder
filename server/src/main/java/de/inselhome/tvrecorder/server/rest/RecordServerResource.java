@@ -156,14 +156,14 @@ extends      TvRecorderResource
             throw new IllegalArgumentException(msg);
         }
 
-        boolean success = new StartAtJobCreator(job, new MPlayerCmdProducer()).startJob();
+        int jobId = new StartAtJobCreator(job, new MPlayerCmdProducer()).startJob();
 
-        if (!success) {
+        if (jobId < 0) {
             return;
         }
 
         Backend backend = getBackend();
-        backend.insertJob(job);
+        backend.insertJob(job, jobId);
 
         new StopAtJobCreator(job).startJob();
     }

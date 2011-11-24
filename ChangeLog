@@ -1,3 +1,19 @@
+2011-11-24  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/docs/schema.sql: Added an integer field to job relation which
+	  stores the at job id. This id is required to be able to delete jobs.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/Backend.java:
+	  Added an integer atJobId to insertJob(). This integer is inserted to the
+	  job relation now. In addition, there is a new method to find the atJobId
+	  of a given Job.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/AtJobCreator.java:
+	  Read the at job id from stdout.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Insert the at job id into database using insertJob(Job, int).
+
 2011-11-22  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/JobListServerResource.java:

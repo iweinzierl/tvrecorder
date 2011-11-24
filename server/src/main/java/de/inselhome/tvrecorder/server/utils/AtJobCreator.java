@@ -18,6 +18,10 @@
 package de.inselhome.tvrecorder.server.utils;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.File;
 
@@ -33,6 +37,11 @@ import de.inselhome.tvrecorder.common.utils.DateUtils;
  * @author <a href="mailto: ingo_weinzierl@web.de">Ingo Weinzierl</a>
  */
 public abstract class AtJobCreator {
+
+    /** The regular expression used to find the at job id. */
+    public static final Pattern JOB_REGEX =
+        Pattern.compile(".*job\\s(\\d+)\\sat.*");
+
 
     /** The default directoy where the jobs are saved in. */
     public static final String DEFAULT_JOB_DIR = "jobs";
@@ -77,28 +86,28 @@ public abstract class AtJobCreator {
      * this method, a shell script is created by {@link createScriptFile()} that
      * is executed by the job and the <i>at</i> job is created.
      *
-     * @return true, if the job was successfully created. Otherwise false.
+     * @return the at job id or -1 if at job creation failed.
      */
-    public boolean startJob() {
+    public int startJob() {
         File file = createScriptFile();
 
         if (file != null) {
             logger.info("The job file has been created successfully.");
 
-            boolean success = createAtJob(getStartDate(), file);
+            int jobId = createAtJob(getStartDate(), file);
 
-            if (!success) {
+            if (jobId < 0) {
                 logger.error("Job creation failed.");
 
-                return false;
+                return jobId;
             }
 
             logger.info("Job has been created successfully.");
 
-            return true;
+            return jobId;
         }
 
-        return false;
+        return -1;
     }
 
 
@@ -109,19 +118,19 @@ public abstract class AtJobCreator {
      * @param date the execution time.
      * @param file the shell script that is executed.
      *
-     * @return true, if the creation was successful, otherwise false.
+     * @return the at job id or -1 if at job creation failed.
      */
-    public boolean createAtJob(Date date, File file) {
+    public int createAtJob(Date date, File file) {
         if (date == null || file == null) {
             logger.error("Job creation failed: job or jobfile null.");
-            return false;
+            return -1;
         }
 
         String timespec = DateUtils.format(date, DateUtils.TIMESPEC_FORMAT);
 
         if (timespec == null) {
             logger.error("Job creation failed: could not create timespec.");
-            return false;
+            return -1;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -136,10 +145,24 @@ public abstract class AtJobCreator {
             logger.debug("Try to execute the command: " + sb.toString());
             Process proc = runtime.exec(sb.toString());
 
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(proc.getErrorStream()));
+
+            String line  = null;
+            int    jobId = -1;
+
+            while ((line = reader.readLine()) != null) {
+                if (jobId < 0) {
+                    jobId = extractJobId(line);
+                }
+            }
+
             try {
                 proc.waitFor();
 
                 logger.debug("Exit value of job creation: " + proc.exitValue());
+
+                return jobId;
             }
             catch (InterruptedException ie) {
                 logger.error(ie.getLocalizedMessage());
@@ -147,10 +170,34 @@ public abstract class AtJobCreator {
         }
         catch (IOException ioe) {
             logger.error(ioe.getLocalizedMessage());
-            return false;
         }
 
-        return true;
+        return -1;
+    }
+
+
+    protected static int extractJobId(String line) {
+        Matcher m = JOB_REGEX.matcher(line);
+
+        int jobId = -1;
+
+        if (m.matches()) {
+            if (m.groupCount() > 0) {
+                String group = m.group(1);
+
+                try {
+                    jobId = Integer.valueOf(group);
+
+                    logger.debug("Created at job: " + jobId);
+                }
+                catch (NumberFormatException nfe) {
+                    // this should never happen
+                    logger.debug("Found group which is no Integer: " + group);
+                }
+            }
+        }
+
+        return jobId;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
