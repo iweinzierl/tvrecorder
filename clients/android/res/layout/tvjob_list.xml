@@ -6,12 +6,22 @@
     android:paddingTop="5dp"
     android:paddingBottom="5dp">
 
-    <TextView
-        android:id="@+id/channel"
-        android:layout_width="65dp"
-        android:layout_height="fill_parent"
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_vertical"
         android:paddingLeft="5dp"
-        android:gravity="center_vertical"/>
+        android:paddingRight="10dp"
+        android:layout_width="65dp"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/channel"
+            android:layout_width="fill_parent"
+            android:layout_height="25px"
+            android:maxHeight="25px"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
