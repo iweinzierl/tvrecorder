@@ -18,22 +18,28 @@
 package de.inselhome.tvrecorder.client.activities.tvsearch;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
 import de.inselhome.tvrecorder.common.objects.TvShow;
+import de.inselhome.tvrecorder.common.utils.JobBuilder;
 
 import de.inselhome.tvrecorder.client.R;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuideDataStore;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvShowsAdapter;
+import de.inselhome.tvrecorder.client.util.JobRecorder;
 
 
 /**
@@ -43,6 +49,10 @@ public class TvSearch
 extends      Activity
 {
     private static final String TAG = "TvR [TvSearch]";
+
+
+    public static final int OPTIONS_RECORD_SELECTED = 0;
+    public static final int OPTIONS_RECORD_ALL      = 1;
 
 
     protected TextView searchresult;
@@ -89,6 +99,68 @@ extends      Activity
         resultList = (ListView) findViewById(R.id.resultlist);
 
         displayShows(shows);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu");
+
+        menu.add(
+            0,
+            OPTIONS_RECORD_SELECTED,
+            0,
+            R.string.tvsearch_options_record_selected);
+
+        menu.add(
+            0,
+            OPTIONS_RECORD_ALL,
+            0,
+            R.string.tvsearch_options_record_all);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected");
+
+        int id = item.getItemId();
+
+        TvShowsAdapter adapter = (TvShowsAdapter) resultList.getAdapter();
+
+        if (id == OPTIONS_RECORD_SELECTED) {
+            recordShows(adapter.getSelectedTvShows());
+            return true;
+        }
+        else if (id == OPTIONS_RECORD_ALL) {
+            recordShows(adapter.getAllTvShows());
+            return true;
+        }
+
+        return false;
+    }
+
+
+    protected void recordShows(List<TvShow> shows) {
+        if (shows == null || shows.isEmpty()) {
+            return;
+        }
+
+        // TODO a channel is required
+        Channel    channel = new Channel("RTL", "RTL");
+        JobBuilder builder = new JobBuilder();
+
+        final int[] success = new int[] { 0 };
+
+        for (TvShow show: shows) {
+            if(builder.addJob(channel, show)) {
+                success[0] = success[0] + 1;
+            }
+        }
+
+        new JobRecorder(this).record(builder.get());
     }
 
 

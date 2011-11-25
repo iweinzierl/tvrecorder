@@ -88,6 +88,11 @@ public class TvShowsAdapter extends ArrayAdapter<TvShow>
     }
 
 
+    public List<TvShow> getAllTvShows() {
+        return Arrays.asList(shows);
+    }
+
+
     @Override
     public View getView(int pos, View view, ViewGroup parent) {
         View v = view;
