@@ -162,10 +162,10 @@ extends      TvRecorderResource
             return;
         }
 
-        Backend backend = getBackend();
-        backend.insertJob(job, jobId);
+        int endJobId = new StopAtJobCreator(job).startJob();
 
-        new StopAtJobCreator(job).startJob();
+        Backend backend = getBackend();
+        backend.insertJob(job, jobId, endJobId);
     }
 
 

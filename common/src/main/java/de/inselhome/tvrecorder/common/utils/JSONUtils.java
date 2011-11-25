@@ -89,6 +89,21 @@ public class JSONUtils {
     }
 
 
+    public static JSONArray toJSON(List<Job> jobs) {
+        JSONArray arr = new JSONArray();
+
+        for (Job job: jobs) {
+            JSONObject obj = toJSON(job);
+
+            if (obj != null) {
+                arr.put(obj);
+            }
+        }
+
+        return arr;
+    }
+
+
     public static JSONObject toJSON(Job job) {
         JSONObject obj = new JSONObject();
 

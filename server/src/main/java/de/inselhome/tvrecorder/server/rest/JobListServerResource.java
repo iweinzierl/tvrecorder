@@ -17,8 +17,11 @@
  */
 package de.inselhome.tvrecorder.server.rest;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
@@ -28,10 +31,14 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.JobListResource;
 import de.inselhome.tvrecorder.common.utils.JSONUtils;
+
+import de.inselhome.tvrecorder.server.backend.Backend;
+import de.inselhome.tvrecorder.server.utils.AtJobRemover;
 
 /**
  * The concrete implementation of a {@link TvGuideResource}.
@@ -73,6 +80,55 @@ implements   JobListResource
         }
 
         return new StringRepresentation(arr.toString());
+    }
+
+
+    @Override
+    public Representation post(Representation job) {
+        logger.info(PATH + " - post()");
+
+        List<Job> toRemove = null;
+
+        try {
+            String json = job.getText();
+            toRemove = JSONUtils.jobsFromJSON(new JSONArray(json));
+
+            logger.debug("Try to remove " + toRemove.size() + " jobs.");
+        }
+        catch (JSONException je) {
+            logger.error("Error while parsing job: " + je.getMessage());
+        }
+        catch (IOException ioe) {
+            logger.error("Error while parsing job: " + ioe.getMessage());
+        }
+
+        if (toRemove == null) {
+            return new StringRepresentation("Error: no job.");
+        }
+
+        Backend backend = getBackend();
+
+        List<Job> removed = new ArrayList<Job>();
+
+        for (Job j: toRemove) {
+            int[] atJobIds = backend.findAtJobIds(j);
+            logger.info(
+                "Try to remove at job: " + atJobIds[0] + " & " + atJobIds[1]);
+
+            if (atJobIds[0] > 0 && atJobIds[1] > 0) {
+                AtJobRemover.remove(atJobIds[0]);
+                AtJobRemover.remove(atJobIds[1]);
+
+                if (backend.removeJob(j) <= 0) {
+                    logger.warn("Job was not removed!");
+                    continue;
+                }
+
+                removed.add(j);
+            }
+        }
+
+        return new StringRepresentation(JSONUtils.toJSON(removed).toString());
     }
 
 
