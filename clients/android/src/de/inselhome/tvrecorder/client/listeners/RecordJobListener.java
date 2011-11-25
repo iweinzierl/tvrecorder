@@ -25,19 +25,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
-import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
-import org.restlet.resource.ClientResource;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
-import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
-import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 import de.inselhome.tvrecorder.client.R;
-import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.TvRecorder;
+import de.inselhome.tvrecorder.client.util.JobRecorder;
 
 
 /**
@@ -87,31 +82,9 @@ implements   View.OnClickListener
                     res.getString(R.string.error_endtime_before_starttime));
             }
 
-            String msg =  res.getString(R.string.addjob_recorded_message) + "\n";
-            msg += res.getString(R.string.addjob_recorded_start) + " ";
-            msg += DateUtils.format(
-                start.getTime(), DateUtils.DATETIME_FORMAT);
-            msg += "\n" + res.getString(R.string.addjob_recorded_end) + " ";
-            msg += DateUtils.format(
-                end.getTime(), DateUtils.DATETIME_FORMAT);
-            msg += "\n" + res.getString(R.string.addjob_recorded_channel) + " ";
-            msg += chann.getDescription();
-            msg += "\n" + res.getString(R.string.addjob_recorded_name) + " ";
-            msg += name;
+            Job job = new Job(start.getTime(), end.getTime(), chann, name);
 
-            ClientResource c = Config.getClientResource(
-                recorder, RecordResource.PATH);
-
-            Job    job  = new Job(start.getTime(), end.getTime(), chann, name);
-            String json = JSONUtils.toJSON(job).toString();
-
-            Log.i("TvR [RecordJobListener]", "createJob() - add new job.");
-
-            Representation result = c.post(new StringRepresentation(json));
-
-            Toast popup = Toast.makeText(recorder, msg, Toast.LENGTH_SHORT);
-            popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            popup.show();
+            new JobRecorder(recorder).record(job);
         }
         catch (Exception e) {
             String msg =

@@ -17,6 +17,7 @@
  */
 package de.inselhome.tvrecorder.client.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -53,6 +54,14 @@ public class JobRecorder {
 
     public JobRecorder(Context context) {
         this.context = context;
+    }
+
+
+    public void record(final Job toRecord) {
+        List<Job> toRecordList = new ArrayList<Job>();
+        toRecordList.add(toRecord);
+
+        record(toRecordList);
     }
 
 
