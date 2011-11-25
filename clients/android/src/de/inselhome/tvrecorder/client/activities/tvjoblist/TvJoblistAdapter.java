@@ -20,6 +20,7 @@ package de.inselhome.tvrecorder.client.activities.tvjoblist;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
@@ -82,7 +84,22 @@ public class TvJoblistAdapter extends ArrayAdapter<Job> {
 
             name.setText(job.getName());
 
-            channel.setText(job.getChannel().getDescription());
+            Resources res   = view.getResources();
+            Channel   chann = job.getChannel();
+
+            int resId = res.getIdentifier(
+                chann.getKey().toLowerCase(),
+                "drawable",
+                "de.inselhome.tvrecorder.client");
+
+            if (resId == 0) {
+                channel.setText(job.getChannel().getDescription());
+                channel.setBackgroundDrawable(null);
+            }
+            else {
+                channel.setText(" ");
+                channel.setBackgroundDrawable(res.getDrawable(resId));
+            }
         }
 
         return view;

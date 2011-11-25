@@ -1,5 +1,25 @@
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/layout/tvjob_list.xml: Adjustment of the channel
+	  column. This column is now centered vertically.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblistAdapter.java:
+	  Try to find an icon for channels. If there is an icon existing, it is
+	  set as background of the channel column and the text is set to an empty
+	  string. Otherwise, no background is set and the text is set to the
+	  channel description.
+
+	* clients/android/res/drawable/ard.png,
+	  clients/android/res/drawable/kabel1.png,
+	  clients/android/res/drawable/pro7.png,
+	  clients/android/res/drawable/rtl.png,
+	  clients/android/res/drawable/rtl2.png,
+	  clients/android/res/drawable/sat1.png,
+	  clients/android/res/drawable/vox.png,
+	  clients/android/res/drawable/zdf.png: New. Icons for TV channels.
+
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
 	  Added a method to record a single job.
 
