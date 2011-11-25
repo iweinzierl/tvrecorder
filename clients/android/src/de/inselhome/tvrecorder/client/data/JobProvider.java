@@ -26,6 +26,7 @@ import android.util.Log;
 
 import org.restlet.data.MediaType;
 import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 
 import org.json.JSONArray;
@@ -75,9 +76,38 @@ public class JobProvider {
     }
 
 
+    protected static List<Job> removeFromServer(Context c, List<Job> jobs) {
+        ClientResource cr = Config.getClientResource(c, JobListResource.PATH);
+
+        Log.d(TAG, "Try to remove " + jobs.size() + " jobs.");
+
+        JSONArray j = JSONUtils.toJSON(jobs);
+
+        Representation r = cr.post(new StringRepresentation(j.toString()));
+        Log.d(TAG, "Finished HTTP request.");
+
+        try {
+            return JSONUtils.jobsFromJSON(new JSONArray(r.getText()));
+        }
+        catch (JSONException je) {
+            Log.e(TAG, "Error while parsing removed jobs: " + je.getMessage());
+        }
+        catch (IOException ioe) {
+            Log.e(TAG, "Error while parsing removed jobs: " + ioe.getMessage());
+        }
+
+        return null;
+    }
+
+
     public static List<Job> getJobs(Context context) {
         // XXX Should we store a list of jobs locally?
         return getFromServer(context);
+    }
+
+
+    public static List<Job> removeJobs(Context context, List<Job> jobs) {
+        return removeFromServer(context, jobs);
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

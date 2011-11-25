@@ -1,5 +1,21 @@
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblistAdapter.java:
+	  Added a method to remove a list of Jobs.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:
+	  Added a context menu (on long press) with two options: remove the
+	  selected job / remove all jobs.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/data/JobProvider.java:
+	  Added a method to remove a list of jobs. The jobs, that have been
+	  removed is returned. This list can differ from the input list!
+
+	* clients/android/res/values/strings.xml: Added strings for the
+	  TvJoblist's context menu.
+
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/docs/schema.sql: Added a further column 'atJobId_end' to store
 	  the id of the at job which is used to stop a recording.
 
