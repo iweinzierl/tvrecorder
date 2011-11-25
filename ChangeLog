@@ -1,5 +1,14 @@
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
+	  Added a method to record a single job.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java:
+	  Removed the code to prepare the Http request and parse its response -
+	  use JobRecorder instead.
+
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
 	  A TvShow can now store an instance of a Channel. Added getChannel() and
 	  setChannel(Channel).
