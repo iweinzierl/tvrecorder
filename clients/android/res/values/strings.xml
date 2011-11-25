@@ -19,6 +19,8 @@
     <string name="tvguide_record_shows">Gewählte Shows aufnehmen</string>
     <string name="tvguide_load_progress_title">Aktualisierung</string>
     <string name="tvguide_load_progress_text">Lade Sendungen</string>
+    <string name="tvguide_record_progress_title">Aufnehmen</string>
+    <string name="tvguide_record_progress_text">Gewählte Sendungen werden aufgenommen</string>
     <string name="tvguide_channel_prompt">Kanal wählen</string>
     <string name="tvguide_context_open">Details</string>
     <string name="tvguide_context_record">Aufnehmen</string>
