@@ -1,4 +1,22 @@
-2011-11-24  Ingo Weinzierl <ingo@intevation.de>
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* server/docs/schema.sql: Added a further column 'atJobId_end' to store
+	  the id of the at job which is used to stop a recording.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/AtJobRemover.java:
+	  New. This class is used to remove at jobs.
+
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JSONUtils.java:
+	  Added a function that transforms a list of jobs into a JSON array.
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/backend/Backend.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/JobListServerResource.java,
+	  server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
+	  Improved process to remove at jobs. Also the id of the at job which is
+	  used to stop a recording is stored in the database now. And both at jobs
+	  are deleted when a Job is removed.
+
+2011-11-24  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* server/docs/schema.sql: Added an integer field to job relation which
 	  stores the at job id. This id is required to be able to delete jobs.

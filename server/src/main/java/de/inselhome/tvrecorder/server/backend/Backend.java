@@ -43,10 +43,13 @@ public class Backend {
         "SELECT * FROM jobs where start >= ? OR end >= ?";
 
     public static final String SQL_INSERT_NEW_JOB  =
-        "INSERT INTO jobs (start, end, channel, name, atJobId) VALUES (?, ?, ?, ?, ?)";
+        "INSERT INTO jobs (start, end, channel, name, atJobId_start, atJobId_end) VALUES (?, ?, ?, ?, ?, ?)";
 
     public static final String SQL_FIND_AT_JOB_ID =
-        "SELECT atJobId FROM jobs WHERE start = ? AND end = ?";
+        "SELECT atJobId_start, atJobId_end FROM jobs WHERE start = ? AND end = ? AND channel = ?";
+
+    public static final String SQL_REMOVE_JOB =
+        "DELETE FROM jobs WHERE start = ? AND end = ? AND channel = ?";
 
     private static Logger logger = Logger.getLogger(Backend.class);
 
@@ -147,7 +150,7 @@ public class Backend {
      *
      * @param The job that we want to insert.
      */
-    public void insertJob(Job job, int jobId) {
+    public void insertJob(Job job, int jobId_start, int jobId_end) {
         try {
             Connection connection       = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -157,7 +160,8 @@ public class Backend {
             statement.setDate(2, new Date(job.getEnd().getTime()));
             statement.setString(3, job.getChannel().getKey());
             statement.setString(4, job.getName());
-            statement.setInt(5, jobId);
+            statement.setInt(5, jobId_start);
+            statement.setInt(6, jobId_end);
 
             statement.executeUpdate();
         }
@@ -170,22 +174,37 @@ public class Backend {
     }
 
 
-    public int findAtJobId(Job job) {
-        int jobId = -1;
+    public int[] findAtJobIds(Job job) {
+        int[] jobIds = new int[] { -1, -1 };
 
         try {
             Connection connection       = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
-                SQL_INSERT_NEW_JOB);
+                SQL_FIND_AT_JOB_ID);
 
-            statement.setDate(1, new Date(job.getStart().getTime()));
-            statement.setDate(2, new Date(job.getEnd().getTime()));
+            if (logger.isDebugEnabled()) {
+                logger.debug("Try to find atJobId for:");
+                logger.debug("  start:   " + job.getStart().getTime());
+                logger.debug("  end:     " + job.getEnd().getTime());
+                logger.debug("  channel: " + job.getChannel().getKey());
+            }
+
+            statement.setLong(1, job.getStart().getTime());
+            statement.setLong(2, job.getEnd().getTime());
+            statement.setString(3, job.getChannel().getKey());
 
             ResultSet rs = statement.executeQuery();
 
-            rs.first();
+            while (rs.next()) {
+                jobIds[0] = rs.getInt("atJobId_start");
+                jobIds[1] = rs.getInt("atJobId_end");
 
-            jobId = rs.getInt("atJobId");
+                if (jobIds[0] > 0 && jobIds[1] > 0) {
+                    break;
+                }
+            }
+
+            connection.close();
         }
         catch (SQLException sqle) {
             logger.error(sqle.getLocalizedMessage());
@@ -194,7 +213,42 @@ public class Backend {
             logger.error(cnfe.getLocalizedMessage());
         }
 
-        return jobId;
+        return jobIds;
+    }
+
+
+    public int removeJob(Job job) {
+        try {
+            Connection connection       = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                SQL_REMOVE_JOB);
+
+            if (logger.isDebugEnabled()) {
+                logger.debug("Try to remove job:");
+                logger.debug("  start:   " + job.getStart().getTime());
+                logger.debug("  end:     " + job.getEnd().getTime());
+                logger.debug("  channel: " + job.getChannel().getKey());
+                logger.debug("  name:    " + job.getName());
+            }
+
+            statement.setLong(1, job.getStart().getTime());
+            statement.setLong(2, job.getEnd().getTime());
+            statement.setString(3, job.getChannel().getKey());
+
+            int count = statement.executeUpdate();
+
+            connection.close();
+
+            return count;
+        }
+        catch (SQLException sqle) {
+            logger.error(sqle.getLocalizedMessage());
+        }
+        catch (ClassNotFoundException cnfe) {
+            logger.error(cnfe.getLocalizedMessage());
+        }
+
+        return -1;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
