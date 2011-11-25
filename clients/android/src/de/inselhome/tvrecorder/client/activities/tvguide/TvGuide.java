@@ -46,11 +46,15 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 
+import org.json.JSONArray;
+
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
+import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.JobBuilder;
+import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.R;
@@ -316,18 +320,18 @@ implements   TvGuideUpdateListener {
 
         final String json = builder.toJSON().toString();
 
-        new AsyncTask<Void, Void, String>() {
-            protected String doInBackground(Void... v) {
+        new AsyncTask<Void, Void, List<Job>>() {
+            protected List<Job> doInBackground(Void... v) {
                 ClientResource cr = Config.getClientResource(
                     TvGuide.this, RecordResource.PATH);
 
                 try {
-                    Representation result =
+                    Representation res =
                         cr.post(new StringRepresentation(json));
 
                     afterRecordShows();
 
-                    return result.getText();
+                    return JSONUtils.jobsFromJSON(new JSONArray(res.getText()));
                 }
                 catch (Exception e) {
                     Log.e(TAG, "INTERNAL SERVER ERROR");
@@ -338,11 +342,11 @@ implements   TvGuideUpdateListener {
                 return null;
             }
 
-            protected void onPostExecute(String responseText) {
+            protected void onPostExecute(List<Job> jobs) {
                 String message = null;
                 Toast  popup   = null;
 
-                if (responseText == null) {
+                if (jobs == null) {
                     displayError(
                         "Error",
                         "Error while recording jobs.");
@@ -350,11 +354,9 @@ implements   TvGuideUpdateListener {
                     return;
                 }
 
-                if (responseText.equals("SUCCESS")) {
-                    displayInformation(
-                        "Successfully added " + success[0] +
-                        " / " + success[0] + " jobs.");
-                }
+                displayInformation(
+                    "Successfully added " + jobs.size() +
+                    " / " + success[0] + " jobs.");
             }
         }.execute();
     }

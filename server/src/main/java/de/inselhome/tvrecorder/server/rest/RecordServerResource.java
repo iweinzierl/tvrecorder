@@ -18,7 +18,9 @@
 package de.inselhome.tvrecorder.server.rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -32,6 +34,7 @@ import org.json.JSONException;
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
+import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
 import de.inselhome.tvrecorder.server.backend.Backend;
 import de.inselhome.tvrecorder.server.utils.MPlayerCmdProducer;
@@ -69,6 +72,8 @@ extends      TvRecorderResource
     public Representation post(Representation job) {
         logger.info("/record - post()");
 
+        List<Job> success = new ArrayList<Job>();
+
         try {
             JSONArray items = readJobItems(job.getText());
             int    numItems = items != null ? items.length() : 0;
@@ -83,10 +88,14 @@ extends      TvRecorderResource
                 Date   start = new Date(json.getLong("start"));
                 Date   end   = new Date(json.getLong("end"));
 
-                doRecord(new Job(start, end, new Channel(chan, chan), name));
+                Job j = new Job(start, end, new Channel(chan, chan), name);
+                if (doRecord(j)) {
+                    success.add(j);
+                }
             }
 
-            return new StringRepresentation("SUCCESS");
+            String response = JSONUtils.toJSON(success).toString();
+            return new StringRepresentation(response);
         }
         catch (IOException ioe) {
             logger.error("Broken JSON representation: " + ioe.getMessage());
@@ -132,10 +141,10 @@ extends      TvRecorderResource
     }
 
 
-    protected void doRecord(Job job) {
+    protected boolean doRecord(Job job) {
         if (job == null) {
             logger.warn("Job to record is null!");
-            throw new IllegalArgumentException("Could not create job - missing information.");
+            return false;
         }
 
         prepareJob(job);
@@ -150,22 +159,22 @@ extends      TvRecorderResource
         }
 
         if (!isJobValid(job)) {
-            String msg = "The job '" + job.getName() + "' is not valid!";
-            logger.error(msg);
-
-            throw new IllegalArgumentException(msg);
+            logger.error("The job '" + job.getName() + "' is not valid!");
+            return false;
         }
 
         int jobId = new StartAtJobCreator(job, new MPlayerCmdProducer()).startJob();
 
         if (jobId < 0) {
-            return;
+            return false;
         }
 
         int endJobId = new StopAtJobCreator(job).startJob();
 
         Backend backend = getBackend();
         backend.insertJob(job, jobId, endJobId);
+
+        return true;
     }
 
 
