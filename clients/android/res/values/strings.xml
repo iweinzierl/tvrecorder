@@ -38,6 +38,8 @@
     <string name="tvjoblist_load_failed_text">Es konnten keine Aufträge vom Server geladen werden. Prüfen Sie ihre Internetverbindung und versuchen Sie es erneut.</string>
     <string name="tvjoblist_no_jobs_title">Keine Aufträge gefunden</string>
     <string name="tvjoblist_no_jobs_text">Es wurden keine Aufträge gefunden, die derzeit in Warteschlange stehen.</string>
+    <string name="tvjoblist_context_remove_single">Gewählten Job löschen</string>
+    <string name="tvjoblist_context_remove_all">Alle Jobs löschen</string>
 
     <string name="keyvalueitem_change">ändern</string>
 

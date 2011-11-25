@@ -17,6 +17,7 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvjoblist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -26,6 +27,11 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
 import de.inselhome.tvrecorder.client.R;
@@ -42,9 +48,14 @@ extends      Activity
 {
     private static final String TAG = "TvR [TvJoblist]";
 
+
     protected ListView joblist;
 
     protected ProgressDialog progress;
+
+
+    public static final int CONTEXT_REMOVE_SINGLE = 1;
+    public static final int CONTEXT_REMOVE_ALL    = 2;
 
 
     @Override
@@ -57,7 +68,58 @@ extends      Activity
 
         joblist = (ListView) findViewById(R.id.joblist);
 
+        registerForContextMenu(joblist);
+
         updateJobs();
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu m, View v, ContextMenuInfo mi) {
+        super.onCreateContextMenu(m, v, mi);
+
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) mi;
+
+        Job job = (Job) joblist.getAdapter().getItem(info.position);
+
+        m.setHeaderTitle(job.getName());
+        m.add(
+            0,
+            CONTEXT_REMOVE_SINGLE,
+            0,
+            R.string.tvjoblist_context_remove_single);
+
+        m.add(
+            0,
+            CONTEXT_REMOVE_ALL,
+            0,
+            R.string.tvjoblist_context_remove_all);
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == CONTEXT_REMOVE_SINGLE) {
+            AdapterContextMenuInfo info =
+                (AdapterContextMenuInfo) item.getMenuInfo();
+
+            Job job = (Job) joblist.getAdapter().getItem(info.position);
+
+            List<Job> toRemove = new ArrayList<Job>();
+            toRemove.add(job);
+
+            removeJobs(toRemove);
+
+            return true;
+        }
+        else if (id == CONTEXT_REMOVE_ALL) {
+            TvJoblistAdapter a = (TvJoblistAdapter) joblist.getAdapter();
+            removeJobs(a.getJobs());
+        }
+
+        return super.onContextItemSelected(item);
     }
 
 
@@ -102,6 +164,34 @@ extends      Activity
     }
 
 
+    protected void removeJobs(final List<Job> toRemove) {
+        // TODO ADD PROGRESS DIALOG
+
+        new AsyncTask<Void, Void, List<Job>>() {
+            protected List<Job> doInBackground(Void... v) {
+                try {
+                    return JobProvider.removeJobs(TvJoblist.this, toRemove);
+                }
+                catch (Exception e) {
+                    Log.e(TAG, "INTERNAL SERVER ERROR");
+                    // TODO REMOVE PROGRESS DIALOG
+                }
+
+                return null;
+            }
+
+            protected void onPostExecute(List<Job> jobs) {
+                Log.d(TAG, "HTTP request finished.");
+                TvJoblistAdapter a = (TvJoblistAdapter) joblist.getAdapter();
+                a.removeJobs(jobs);
+
+                // TODO DISPLAY REMOVED JOBS
+                // TODO REMOVE PROGRESS DIALOG
+            }
+        }.execute();
+    }
+
+
     protected void beforeUpdateJobs() {
         Resources res = getResources();
         progress = ProgressDialog.show(
@@ -120,14 +210,10 @@ extends      Activity
 
 
     protected void displayJobs(List<Job> jobs) {
-        Job[] data = jobs != null
-            ? (Job[]) jobs.toArray(new Job[jobs.size()])
-            : new Job[0];
-
         joblist.setAdapter(new TvJoblistAdapter(
             this,
             R.layout.tvjob_list,
-            data));
+            jobs));
     }
 
 

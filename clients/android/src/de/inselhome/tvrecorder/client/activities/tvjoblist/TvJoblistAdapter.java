@@ -17,6 +17,8 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvjoblist;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,9 @@ import de.inselhome.tvrecorder.client.R;
  */
 public class TvJoblistAdapter extends ArrayAdapter<Job> {
 
-    protected Job[] jobs;
+    private static final String TAG = "TvR [TvJoblistAdapter]";
+
+    protected List<Job> jobs;
 
 
     public TvJoblistAdapter(Context context, int resourceId) {
@@ -44,8 +48,11 @@ public class TvJoblistAdapter extends ArrayAdapter<Job> {
     }
 
 
-    public TvJoblistAdapter(Context context, int resourceId, Job[] jobs) {
+    public TvJoblistAdapter(Context context, int resourceId, List<Job> jobs) {
         super(context, resourceId, jobs);
+        //super(context, resourceId, jobs != null
+        //    ? (Job[]) jobs.toArray(new Job[jobs.size()])
+        //    : new Job[0]);
         this.jobs = jobs;
     }
 
@@ -59,7 +66,7 @@ public class TvJoblistAdapter extends ArrayAdapter<Job> {
             view = vi.inflate(R.layout.tvjob_list, null);
         }
 
-        final Job job = jobs[pos];
+        final Job job = jobs.get(pos);
 
         if (job != null) {
             TextView start   = (TextView) view.findViewById(R.id.start);
@@ -79,6 +86,32 @@ public class TvJoblistAdapter extends ArrayAdapter<Job> {
         }
 
         return view;
+    }
+
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+
+    public void removeJobs(List<Job> toRemove) {
+        OUTER: for (int i = jobs.size()-1; i >= 0; i--) {
+            Job orig = jobs.get(i);
+
+            String chann = orig.getChannel().getKey();
+            long   start = orig.getStart().getTime();
+
+            for (Job job: toRemove) {
+                if (chann.equals(job.getChannel().getKey())
+                    && start == job.getStart().getTime())
+                {
+                    jobs.remove(orig);
+                    remove(orig);
+
+                    continue OUTER;
+                }
+            }
+        }
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
