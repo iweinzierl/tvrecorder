@@ -37,6 +37,8 @@ public class TvShow implements Serializable, Comparable {
     protected Date   end;
     protected int    length;
 
+    protected Channel channel;
+
 
     public TvShow() {
     }
@@ -101,6 +103,16 @@ public class TvShow implements Serializable, Comparable {
 
     public int getLength() {
         return length;
+    }
+
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+
+    public Channel getChannel() {
+        return channel;
     }
 
 

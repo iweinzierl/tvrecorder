@@ -148,15 +148,16 @@ extends      Activity
             return;
         }
 
-        // TODO a channel is required
-        Channel    channel = new Channel("RTL", "RTL");
-        JobBuilder builder = new JobBuilder();
-
+        JobBuilder  builder = new JobBuilder();
         final int[] success = new int[] { 0 };
 
         for (TvShow show: shows) {
-            if(builder.addJob(channel, show)) {
-                success[0] = success[0] + 1;
+            Channel channel = show.getChannel();
+
+            if (channel != null) {
+                if(builder.addJob(channel, show)) {
+                    success[0] = success[0] + 1;
+                }
             }
         }
 
@@ -169,6 +170,7 @@ extends      Activity
 
         for (ChannelWithTvGuide channel: channels) {
             for (TvShow show: channel.getSortedListing()) {
+                show.setChannel(channel);
                 shows.add(show);
             }
         }
