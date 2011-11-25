@@ -72,6 +72,9 @@ implements   TvGuideUpdateListener {
     protected ProgressDialog progress;
 
 
+    private static final String TAG = "TvR [TvGuide]";
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -294,6 +297,8 @@ implements   TvGuideUpdateListener {
 
 
     protected void recordShows(List<TvShow> shows) {
+        beforeRecordShows();
+
         if (shows == null || shows.isEmpty()) {
             return;
         }
@@ -301,49 +306,90 @@ implements   TvGuideUpdateListener {
         Channel    channel = (Channel) channelList.getSelectedItem();
         JobBuilder builder = new JobBuilder();
 
-        int success = 0;
+        final int[] success = new int[] { 0 };
 
         for (TvShow show: shows) {
             if(builder.addJob(channel, show)) {
-                success++;
-            };
+                success[0] = success[0] + 1;
+            }
         }
 
-        String json = builder.toJSON().toString();
+        final String json = builder.toJSON().toString();
 
-        ClientResource c = Config.getClientResource(this, RecordResource.PATH);
+        new AsyncTask<Void, Void, String>() {
+            protected String doInBackground(Void... v) {
+                ClientResource cr = Config.getClientResource(
+                    TvGuide.this, RecordResource.PATH);
 
-        Representation result = c.post(new StringRepresentation(json));
+                try {
+                    Representation result =
+                        cr.post(new StringRepresentation(json));
 
-        String message = null;
-        Toast  popup   = null;
+                    afterRecordShows();
 
-        try {
-            message = result.getText();
-        }
-        catch (IOException ioe) {
-            popup = Toast.makeText(
-                this,
-                ioe.getMessage(),
-                Toast.LENGTH_SHORT);
-        }
+                    return result.getText();
+                }
+                catch (Exception e) {
+                    Log.e(TAG, "INTERNAL SERVER ERROR");
+                }
 
-        if (popup == null && message != null && message.equals("SUCCESS")) {
-            popup = Toast.makeText(
-                this,
-                "Successfully added " + success + " / " +
-                shows.size() + " TvShows.",
-                Toast.LENGTH_SHORT);
-        }
-        else if (popup == null) {
-            popup = Toast.makeText(
-                this,
-                "Adding jobs was not successful!",
-                Toast.LENGTH_SHORT);
-        }
+                afterRecordShows();
 
+                return null;
+            }
+
+            protected void onPostExecute(String responseText) {
+                String message = null;
+                Toast  popup   = null;
+
+                if (responseText == null) {
+                    displayError(
+                        "Error",
+                        "Error while recording jobs.");
+
+                    return;
+                }
+
+                if (responseText.equals("SUCCESS")) {
+                    displayInformation(
+                        "Successfully added " + success[0] +
+                        " / " + success[0] + " jobs.");
+                }
+            }
+        }.execute();
+    }
+
+
+    protected void displayInformation(String info) {
+        Toast popup = Toast.makeText(this, info, Toast.LENGTH_SHORT);
         popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         popup.show();
+    }
+
+
+    protected void displayError(String title, String text) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TvGuide.this);
+        builder.setTitle(title);
+        builder.setMessage(text);
+
+        builder.show();
+    }
+
+
+    protected void beforeRecordShows() {
+        Resources res = getResources();
+        progress = ProgressDialog.show(
+            this,
+            res.getString(R.string.tvguide_record_progress_title),
+            res.getString(R.string.tvguide_record_progress_text),
+            true);
+    }
+
+
+    protected void afterRecordShows() {
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
