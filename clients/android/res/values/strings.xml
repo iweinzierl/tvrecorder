@@ -19,8 +19,6 @@
     <string name="tvguide_record_shows">Gewählte Shows aufnehmen</string>
     <string name="tvguide_load_progress_title">Aktualisierung</string>
     <string name="tvguide_load_progress_text">Lade Sendungen</string>
-    <string name="tvguide_record_progress_title">Aufnehmen</string>
-    <string name="tvguide_record_progress_text">Gewählte Sendungen werden aufgenommen</string>
     <string name="tvguide_channel_prompt">Kanal wählen</string>
     <string name="tvguide_context_open">Details</string>
     <string name="tvguide_context_record">Aufnehmen</string>
@@ -32,6 +30,8 @@
     <string name="tvshowdetail_datesuffix">Uhr</string>
 
     <string name="tvsearch_title">Tv Search</string>
+    <string name="tvsearch_options_record_selected">Gewählte Sendungen aufnehmen</string>
+    <string name="tvsearch_options_record_all">Alle Sendungen aufnehmen</string>
 
     <string name="tvjoblist_title">Tv Joblist</string>
     <string name="tvjoblist_load_progress_title">Aktualisierung</string>
@@ -62,6 +62,9 @@
     <string name="addjob_recorded_channel">Programm: </string>
     <string name="addjob_recorded_name">Name: </string>
     <string name="addjob_recorded_error_title">Fehler beim Erstellen des Jobs: </string>
+
+    <string name="jobrecorder_record_progress_title">Aufnehmen</string>
+    <string name="jobrecorder_record_progress_text">Gewählte Sendungen werden aufgenommen</string>
 
     <string name="datepicker_cancel">abbrechen</string>
     <string name="datepicker_ok">ok</string>

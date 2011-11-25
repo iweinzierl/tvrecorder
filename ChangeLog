@@ -1,5 +1,29 @@
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JobBuilder.java:
+	  Added a method to get the list of created jobs.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
+	  New. This utility class should be used to send jobs to the server. The
+	  Http request is prepared here and the response is parsed.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Removed the code to send jobs to TvRecorder server. This code is placed in
+	  JobRecorder now.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java:
+	  Added a method that returns a list of TvShows that contains all TvShows
+	  currently stored in the adapter.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvsearch/TvSearch.java:
+	  Registered an options menu with two items: an item to record selected
+	  TvShows and an item to record all TvShows currently displayed.
+
+	* clients/android/res/values/strings.xml: Added strings for options menu
+	  in the TvSearch Activity.
+
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* server/src/main/java/de/inselhome/tvrecorder/server/rest/RecordServerResource.java:
 	  This resource no longer throws IOExceptions for invalid jobs. All valid
 	  jobs are used; the valid jobs are returned as JSONArray.

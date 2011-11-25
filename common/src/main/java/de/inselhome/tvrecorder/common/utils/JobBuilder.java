@@ -75,5 +75,10 @@ public final class JobBuilder {
 
         return array;
     }
+
+
+    public List<Job> get() {
+        return jobs;
+    }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :

@@ -17,7 +17,6 @@
  */
 package de.inselhome.tvrecorder.client.activities.tvguide;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,7 +29,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,24 +38,16 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
-import org.restlet.resource.ClientResource;
 
-import org.json.JSONArray;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.ChannelWithTvGuide;
-import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.objects.TvShow;
-import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.JobBuilder;
-import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
-import de.inselhome.tvrecorder.client.Config;
 import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.util.JobRecorder;
 
 
 /**
@@ -301,8 +291,6 @@ implements   TvGuideUpdateListener {
 
 
     protected void recordShows(List<TvShow> shows) {
-        beforeRecordShows();
-
         if (shows == null || shows.isEmpty()) {
             return;
         }
@@ -318,80 +306,7 @@ implements   TvGuideUpdateListener {
             }
         }
 
-        final String json = builder.toJSON().toString();
-
-        new AsyncTask<Void, Void, List<Job>>() {
-            protected List<Job> doInBackground(Void... v) {
-                ClientResource cr = Config.getClientResource(
-                    TvGuide.this, RecordResource.PATH);
-
-                try {
-                    Representation res =
-                        cr.post(new StringRepresentation(json));
-
-                    afterRecordShows();
-
-                    return JSONUtils.jobsFromJSON(new JSONArray(res.getText()));
-                }
-                catch (Exception e) {
-                    Log.e(TAG, "INTERNAL SERVER ERROR");
-                }
-
-                afterRecordShows();
-
-                return null;
-            }
-
-            protected void onPostExecute(List<Job> jobs) {
-                String message = null;
-                Toast  popup   = null;
-
-                if (jobs == null) {
-                    displayError(
-                        "Error",
-                        "Error while recording jobs.");
-
-                    return;
-                }
-
-                displayInformation(
-                    "Successfully added " + jobs.size() +
-                    " / " + success[0] + " jobs.");
-            }
-        }.execute();
-    }
-
-
-    protected void displayInformation(String info) {
-        Toast popup = Toast.makeText(this, info, Toast.LENGTH_SHORT);
-        popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        popup.show();
-    }
-
-
-    protected void displayError(String title, String text) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(TvGuide.this);
-        builder.setTitle(title);
-        builder.setMessage(text);
-
-        builder.show();
-    }
-
-
-    protected void beforeRecordShows() {
-        Resources res = getResources();
-        progress = ProgressDialog.show(
-            this,
-            res.getString(R.string.tvguide_record_progress_title),
-            res.getString(R.string.tvguide_record_progress_text),
-            true);
-    }
-
-
-    protected void afterRecordShows() {
-        if (progress != null) {
-            progress.dismiss();
-        }
+        new JobRecorder(this).record(builder.get());
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
