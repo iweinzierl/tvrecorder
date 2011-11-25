@@ -165,7 +165,7 @@ extends      Activity
 
 
     protected void removeJobs(final List<Job> toRemove) {
-        // TODO ADD PROGRESS DIALOG
+        beforeRemoveJobs();
 
         new AsyncTask<Void, Void, List<Job>>() {
             protected List<Job> doInBackground(Void... v) {
@@ -174,7 +174,7 @@ extends      Activity
                 }
                 catch (Exception e) {
                     Log.e(TAG, "INTERNAL SERVER ERROR");
-                    // TODO REMOVE PROGRESS DIALOG
+                    afterRemoveJobs();
                 }
 
                 return null;
@@ -182,23 +182,34 @@ extends      Activity
 
             protected void onPostExecute(List<Job> jobs) {
                 Log.d(TAG, "HTTP request finished.");
+
+                if (jobs == null) {
+                    displayInformation(
+                        R.string.tvjoblist_remove_failed_title,
+                        R.string.tvjoblist_remove_failed_text);
+                    return;
+                }
+
                 TvJoblistAdapter a = (TvJoblistAdapter) joblist.getAdapter();
                 a.removeJobs(jobs);
 
-                // TODO DISPLAY REMOVED JOBS
-                // TODO REMOVE PROGRESS DIALOG
+                afterRemoveJobs();
             }
         }.execute();
     }
 
 
     protected void beforeUpdateJobs() {
-        Resources res = getResources();
-        progress = ProgressDialog.show(
-            this,
-            res.getString(R.string.tvjoblist_load_progress_title),
-            res.getString(R.string.tvjoblist_load_progress_text),
-            true);
+        displayProgress(
+            R.string.tvjoblist_load_progress_title,
+            R.string.tvjoblist_load_progress_text);
+    }
+
+
+    protected void beforeRemoveJobs() {
+        displayProgress(
+            R.string.tvjoblist_remove_progress_title,
+            R.string.tvjoblist_remove_progress_text);
     }
 
 
@@ -206,6 +217,23 @@ extends      Activity
         if (progress != null) {
             progress.dismiss();
         }
+    }
+
+
+    protected void afterRemoveJobs() {
+        if (progress != null) {
+            progress.dismiss();
+        }
+    }
+
+
+    protected void displayProgress(int titleId, int textId) {
+        Resources res = getResources();
+        progress = ProgressDialog.show(
+            this,
+            res.getString(titleId),
+            res.getString(textId),
+            true);
     }
 
 

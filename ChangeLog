@@ -1,5 +1,13 @@
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java:
+	  Display progress dialog while removing jobs and if an error occured.
+
+	* clients/android/res/values/strings.xml: Added error and progress strings
+	  for removing jobs.
+
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblistAdapter.java:
 	  Added a method to remove a list of Jobs.
 
