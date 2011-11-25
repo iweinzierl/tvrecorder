@@ -1,5 +1,14 @@
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* common/src/main/java/de/inselhome/tvrecorder/common/objects/TvShow.java:
+	  A TvShow can now store an instance of a Channel. Added getChannel() and
+	  setChannel(Channel).
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvsearch/TvSearch.java:
+	  Create Jobs only for TvShows that support a Channel.
+
+2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* common/src/main/java/de/inselhome/tvrecorder/common/utils/JobBuilder.java:
 	  Added a method to get the list of created jobs.
 
