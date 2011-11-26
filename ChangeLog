@@ -1,3 +1,17 @@
+2011-11-26  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/ui/ChannelView.java:
+	  New. A TextView that displays the channel as text or as image if an
+	  image is existing for the specific channel.
+
+	* clients/android/res/layout/tvguide.xml: Removed the Channel Spinner. It
+	  has been replaced by an HorizontalScrollView. The Channels are now
+	  displayed horizontally with their name or an icon (see ChannelView).
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Removed Channel Spinner. Add a ChannelView for each Channel of the
+	  TvGuide.
+
 2011-11-25  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/layout/tvjob_list.xml: Adjustment of the channel
