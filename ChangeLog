@@ -1,5 +1,9 @@
 2011-11-26  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/drawable/rtl2.png: Adjusted dimension of RTL2 logo.
+
+2011-11-26  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/ui/ChannelView.java:
 	  New. A TextView that displays the channel as text or as image if an
 	  image is existing for the specific channel.
