@@ -32,12 +32,10 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 
 
@@ -47,6 +45,7 @@ import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.utils.JobBuilder;
 
 import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.ui.ChannelView;
 import de.inselhome.tvrecorder.client.util.JobRecorder;
 
 
@@ -58,9 +57,11 @@ extends      Activity
 implements   TvGuideUpdateListener {
 
     protected List<TvGuideUpdateListener> listeners;
+    protected List<ChannelWithTvGuide>    channels;
 
-    protected LinearLayout rootLayout;
-    protected Spinner      channelList;
+    protected Channel selectedChannel;
+
+    protected LinearLayout channelList;
     protected ListView     tvShows;
 
     protected ProgressDialog progress;
@@ -88,8 +89,8 @@ implements   TvGuideUpdateListener {
     protected void initLayout() {
         setContentView(R.layout.tvguide);
 
+        channelList = (LinearLayout) findViewById(R.id.channels);
         tvShows     = (ListView) findViewById(R.id.tvguide);
-        channelList = (Spinner)  findViewById(R.id.channel_spinner);
 
         Log.d("TvR [TvGuide]", "register tv show list for context menu");
         registerForContextMenu(tvShows);
@@ -222,38 +223,44 @@ implements   TvGuideUpdateListener {
             return;
         }
 
-        Log.d("TvR [TvGuide]", "Create ArrayAdapter now...");
+        channelList.removeAllViews();
 
-        ArrayAdapter adapter = new ArrayAdapter(
-            activity,
-            android.R.layout.simple_spinner_dropdown_item,
-            channels);
+        boolean first = true;
 
-        channelList.setAdapter(adapter);
+        for (ChannelWithTvGuide c: channels) {
+            if (first) {
+                setSelectedChannel(c);
+                updateTvShows(c);
+                first = false;
+            }
 
-        channelList.setOnItemSelectedListener(
-            new AdapterView.OnItemSelectedListener() {
-                public void onItemSelected(
-                    AdapterView parent,
-                    View        view,
-                    int         position,
-                    long        id)
-                {
-                    ChannelWithTvGuide c = (ChannelWithTvGuide)
-                        parent.getItemAtPosition(position);
+            ChannelView view = new ChannelView(this, c);
+            view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    ChannelView tmp = (ChannelView) v;
 
-                    Log.d("TvR [TvGuide]", "Update list with new channels.");
+                    ChannelWithTvGuide ctv = (ChannelWithTvGuide)
+                        tmp.getChannel();
 
-                    updateTvShows(c);
-                }
-
-
-                public void onNothingSelected(AdapterView view) {
-                    // do nothing
+                    setSelectedChannel(ctv);
+                    updateTvShows(ctv);
                 }
             });
 
+            channelList.addView(view);
+        }
+
         progress.dismiss();
+    }
+
+
+    public void setSelectedChannel(Channel selectedChannel) {
+        this.selectedChannel = selectedChannel;
+    }
+
+
+    public Channel getSelectedChannel() {
+        return selectedChannel;
     }
 
 
@@ -295,7 +302,7 @@ implements   TvGuideUpdateListener {
             return;
         }
 
-        Channel    channel = (Channel) channelList.getSelectedItem();
+        Channel    channel = getSelectedChannel();
         JobBuilder builder = new JobBuilder();
 
         final int[] success = new int[] { 0 };

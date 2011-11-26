@@ -4,11 +4,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Spinner 
-        android:id="@+id/channel_spinner"
+    <HorizontalScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:prompt="@string/tvguide_channel_prompt"/>
+        android:layout_height="60px">
+
+        <LinearLayout
+            android:id="@+id/channels"
+            android:layout_height="100px"
+            android:layout_width="fill_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+    </HorizontalScrollView>
 
     <ListView
         android:id="@+id/tvguide"
