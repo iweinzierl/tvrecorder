@@ -95,19 +95,40 @@
         android:layout_marginRight="10dp"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/addjob_recorded_channel" />
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/addjob_channel_spinner"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/addjob_recorded_channel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                android:id="@+id/addjob_selected_channel"/>
+
+        </LinearLayout>
+
+        <HorizontalScrollView
             android:layout_width="fill_parent"
-            android:layout_height="55px"
-            android:prompt="@string/addjob_recorded_channel"/>
+            android:layout_height="60px">
+
+            <LinearLayout
+                android:id="@+id/addjob_channel_list"
+                android:layout_height="100px"
+                android:layout_width="fill_parent"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+        </HorizontalScrollView>
 
     </LinearLayout>
 

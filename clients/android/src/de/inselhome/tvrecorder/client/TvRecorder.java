@@ -35,11 +35,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -53,6 +52,7 @@ import de.inselhome.tvrecorder.client.listeners.RecordJobListener;
 import de.inselhome.tvrecorder.client.activities.addjob.OnChannelsUpdatedListener;
 import de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings;
 import de.inselhome.tvrecorder.client.activities.tvguide.TvGuide;
+import de.inselhome.tvrecorder.client.ui.ChannelView;
 
 
 /**
@@ -66,13 +66,16 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
 
     protected ProgressDialog dialog;
 
-    protected TextView start_date;
-    protected TextView start_time;
-    protected TextView end_date;
-    protected TextView end_time;
-    protected EditText name;
-    protected Spinner  channels;
-    protected Button   record;
+    protected TextView     start_date;
+    protected TextView     start_time;
+    protected TextView     end_date;
+    protected TextView     end_time;
+    protected TextView     selectedChannel;
+    protected LinearLayout channels;
+    protected EditText     name;
+    protected Button       record;
+
+    protected Channel channel;
 
     protected GregorianCalendar start_datetime;
     protected GregorianCalendar end_datetime;
@@ -106,13 +109,14 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
     protected void initLayout() {
         Log.d("TvR [TvRecorderActivity]", "initLayout()");
 
-        start_date = (TextView) findViewById(R.id.start_date);
-        start_time = (TextView) findViewById(R.id.start_time);
-        end_date   = (TextView) findViewById(R.id.end_date);
-        end_time   = (TextView) findViewById(R.id.end_time);
-        name       = (EditText) findViewById(R.id.addjob_name);
-        channels   = (Spinner)  findViewById(R.id.addjob_channel_spinner);
-        record     = (Button)   findViewById(R.id.record);
+        start_date      = (TextView) findViewById(R.id.start_date);
+        start_time      = (TextView) findViewById(R.id.start_time);
+        end_date        = (TextView) findViewById(R.id.end_date);
+        end_time        = (TextView) findViewById(R.id.end_time);
+        name            = (EditText) findViewById(R.id.addjob_name);
+        selectedChannel = (TextView) findViewById(R.id.addjob_selected_channel);
+        channels        = (LinearLayout) findViewById(R.id.addjob_channel_list);
+        record          = (Button) findViewById(R.id.record);
 
         start_date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -252,8 +256,13 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
 
 
     public Channel getChannel() {
-        int idx = channels.getSelectedItemPosition();
-        return rawChannels.get(idx);
+        return channel;
+    }
+
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+        selectedChannel.setText(channel.getDescription());
     }
 
 
@@ -337,15 +346,19 @@ public class TvRecorder extends Activity implements OnChannelsUpdatedListener {
 
         Log.i("TvR [TvRecorder]", "Found " + channels.length + " channels");
 
-        ArrayAdapter adapter = new ArrayAdapter(
-            this, android.R.layout.simple_spinner_dropdown_item);
-
         for (Channel channel: channels) {
             rawChannels.add(channel);
-            adapter.add(channel.getDescription());
-        }
 
-        this.channels.setAdapter(adapter);
+            final ChannelView view = new ChannelView(this, channel);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    setChannel(view.getChannel());
+                }
+            });
+
+            this.channels.addView(view);
+        }
     }
 
 
