@@ -74,7 +74,6 @@ implements   OnSharedPreferenceChangeListener
     }
 
 
-    @Override
     public void onSharedPreferenceChanged(
         SharedPreferences pref, String key
     ) {
