@@ -1,3 +1,13 @@
+2011-12-02  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	+ clients/android/AndroidManifest.xml: Set version and min sdk version.
+
+	* clients/android/res/layout-land/menu.xml: Added missing menu buttons for
+	  TvSearch and TvJoblist.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/services/TvGuideUpdateService.java:
+	  Removed Override annotation.
+
 2011-11-26  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/res/layout/tvrecorder.xml: Removed the Channel Spinner
