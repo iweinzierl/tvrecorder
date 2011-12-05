@@ -1,3 +1,15 @@
+2011-12-05  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/AndroidManifest.xml: Set version code.
+
+	* clients/android/res/values/strings.xml: Translated german strings into
+	  english.
+
+	* clients/android/res/values-de/arrays.xml,
+	  clients/android/res/values-de/colors.xml,
+	  clients/android/res/values-de/strings.xml: New. A german resource
+	  package.
+
 2011-12-02  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	+ clients/android/AndroidManifest.xml: Set version and min sdk version.
