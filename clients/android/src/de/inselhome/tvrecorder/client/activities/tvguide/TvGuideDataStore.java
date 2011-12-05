@@ -71,7 +71,7 @@ public class TvGuideDataStore {
         ChannelSQLiteHelper db = new ChannelSQLiteHelper(context);
 
         int updateInterval = Config.getPreferenceAsInteger(
-            context, Config.SETTINGS_TVGUIDE_UPDATE_INTERVAL, null);
+            context, Config.SETTINGS_TVGUIDE_UPDATE_INTERVAL, -1);
 
         if (allowHttp && (db.needsUpdate(updateInterval) || forceHttp)) {
             Log.d(TAG,"Database needs update from server");
@@ -137,6 +137,11 @@ public class TvGuideDataStore {
             Representation repr = cr.get(MediaType.APPLICATION_JSON);
 
             Log.d(TAG, "HTTP request finished successfully.");
+
+            if (repr == null) {
+                Log.i(TAG, "Empty response received!");
+                return new ChannelWithTvGuide[0];
+            }
 
             String json = repr.getText();
             JSONArray a = new JSONArray(json);
