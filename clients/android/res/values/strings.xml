@@ -5,97 +5,97 @@
     <!-- THE MAIN MENU -->
     <string name="main_menu_tvrecorder_button">TvRecorder</string>
     <string name="main_menu_tvguide_button">TvGuide</string>
-    <string name="main_menu_settings_button">Einstellungen</string>
-    <string name="main_menu_search_button">Suche</string>
-    <string name="main_menu_joblist_button">Aufträge</string>
+    <string name="main_menu_settings_button">Settings</string>
+    <string name="main_menu_search_button">Search</string>
+    <string name="main_menu_joblist_button">Jobs</string>
 
     <!-- THE RECORD ACTIVITY -->
-    <string name="tvrecorder_contextmenu_quit">Beenden</string>
-    <string name="tvrecorder_contextmenu_settings">Einstellungen</string>
+    <string name="tvrecorder_contextmenu_quit">Quit</string>
+    <string name="tvrecorder_contextmenu_settings">Settings</string>
     <string name="tvrecorder_contextmenu_tvguide">TvGuide</string>
 
     <string name="tvguide_title">TvGuide</string>
-    <string name="tvguide_update_list">Aktualisieren</string>
-    <string name="tvguide_record_shows">Gewählte Shows aufnehmen</string>
-    <string name="tvguide_load_progress_title">Aktualisierung</string>
-    <string name="tvguide_load_progress_text">Lade Sendungen</string>
-    <string name="tvguide_channel_prompt">Kanal wählen</string>
+    <string name="tvguide_update_list">Update</string>
+    <string name="tvguide_record_shows">Record selected shows</string>
+    <string name="tvguide_load_progress_title">Update</string>
+    <string name="tvguide_load_progress_text">Loading TV shows</string>
+    <string name="tvguide_channel_prompt">Choose channel</string>
     <string name="tvguide_context_open">Details</string>
-    <string name="tvguide_context_record">Aufnehmen</string>
-    <string name="tvguide_notification_ticker">TvGuide: neue TvShows geladen</string>
-    <string name="tvguide_notification_title">Neue TvShows vom Server geladen</string>
-    <string name="tvguide_notification_text">$SHOWS neue TvShows / $CHANNELS neue Channels</string>
+    <string name="tvguide_context_record">Record</string>
+    <string name="tvguide_notification_ticker">TvGuide: loaded new TV shows</string>
+    <string name="tvguide_notification_title">Retrieved new TV shows from server.</string>
+    <string name="tvguide_notification_text">$SHOWS new TV shows / $CHANNELS new channels</string>
 
     <string name="tvshowdetail_title">Tv Show Details</string>
-    <string name="tvshowdetail_datesuffix">Uhr</string>
+    <string name="tvshowdetail_datesuffix">o clock</string>
 
     <string name="tvsearch_title">Tv Search</string>
-    <string name="tvsearch_options_record_selected">Gewählte Sendungen aufnehmen</string>
-    <string name="tvsearch_options_record_all">Alle Sendungen aufnehmen</string>
+    <string name="tvsearch_options_record_selected">Record selected TV shows</string>
+    <string name="tvsearch_options_record_all">Record all TV shows</string>
 
     <string name="tvjoblist_title">Tv Joblist</string>
-    <string name="tvjoblist_load_progress_title">Aktualisierung</string>
-    <string name="tvjoblist_load_progress_text">Lade Aufträge</string>
-    <string name="tvjoblist_load_failed_title">Fehler beim Laden der Aufträge</string>
-    <string name="tvjoblist_load_failed_text">Es konnten keine Aufträge vom Server geladen werden. Prüfen Sie ihre Internetverbindung und versuchen Sie es erneut.</string>
-    <string name="tvjoblist_remove_progress_title">Entferne Jobs</string>
-    <string name="tvjoblist_remove_progress_text">Entferne Jobs vom Server</string>
-    <string name="tvjoblist_remove_failed_title">Fehler beim Entfernen der Aufträge</string>
-    <string name="tvjoblist_remove_failed_text">Beim Entfernen der Aufträge ist ein Fehler aufgetreten. Prüfen Sie ihre Internetverbindung und versuchen Sie es erneut.</string>
-    <string name="tvjoblist_no_jobs_title">Keine Aufträge gefunden</string>
-    <string name="tvjoblist_no_jobs_text">Es wurden keine Aufträge gefunden, die derzeit in Warteschlange stehen.</string>
-    <string name="tvjoblist_context_remove_single">Gewählten Job löschen</string>
-    <string name="tvjoblist_context_remove_all">Alle Jobs löschen</string>
+    <string name="tvjoblist_load_progress_title">Update</string>
+    <string name="tvjoblist_load_progress_text">Fetching jobs</string>
+    <string name="tvjoblist_load_failed_title">Error while fetching jobs</string>
+    <string name="tvjoblist_load_failed_text">No jobs could be retrieved from server. Check your internet connection and try again.</string>
+    <string name="tvjoblist_remove_progress_title">Removing jobs</string>
+    <string name="tvjoblist_remove_progress_text">Removing jobs from server</string>
+    <string name="tvjoblist_remove_failed_title">Error while removing jobs from server</string>
+    <string name="tvjoblist_remove_failed_text">Error while removing jobs. Check your internet connection and try again.</string>
+    <string name="tvjoblist_no_jobs_title">No jobs found.</string>
+    <string name="tvjoblist_no_jobs_text">There are currently no jobs in queue.</string>
+    <string name="tvjoblist_context_remove_single">Remove selected job</string>
+    <string name="tvjoblist_context_remove_all">Remove all jobs</string>
 
-    <string name="keyvalueitem_change">ändern</string>
+    <string name="keyvalueitem_change">change</string>
 
     <string name="addjob_start">Start</string>
-    <string name="addjob_end">Ende</string>
-    <string name="addjob_channel">Programm</string>
+    <string name="addjob_end">End</string>
+    <string name="addjob_channel">Channel</string>
     <string name="addjob_name">Name</string>
-    <string name="addjob_start_record">aufnehmen</string>
-    <string name="addjob_load_progress_title">Aktualisierung</string>
-    <string name="addjob_load_progress_text">Lade Programme</string>
-    <string name="addjob_recorded_message">Neuen Job erstellt:</string>
+    <string name="addjob_start_record">record</string>
+    <string name="addjob_load_progress_title">Update</string>
+    <string name="addjob_load_progress_text">Fetching channels</string>
+    <string name="addjob_recorded_message">New job created:</string>
     <string name="addjob_recorded_start">Start: </string>
-    <string name="addjob_recorded_end">Ende: </string>
-    <string name="addjob_recorded_channel">Programm: </string>
+    <string name="addjob_recorded_end">End: </string>
+    <string name="addjob_recorded_channel">Channel: </string>
     <string name="addjob_recorded_name">Name: </string>
-    <string name="addjob_recorded_error_title">Fehler beim Erstellen des Jobs: </string>
+    <string name="addjob_recorded_error_title">Error while creating new job: </string>
 
-    <string name="jobrecorder_record_progress_title">Aufnehmen</string>
-    <string name="jobrecorder_record_progress_text">Gewählte Sendungen werden aufgenommen</string>
+    <string name="jobrecorder_record_progress_title">Record</string>
+    <string name="jobrecorder_record_progress_text">Recording selected TV shows</string>
 
-    <string name="datepicker_cancel">abbrechen</string>
+    <string name="datepicker_cancel">cancel</string>
     <string name="datepicker_ok">ok</string>
 
-    <string name="timepicker_cancel">abbrechen</string>
+    <string name="timepicker_cancel">cancel</string>
     <string name="timepicker_ok">ok</string>
 
     <!-- ERRORS -->
-    <string name="error">Fehler</string>
-    <string name="error_endtime_before_starttime">Die Startzeit muss vor der Endzeit liegen</string>
-    <string name="error_no_channels">Keine Kanäle gefunden!</string>
+    <string name="error">Error</string>
+    <string name="error_endtime_before_starttime">Start time needs to be before end time</string>
+    <string name="error_no_channels">No channels retrieved</string>
 
     <!-- PREFERENCES -->
-    <string name="prefs_server">Einstellungen Server</string>
+    <string name="prefs_server">Server Settings</string>
     <string name="prefs_server_url">Server URL</string>
-    <string name="prefs_server_url_summary">Die HTTP Adresse des TvRecorder Servers.</string>
+    <string name="prefs_server_url_summary">The HTTP address of the TvRecorder server.</string>
     <string name="prefs_server_port">Server Port</string>
-    <string name="prefs_server_port_summary">Der Port über den der TvRecorder Server erreichbar ist.</string>
-    <string name="prefs_server_user">Nutzer</string>
-    <string name="prefs_server_user_summary">Der Nutzer, der sich am TvRecorder anmeldet.</string>
-    <string name="prefs_server_passwd">Passwort</string>
-    <string name="prefs_server_passwd_summary">Das Passwort, mit dem sich der Nutzer am TvRecorder anmeldet.</string>
-    <string name="prefs_server_authentication">Nutze Authentifizierung</string>
-    <string name="prefs_server_authentication_summary">Wenn Authentifizierung benötigt wird, diesen Haken setzen.</string>
-    <string name="prefs_tvguide">Einstellung TvGuide</string>
-    <string name="prefs_tvguide_update_automatically">Automatische Aktualisierung</string>
-    <string name="prefs_tvguide_update_automatically_summary">Bei automatischer Aktualisierung, wird der TvGuide nach dem einstellten Interval aktualisiert.</string>
-    <string name="prefs_tvguide_update_wifi_only">Wifi Verbindung erforderlich</string>
-    <string name="prefs_tvguide_update_wifi_only_summary">Wenn diese Option gewählt ist, muss mindestens eine Wifi Verbindung zur Aktualisierugn bestehen.</string>
-    <string name="prefs_tvguide_update_roaming">Aktualisierung erlaubt, falls Roaming aktiv?</string>
-    <string name="prefs_tvguide_update_roaming_summary">Wenn diese Option gewählt ist, wird eine Aktualisierung auch bei Roaming durchgeführt.</string>
-    <string name="prefs_tvguide_update_interval">Interval der Aktualisierung</string>
-    <string name="prefs_tvguide_update_interval_summary">Interval, in dem der TvGuide aktualisiert wird (in Stunden)</string>
+    <string name="prefs_server_port_summary">The port of the TvRecorder server.</string>
+    <string name="prefs_server_user">User</string>
+    <string name="prefs_server_user_summary">The user that is used for TvRecorder authentication.</string>
+    <string name="prefs_server_passwd">Password</string>
+    <string name="prefs_server_passwd_summary">The password that is used for TvRecorder authentication.</string>
+    <string name="prefs_server_authentication">Use Authentication</string>
+    <string name="prefs_server_authentication_summary">Enable authentication if required by TvRecorder server.</string>
+    <string name="prefs_tvguide">Settings TvGuide</string>
+    <string name="prefs_tvguide_update_automatically">Automatic Update</string>
+    <string name="prefs_tvguide_update_automatically_summary">When automatic update is enabled, the TvGuide is updated in the specified interval.</string>
+    <string name="prefs_tvguide_update_wifi_only">Wifi connection required</string>
+    <string name="prefs_tvguide_update_wifi_only_summary">If this option is enabled, a Wifi connection is required for updates.</string>
+    <string name="prefs_tvguide_update_roaming">Update allowed while roaming?</string>
+    <string name="prefs_tvguide_update_roaming_summary">If this option is enabled, updates take place while roaming.</string>
+    <string name="prefs_tvguide_update_interval">Update interval</string>
+    <string name="prefs_tvguide_update_interval_summary">Update interval in hours</string>
 </resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tvrecorder_settings">
+        <item>settings_host_url</item>
+        <item>settings_host_port</item>
+        <item>settings_auth_user</item>
+        <item>settings_auth_pass</item>
+    </string-array>
+
+</resources>
