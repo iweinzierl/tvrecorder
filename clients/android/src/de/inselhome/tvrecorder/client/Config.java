@@ -110,7 +110,7 @@ public class Config {
     ) {
         String pref = (String) getPreference(c, key, null);
 
-        return pref != null ? Integer.parseInt(pref) : def;
+        return pref != null && pref.length() > 0 ? Integer.parseInt(pref) : def;
     }
 
 

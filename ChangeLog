@@ -1,5 +1,11 @@
 2011-12-05  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/src/de/inselhome/tvrecorder/client/Config.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java:
+	  Made implementation more robust against nullpointers.
+
+2011-12-05  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/AndroidManifest.xml: Set version code.
 
 	* clients/android/res/values/strings.xml: Translated german strings into
