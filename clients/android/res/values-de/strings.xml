@@ -68,6 +68,8 @@
     <string name="addjob_recorded_name">Name: </string>
     <string name="addjob_recorded_error_title">Fehler beim Erstellen des Jobs: </string>
 
+    <string name="jobrecorder_record_demo_title">Demo Version</string>
+    <string name="jobrecorder_record_demo_text">Diese Funktion ist in dieser Demo Version nicht verfügbar. Bitte laden Sie sich die Vollversion des TvRecoder herunter.</string>
     <string name="jobrecorder_record_progress_title">Aufnehmen</string>
     <string name="jobrecorder_record_progress_text">Gewählte Sendungen werden aufgenommen</string>
     <string name="jobrecorder_record_error_title">Fehler</string>

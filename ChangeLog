@@ -1,5 +1,14 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/values-de/strings.xml,
+	  clients/android/res/values/strings.xml: Added strings that inform the
+	  user about the demo version.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
+	  Disabled the function to record new jobs.
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/AndroidManifest.xml,
 	  clients/android/src/de/inselhome/tvrecorder/client/Config.java,
 	  clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java,
