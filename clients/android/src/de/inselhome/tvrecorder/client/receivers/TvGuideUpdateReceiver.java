@@ -87,7 +87,7 @@ public class TvGuideUpdateReceiver extends BroadcastReceiver {
             context, Config.SETTINGS_TVGUIDE_ROAMING, false);
 
         int updateInterval = Config.getPreferenceAsInteger(
-            context, Config.SETTINGS_TVGUIDE_UPDATE_INTERVAL, null);
+            context, Config.SETTINGS_TVGUIDE_UPDATE_INTERVAL, -1);
 
         Log.d(TAG, "Setting: auto update = " + autoUpdate);
         Log.d(TAG, "Setting: wifi required = " + onlyWifiUpdate);
