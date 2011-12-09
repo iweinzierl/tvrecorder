@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="de.inselhome.tvrecorder.client"
-      android:versionCode="131"
-      android:versionName="1.0pre2">
+      package="de.inselhome.tvrecorder.client.android"
+      android:versionCode="132"
+      android:versionName="1.0">
     <application android:label="@string/app_name" android:icon="@drawable/icon">
         <activity android:name="MainMenu"
                   android:label="@string/app_name">
@@ -12,35 +12,35 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="de.inselhome.tvrecorder.client.TvRecorder"
+        <activity android:name="de.inselhome.tvrecorder.client.android.TvRecorder"
                   android:label="@string/app_name">
         </activity>
 
-        <activity android:name="de.inselhome.tvrecorder.client.activities.setup.TvRecorderSettings"
+        <activity android:name="de.inselhome.tvrecorder.client.android.activities.setup.TvRecorderSettings"
                   android:label="@string/app_name">
         </activity>
 
-        <activity android:name="de.inselhome.tvrecorder.client.activities.tvguide.TvGuide"
+        <activity android:name="de.inselhome.tvrecorder.client.android.activities.tvguide.TvGuide"
                   android:label="@string/tvguide_title">
         </activity>
 
-        <activity android:name="de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail"
+        <activity android:name="de.inselhome.tvrecorder.client.android.activities.tvshow.TvShowDetail"
                   android:label="@string/tvshowdetail_title">
         </activity>
 
-        <activity android:name="de.inselhome.tvrecorder.client.activities.tvsearch.TvSearch"
+        <activity android:name="de.inselhome.tvrecorder.client.android.activities.tvsearch.TvSearch"
                   android:label="@string/tvsearch_title">
         </activity>
 
-        <activity android:name="de.inselhome.tvrecorder.client.activities.tvjoblist.TvJoblist"
+        <activity android:name="de.inselhome.tvrecorder.client.android.activities.tvjoblist.TvJoblist"
                   android:label="@string/tvjoblist_title">
         </activity>
 
         <!-- SERVICES -->
-        <service android:name="de.inselhome.tvrecorder.client.services.TvGuideUpdateService"/>
+        <service android:name="de.inselhome.tvrecorder.client.android.services.TvGuideUpdateService"/>
 
         <!-- BROADCAST RECEIVERS -->
-        <receiver android:name="de.inselhome.tvrecorder.client.receivers.TvGuideUpdateReceiver">
+        <receiver android:name="de.inselhome.tvrecorder.client.android.receivers.TvGuideUpdateReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>

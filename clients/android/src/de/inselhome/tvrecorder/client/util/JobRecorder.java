@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.util;
+package de.inselhome.tvrecorder.client.android.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,8 @@ import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.RecordResource;
 import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
-import de.inselhome.tvrecorder.client.Config;
-import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.android.Config;
+import de.inselhome.tvrecorder.client.android.R;
 
 
 public class JobRecorder {

@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.activities.tvguide;
+package de.inselhome.tvrecorder.client.android.activities.tvguide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,8 +35,8 @@ import android.widget.TextView;
 import de.inselhome.tvrecorder.common.objects.TvShow;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
-import de.inselhome.tvrecorder.client.R;
-import de.inselhome.tvrecorder.client.activities.tvshow.TvShowDetail;
+import de.inselhome.tvrecorder.client.android.R;
+import de.inselhome.tvrecorder.client.android.activities.tvshow.TvShowDetail;
 
 
 /**

@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.activities.tvjoblist;
+package de.inselhome.tvrecorder.client.android.activities.tvjoblist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +34,8 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
-import de.inselhome.tvrecorder.client.R;
-import de.inselhome.tvrecorder.client.data.JobProvider;
+import de.inselhome.tvrecorder.client.android.R;
+import de.inselhome.tvrecorder.client.android.data.JobProvider;
 
 import de.inselhome.tvrecorder.common.objects.Job;
 

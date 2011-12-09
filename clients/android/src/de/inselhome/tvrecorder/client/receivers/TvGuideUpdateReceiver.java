@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.receivers;
+package de.inselhome.tvrecorder.client.android.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,9 +24,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import de.inselhome.tvrecorder.client.Config;
-import de.inselhome.tvrecorder.client.activities.tvguide.TvGuideDataStore;
-import de.inselhome.tvrecorder.client.database.ChannelSQLiteHelper;
+import de.inselhome.tvrecorder.client.android.Config;
+import de.inselhome.tvrecorder.client.android.activities.tvguide.TvGuideDataStore;
+import de.inselhome.tvrecorder.client.android.database.ChannelSQLiteHelper;
 
 
 public class TvGuideUpdateReceiver extends BroadcastReceiver {

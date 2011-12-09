@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.activities.tvshow;
+package de.inselhome.tvrecorder.client.android.activities.tvshow;
 
 import java.util.Date;
 
@@ -30,7 +30,7 @@ import android.widget.ImageView;
 
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
-import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.android.R;
 
 
 public class TvShowDetail extends Activity {

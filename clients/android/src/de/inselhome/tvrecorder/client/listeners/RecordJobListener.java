@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.listeners;
+package de.inselhome.tvrecorder.client.android.listeners;
 
 import java.util.Calendar;
 
@@ -30,9 +30,9 @@ import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
-import de.inselhome.tvrecorder.client.R;
-import de.inselhome.tvrecorder.client.TvRecorder;
-import de.inselhome.tvrecorder.client.util.JobRecorder;
+import de.inselhome.tvrecorder.client.android.R;
+import de.inselhome.tvrecorder.client.android.TvRecorder;
+import de.inselhome.tvrecorder.client.android.util.JobRecorder;
 
 
 /**
