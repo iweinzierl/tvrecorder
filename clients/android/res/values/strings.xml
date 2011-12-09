@@ -68,6 +68,8 @@
     <string name="addjob_recorded_name">Name: </string>
     <string name="addjob_recorded_error_title">Error while creating new job: </string>
 
+    <string name="jobrecorder_record_demo_title">Demo Version</string>
+    <string name="jobrecorder_record_demo_text">This function is not supported in this demo app. Download the full version of TvRecorder to enable this function.</string>
     <string name="jobrecorder_record_progress_title">Record</string>
     <string name="jobrecorder_record_progress_text">Recording selected TV shows</string>
     <string name="jobrecorder_record_error_title">Error</string>

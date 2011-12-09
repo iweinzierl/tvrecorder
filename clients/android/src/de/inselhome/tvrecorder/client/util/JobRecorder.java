@@ -78,69 +78,9 @@ public class JobRecorder {
      * server.
      */
     public void record(final List<Job> toRecord) {
-        beforeRecordShows();
-
-        new AsyncTask<Void, Void, List<Job>>() {
-            protected List<Job> doInBackground(Void... v) {
-                ClientResource cr =
-                    Config.getClientResource(context, RecordResource.PATH);
-
-                try {
-                    JSONArray json = JSONUtils.toJSON(toRecord);
-
-                    Representation res =
-                        cr.post(new StringRepresentation(json.toString()));
-
-                    afterRecordShows();
-
-                    return JSONUtils.jobsFromJSON(new JSONArray(res.getText()));
-                }
-                catch (Exception e) {
-                    Log.e(TAG, "INTERNAL SERVER ERROR");
-                }
-
-                afterRecordShows();
-
-                return null;
-            }
-
-            protected void onPostExecute(List<Job> jobs) {
-                if (jobs == null) {
-                    displayError(
-                        R.string.jobrecorder_record_error_title,
-                        R.string.jobrecorder_record_error_text);
-
-                    return;
-                }
-
-                displayInformation(toRecord, jobs);
-            }
-        }.execute();
-    }
-
-
-    protected void beforeRecordShows() {
-        Resources res = context.getResources();
-        progress = ProgressDialog.show(
-            context,
-            res.getString(R.string.jobrecorder_record_progress_title),
-            res.getString(R.string.jobrecorder_record_progress_text),
-            true);
-    }
-
-
-    protected void afterRecordShows() {
-        if (progress != null) {
-            progress.dismiss();
-        }
-    }
-
-
-    protected void displayInformation(List<Job> toRecord, List<Job> recorded) {
-        String info = "Successfully recorded " + recorded.size() + " / " + toRecord.size() + " jobs.";
-        Toast popup = Toast.makeText(context, info, Toast.LENGTH_SHORT);
-        popup.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        popup.show();
+        displayError(
+            R.string.jobrecorder_record_demo_title,
+            R.string.jobrecorder_record_demo_text);
     }
 
 
