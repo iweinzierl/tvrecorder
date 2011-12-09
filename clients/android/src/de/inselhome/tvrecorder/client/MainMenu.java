@@ -18,8 +18,12 @@
 package de.inselhome.tvrecorder.client;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +39,10 @@ import de.inselhome.tvrecorder.client.activities.tvjoblist.TvJoblist;
  */
 public class MainMenu extends Activity {
 
-    public static final String TAG = "TvR [MainMenu]";
+    public static final String KEY_FIRSTRUN = "tvrecorder.firstrun";
+    public static final String TAG          = "TvR [MainMenu]";
+
+    public static final int DIALOG_INFO = 0;
 
 
     @Override
@@ -83,6 +90,37 @@ public class MainMenu extends Activity {
                     new Intent(MainMenu.this, TvRecorderSettings.class));
             }
         });
+
+        SharedPreferences sp =
+            PreferenceManager.getDefaultSharedPreferences(this);
+
+        boolean firstRun = sp.getBoolean(KEY_FIRSTRUN, true);
+
+        if (firstRun) {
+            Log.d(TAG, "FIRST LOGIN");
+
+            showDialog(DIALOG_INFO);
+
+            Editor spEditor = sp.edit();
+            spEditor.putBoolean(KEY_FIRSTRUN, false);
+            spEditor.commit();
+        }
+    }
+
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        Dialog dialog = null;
+
+        switch (id) {
+            case DIALOG_INFO:
+                dialog = new Dialog(this);
+                dialog.setContentView(R.layout.info_dialog);
+                dialog.setTitle(R.string.info_dialog_title);
+                break;
+        }
+
+        return dialog;
     }
 }
 // vim:set ts=4 sw=4 si et sta sts=4 fenc=utf8 :
