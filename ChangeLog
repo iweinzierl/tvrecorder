@@ -1,5 +1,23 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/layout-land/info_dialog.xml,
+	  clients/android/res/layout/info_dialog.xml: New. An info dialog that is
+	  displayed when the Android app is run for the first time.
+
+	* clients/android/res/drawable/tvrecorder_icon.png: New. The TvRecorder
+	  icon as PNG file.
+
+	* clients/android/res/values-de/strings.xml,
+	  clients/android/res/values/strings.xml: Added localized title, intro and
+	  text used in the info dialog.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java:
+	  Display the info dialog if the Android app is run for the first time.
+	  The check uses the SharedPreferences "tvrecorder.firstrun" (true, if the
+	  App is run for the first time, otherwise this preference is false).
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/values-de/strings.xml,
 	  clients/android/res/values/strings.xml: Added localized messages for
 	  errors that might occur in JobRecorder.

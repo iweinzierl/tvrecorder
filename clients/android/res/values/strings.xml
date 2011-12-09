@@ -9,6 +9,11 @@
     <string name="main_menu_search_button">Search</string>
     <string name="main_menu_joblist_button">Jobs</string>
 
+    <!-- THE INFO DIALOG DISPLAYED WHEN FIRST TIME RUNNING THIS APP -->
+    <string name="info_dialog_title">Welcome to TvRecorder</string>
+    <string name="info_dialog_intro">The TvRecorder App acts as a client that telecontrols the TvRecorder server. This App cannot work without the TvRecorder server!</string>
+    <string name="info_dialog_text">Please make sure that your personal TvRecorder server is installed and that the settings of this app are correct. If you don\'t have the server installed, download it at http://bitbucket.org/iweinzierl/tvrecorder and follow the instructions in the README.</string>
+
     <!-- THE RECORD ACTIVITY -->
     <string name="tvrecorder_contextmenu_quit">Quit</string>
     <string name="tvrecorder_contextmenu_settings">Settings</string>
