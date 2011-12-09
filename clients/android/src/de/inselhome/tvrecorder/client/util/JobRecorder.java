@@ -107,8 +107,8 @@ public class JobRecorder {
             protected void onPostExecute(List<Job> jobs) {
                 if (jobs == null) {
                     displayError(
-                        "Error",
-                        "Error while recording jobs.");
+                        R.string.jobrecorder_record_error_title,
+                        R.string.jobrecorder_record_error_text);
 
                     return;
                 }
@@ -144,10 +144,12 @@ public class JobRecorder {
     }
 
 
-    protected void displayError(String title, String text) {
+    protected void displayError(int titleId, int textId) {
+        Resources res = context.getResources();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title);
-        builder.setMessage(text);
+        builder.setTitle(res.getString(titleId));
+        builder.setMessage(res.getString(textId));
 
         builder.show();
     }

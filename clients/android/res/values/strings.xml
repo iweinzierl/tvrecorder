@@ -65,6 +65,8 @@
 
     <string name="jobrecorder_record_progress_title">Record</string>
     <string name="jobrecorder_record_progress_text">Recording selected TV shows</string>
+    <string name="jobrecorder_record_error_title">Error</string>
+    <string name="jobrecorder_record_error_text">Error while recordings job(s).</string>
 
     <string name="datepicker_cancel">cancel</string>
     <string name="datepicker_ok">ok</string>

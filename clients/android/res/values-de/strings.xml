@@ -65,6 +65,8 @@
 
     <string name="jobrecorder_record_progress_title">Aufnehmen</string>
     <string name="jobrecorder_record_progress_text">Gewählte Sendungen werden aufgenommen</string>
+    <string name="jobrecorder_record_error_title">Fehler</string>
+    <string name="jobrecorder_record_error_text">Fehler beim Aufnehmen des Auftrags / der Aufträge.</string>
 
     <string name="datepicker_cancel">abbrechen</string>
     <string name="datepicker_ok">ok</string>

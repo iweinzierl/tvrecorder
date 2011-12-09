@@ -1,5 +1,14 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/values-de/strings.xml,
+	  clients/android/res/values/strings.xml: Added localized messages for
+	  errors that might occur in JobRecorder.
+
+	* clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
+	  Use localized messaged when an error occured while recording job/jobs.
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
 	  Take care on not existing TvShowsAdapter when users try to record jobs.
 
