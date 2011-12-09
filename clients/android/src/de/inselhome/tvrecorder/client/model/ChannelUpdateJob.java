@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.model;
+package de.inselhome.tvrecorder.client.android.model;
 
 import java.io.Serializable;
 import java.net.URL;

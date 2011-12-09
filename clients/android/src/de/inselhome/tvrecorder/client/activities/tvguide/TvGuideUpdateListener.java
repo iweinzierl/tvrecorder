@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.activities.tvguide;
+package de.inselhome.tvrecorder.client.android.activities.tvguide;
 
 
 public interface TvGuideUpdateListener {

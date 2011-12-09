@@ -1,5 +1,53 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/AndroidManifest.xml,
+	  clients/android/src/de/inselhome/tvrecorder/client/Config.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/addjob/OnChannelsUpdatedListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideUpdateEvent.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideUpdateListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblistAdapter.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvsearch/TvSearch.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvshow/TvShowDetail.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/data/JobProvider.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/model/ChannelUpdateJob.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/model/ChannelWithListing.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/model/TvShow.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/receivers/TvGuideUpdateReceiver.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/services/TvGuideUpdateService.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/ChannelView.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/KeyValueItem.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TextDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
+	  Modified the application package (from de.inselhome.tvrecorder.client to
+	  de.inselhome.tvrecorder.client.android).
+
+	* clients/android/screenshots/10_tvjoblist_doremove.png,
+	  clients/android/screenshots/11_tvshow.png,
+	  clients/android/screenshots/12_tvsettings.png,
+	  clients/android/screenshots/13_tvsettings2.png,
+	  clients/android/screenshots/1_tvmenu.png,
+	  clients/android/screenshots/2_tvrecorder_manual.png,
+	  clients/android/screenshots/3_tvrecorder_manual_dotime.png,
+	  clients/android/screenshots/4_tvguide.png,
+	  clients/android/screenshots/5_tvguide_dorecord.png,
+	  clients/android/screenshots/6_tvsearch.png,
+	  clients/android/screenshots/7_tvsearch_searched.png,
+	  clients/android/screenshots/8_tvsearch_dorecord.png,
+	  clients/android/screenshots/9_tvjoblist.png: New. Screenshots used in
+	  the Android market.
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/layout/menu.xml: Improved the layout to not cut the
 	  label of the settings button.
 

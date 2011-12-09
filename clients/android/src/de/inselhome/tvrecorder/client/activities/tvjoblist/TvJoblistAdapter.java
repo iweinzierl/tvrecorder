@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.activities.tvjoblist;
+package de.inselhome.tvrecorder.client.android.activities.tvjoblist;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ import de.inselhome.tvrecorder.common.objects.Channel;
 import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.utils.DateUtils;
 
-import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.android.R;
 
 
 /**
@@ -90,7 +90,7 @@ public class TvJoblistAdapter extends ArrayAdapter<Job> {
             int resId = res.getIdentifier(
                 chann.getKey().toLowerCase(),
                 "drawable",
-                "de.inselhome.tvrecorder.client");
+                "de.inselhome.tvrecorder.client.android");
 
             if (resId == 0) {
                 channel.setText(job.getChannel().getDescription());

@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.services;
+package de.inselhome.tvrecorder.client.android.services;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -24,8 +24,8 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import de.inselhome.tvrecorder.client.Config;
-import de.inselhome.tvrecorder.client.activities.tvguide.TvGuideDataStore;
+import de.inselhome.tvrecorder.client.android.Config;
+import de.inselhome.tvrecorder.client.android.activities.tvguide.TvGuideDataStore;
 
 
 public class TvGuideUpdateService
