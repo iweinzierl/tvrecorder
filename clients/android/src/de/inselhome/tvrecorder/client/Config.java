@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android;
+package de.inselhome.tvrecorder.client;
 
 import java.util.Locale;
 import java.util.Map;

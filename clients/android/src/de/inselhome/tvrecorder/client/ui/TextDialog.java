@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.ui;
+package de.inselhome.tvrecorder.client.ui;
 
 import android.app.Dialog;
 import android.content.Context;

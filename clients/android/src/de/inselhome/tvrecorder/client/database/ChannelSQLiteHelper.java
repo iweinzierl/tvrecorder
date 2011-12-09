@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.database;
+package de.inselhome.tvrecorder.client.database;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.model;
+package de.inselhome.tvrecorder.client.model;
 
 import java.util.Iterator;
 import java.util.TreeSet;

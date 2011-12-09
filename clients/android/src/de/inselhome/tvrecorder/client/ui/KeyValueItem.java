@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.ui;
+package de.inselhome.tvrecorder.client.ui;
 
 import android.content.Context;
 import android.view.View;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import de.inselhome.tvrecorder.client.android.R;
+import de.inselhome.tvrecorder.client.R;
 
 
 /**

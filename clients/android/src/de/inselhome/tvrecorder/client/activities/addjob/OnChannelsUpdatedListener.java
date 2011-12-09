@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.activities.addjob;
+package de.inselhome.tvrecorder.client.activities.addjob;
 
 import de.inselhome.tvrecorder.common.objects.Channel;
 

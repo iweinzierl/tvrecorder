@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.data;
+package de.inselhome.tvrecorder.client.data;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import de.inselhome.tvrecorder.common.objects.Job;
 import de.inselhome.tvrecorder.common.rest.JobListResource;
 import de.inselhome.tvrecorder.common.utils.JSONUtils;
 
-import de.inselhome.tvrecorder.client.android.Config;
+import de.inselhome.tvrecorder.client.Config;
 
 
 /**
