@@ -1,5 +1,10 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/layout/menu.xml: Improved the layout to not cut the
+	  label of the settings button.
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java:
 	  Method needsUpdate(int hours) returns false if 'hours' is lower than 0.
 
