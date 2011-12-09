@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TvRecorder</string>
+    <string name="app_name">TvRecorder Demo</string>
 
     <!-- THE MAIN MENU -->
     <string name="main_menu_tvrecorder_button">TvRecorder</string>

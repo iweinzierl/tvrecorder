@@ -1,5 +1,11 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/res/values-de/strings.xml,
+	  clients/android/res/values/strings.xml: Set Android app name to
+	  "TvRecorder Demo".
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/AndroidManifest.xml,
 	  clients/android/src/de/inselhome/tvrecorder/client/Config.java,
 	  clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java,
