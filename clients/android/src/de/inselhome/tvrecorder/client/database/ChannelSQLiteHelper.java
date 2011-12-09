@@ -213,6 +213,14 @@ public class ChannelSQLiteHelper {
 
 
     public boolean needsUpdate(int hours) {
+        if (hours < 0) {
+            Log.d(
+                TAG,
+                "The definition for 'hours' is negative! No update allowed!");
+
+            return false;
+        }
+
         if (db == null) {
             db = getDatabase().getReadableDatabase();
         }
