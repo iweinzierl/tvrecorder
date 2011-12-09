@@ -1,3 +1,8 @@
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
+	* clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java:
+	  Take care on not existing TvShowsAdapter when users try to record jobs.
+
 2011-12-05  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/src/de/inselhome/tvrecorder/client/Config.java,
