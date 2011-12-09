@@ -123,7 +123,10 @@ implements   TvGuideUpdateListener {
         }
         else if (title.equals(record)) {
             TvShowsAdapter adapter = (TvShowsAdapter) tvShows.getAdapter();
-            recordShows(adapter.getSelectedTvShows());
+
+            if (adapter != null) {
+                recordShows(adapter.getSelectedTvShows());
+            }
         }
 
         return super.onOptionsItemSelected(item);
