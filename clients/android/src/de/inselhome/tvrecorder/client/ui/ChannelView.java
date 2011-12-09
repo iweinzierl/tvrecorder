@@ -1,4 +1,4 @@
-package de.inselhome.tvrecorder.client.android.ui;
+package de.inselhome.tvrecorder.client.ui;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -28,7 +28,7 @@ public class ChannelView extends TextView {
         int resId = res.getIdentifier(
             channel.getKey().toLowerCase(),
             "drawable",
-            "de.inselhome.tvrecorder.client.android");
+            "de.inselhome.tvrecorder.client");
 
         if (resId == 0) {
             setText(channel.getDescription());

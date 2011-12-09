@@ -15,7 +15,7 @@
  * this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
-package de.inselhome.tvrecorder.client.android.activities.setup;
+package de.inselhome.tvrecorder.client.activities.setup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,9 +24,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
-import de.inselhome.tvrecorder.client.android.Config;
-import de.inselhome.tvrecorder.client.android.R;
-import de.inselhome.tvrecorder.client.android.services.TvGuideUpdateService;
+import de.inselhome.tvrecorder.client.Config;
+import de.inselhome.tvrecorder.client.R;
+import de.inselhome.tvrecorder.client.services.TvGuideUpdateService;
 
 
 /**

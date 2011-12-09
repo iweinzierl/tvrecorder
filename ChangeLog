@@ -1,5 +1,38 @@
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
+	* clients/android/AndroidManifest.xml,
+	  clients/android/src/de/inselhome/tvrecorder/client/Config.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/MainMenu.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/TvRecorder.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/addjob/OnChannelsUpdatedListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/setup/TvRecorderSettings.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuide.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideDataStore.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideUpdateEvent.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvGuideUpdateListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvguide/TvShowsAdapter.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblist.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvjoblist/TvJoblistAdapter.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvsearch/TvSearch.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/activities/tvshow/TvShowDetail.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/data/JobProvider.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/database/ChannelSQLiteHelper.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/database/SQLiteProvider.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/listeners/RecordJobListener.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/model/ChannelUpdateJob.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/model/ChannelWithListing.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/model/TvShow.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/receivers/TvGuideUpdateReceiver.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/services/TvGuideUpdateService.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/ChannelView.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/KeyValueItem.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/ui/TextDialog.java,
+	  clients/android/src/de/inselhome/tvrecorder/client/util/JobRecorder.java:
+	  Re-modified the application package structure to fit to the demo app in
+	  the android market again.
+
+2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
+
 	* clients/android/res/values-de/strings.xml,
 	  clients/android/res/values/strings.xml: Added strings that inform the
 	  user about the demo version.
