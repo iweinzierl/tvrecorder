@@ -1,3 +1,9 @@
+2011-12-19  Ingo Weinzierl <ingo@intevation.de>
+
+	* server/src/main/java/de/inselhome/tvrecorder/server/utils/MPlayerCmdProducer.java:
+	  Prepend the start date and replace whitespaces with underscores in
+	  output file names.
+
 2011-12-09  Ingo Weinzierl <ingo_weinzierl@web.de>
 
 	* clients/android/AndroidManifest.xml,

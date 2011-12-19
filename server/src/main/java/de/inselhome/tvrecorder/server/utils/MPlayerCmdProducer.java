@@ -49,9 +49,15 @@ public class MPlayerCmdProducer implements CmdProducer {
      * @return the command line.
      */
     public String produce(Job job) {
-        String outname = job.getName().trim();
-        if (outname == null || outname.equals("")) {
-            outname = DateUtils.format(job.getStart(), DateUtils.OUTPUT_FORMAT);
+        String outname = DateUtils.format(
+            job.getStart(),
+            DateUtils.OUTPUT_FORMAT);
+
+        String jobname = job.getName();
+
+        if (jobname != null || jobname.length() > 0) {
+            jobname = jobname.trim().replace(" ", "_");
+            outname += "_" + jobname;
         }
 
         Config config = Config.getInstance();
